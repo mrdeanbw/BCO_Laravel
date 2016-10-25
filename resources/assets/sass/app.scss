@@ -1,0 +1,102 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+//Font Awesome
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+
+
+.navbar-default {
+    background-color: $brand-secondary;
+    border-color: $brand-primary;
+}
+
+.navbar-default .navbar-nav li a {
+	color: #fff;
+}
+
+.navbar-default .navbar-nav li a:hover, 
+.navbar-default .navbar-nav li  a:focus {
+	color: $brand-primary;
+}
+
+.app-header {
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+.app-header img {
+	max-height: 80px;
+}
+
+.spanner {
+	padding: 20px 0;
+}
+
+.spanner-dark {
+	background-color: $brand-secondary;
+	color: #fff;
+}
+
+.spanner-dark h2 {
+	color: $brand-primary;		
+}
+
+.spanner-dark a {
+	color: #fff;
+}
+
+.spanner-dark a:hover {
+	color: $brand-primary;
+	text-decoration: none;
+}
+
+.spanner .col-md-6 {
+	border-left: 1px solid $brand-primary;	
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spanner-text-pane {
+
+}
+
+
+
+.md {
+	text-align: center;
+}
+
+.md-icon {
+	
+	font-weight: lighter;
+	font-size: 40px;
+	width: 70px;
+	height: 70px;
+	padding-top: 3px;
+	border: 1px solid transparent;
+	background-color: $brand-primary;
+	color: #fff;
+	border-radius: 50%;
+	display: inline-block;
+	text-align: center;
+}
+
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
