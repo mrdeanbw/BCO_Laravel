@@ -26,6 +26,14 @@
 	color: $brand-primary;
 }
 
+.navbar-default .navbar-text {
+	color: $brand-primary;
+}
+
+.navbar-cancelmargin {
+	margin: -22px;
+}
+
 .app-header {
 	padding-top: 10px;
 	padding-bottom: 5px;
@@ -44,8 +52,17 @@
 	color: #fff;
 }
 
+.spanner-light {
+	background-color: $brand-primary;
+	color: $brand-secondary;
+}
+
 .spanner-dark h2 {
 	color: $brand-primary;		
+}
+
+.spanner-light h2 {
+	color: #fff;
 }
 
 .spanner-dark a {
@@ -57,6 +74,15 @@
 	text-decoration: none;
 }
 
+.spanner-light a {
+	color: $brand-secondary;
+}
+
+.spanner-light a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
 .spanner .col-md-6 {
 	border-left: 1px solid $brand-primary;	
 	display:flex;
@@ -64,17 +90,57 @@
     justify-content: center;
 }
 
+.spanner .btn-default {
+	@extend .btn-default;
+}
+
+.spanner .btn-default:hover {
+	@extend .btn-default:hover;
+}
+
+.spanner .btn-primary {
+	@extend .btn-primary;
+}
+
+.spanner .btn-primary:hover {
+	@extend .btn-primary:hover;
+}
+
 .spanner-text-pane {
 
 }
 
+.spanner-image {
+	padding: 0;
+}
 
+.spanner-image > .item {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	min-height: 300px;
+	height: 50%;
+	max-height: 700px;
+	width: 100%;	
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.md {
+.spanner-image > .item > .container > .caption {	
+	width: 25%;
+}
+
+.spanner-image > .item > .container > .caption.right {	
+	@extend .pull-right;
+	text-align: right;
+}
+
+.usp {
 	text-align: center;
 }
 
-.md-icon {
+.usp-icon {
 	
 	font-weight: lighter;
 	font-size: 40px;
@@ -82,11 +148,15 @@
 	height: 70px;
 	padding-top: 3px;
 	border: 1px solid transparent;
-	background-color: $brand-primary;
+	background-color: $brand-secondary;
 	color: #fff;
 	border-radius: 50%;
 	display: inline-block;
 	text-align: center;
+}
+
+.spanner-dark .usp-icon {
+	background-color: $brand-primary
 }
 
 .row {
@@ -100,3 +170,47 @@
   display: flex;
   flex-direction: column;
 }
+
+
+html {
+	height: 100%;
+	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	position: relative;
+	margin: 0;
+	padding-bottom: 6rem;
+	min-height: 100%;
+}
+
+footer {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: $brand-secondary;
+	color: #fff;
+	padding: 10px 0;;
+}
+
+footer ul{
+	margin: 0;
+	padding: 0;
+}
+
+footer li {
+	display: inline;
+	
+}
+
+footer li > a {
+	padding: 0 10px;
+}
+

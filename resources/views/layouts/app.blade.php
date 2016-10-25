@@ -54,6 +54,7 @@
                             <li><a href="#">Board</a></li>
                             <li><a href="#">Contact Us</a></li>
                         @else
+                            <p class="navbar-text">Members Area</p>
                             <li><a href="#">News</a></li>
                             <li><a href="#">Shipping Rates</a></li>
                             <li><a href="#">Forum</a></li>
@@ -95,6 +96,19 @@
 
         @yield('content')
     </div>
+    <footer>
+
+        <div class="container">
+            <ul>
+                <li>Copyright &copy; 2016. All rights reserved.</li>
+                <li><a href="#">Terms of Use</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Site Map</a></li>
+                <li class="pull-right">Hosting and Maintenance by QWYK</li>
+            </ul>
+        </div>
+
+    </footer>
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
