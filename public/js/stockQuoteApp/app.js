@@ -41,7 +41,7 @@ stockQuoteApp.controller('appController', ['$scope', '$http', '$timeout', functi
 	    			});
 
 	    		});
-
+	    		
 	    		console.log($scope.tempresult);
 	    		$scope.result = $scope.tempresult;
 	    	}
