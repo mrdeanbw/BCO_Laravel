@@ -5932,4 +5932,13 @@ footer li {
 footer li > a {
   padding: 0 10px; }
 
+#stockQuoteApp {
+  font-size: 10px; }
+
+#stockQuoteApp .table > tbody > tr > td > strong {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+
 /*# sourceMappingURL=app.css.map */
