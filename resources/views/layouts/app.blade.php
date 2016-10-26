@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>The shipper's association for, and by, shippers - {{ config('app.name', 'Laravel') }}</title>
+    <title>The association for, and by shippers - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
@@ -23,7 +23,7 @@
 <body>
     <div id="app">
         <div class="app-header container hidden-xs">
-            <img class="pull-left" src="{{ url('/res/logo-1.png') }}" />
+            <a href="{{ url('/') }}"><img class="pull-left" src="{{ url('/res/logo-1.png') }}" /></a>
             <h2 class="pull-right">BCO Shippers Association</h2>
         </div>
         <nav class="navbar navbar-default navbar-static-top">
@@ -54,10 +54,11 @@
                             <li><a href="#">Board</a></li>
                             <li><a href="#">Contact Us</a></li>
                         @else
-                            <p class="navbar-text">Members Area</p>
+                            <p class="navbar-text"><a href="{{ url('/members') }}">Members Area</a></p>
                             <li><a href="#">News</a></li>
                             <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="#">Forum</a></li>
+                            <li><a href="#">Forums</a></li>
+                            <li><a href="#">Software</a></li>
                         @endif
 
                     </ul>

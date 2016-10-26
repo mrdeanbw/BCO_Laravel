@@ -31,8 +31,9 @@ stockQuoteApp.controller('appController', ['$scope', '$http', '$timeout', functi
 	    	else {
 
 	    		$.each(data.query.results.quote, function() {
-	    			console.log(this);
+	    			
 	    			$scope.tempresult.push({
+	    				"ticker": this.Symbol,
 	    				"name": this.Name,
 	    				"currency": this.Currency,
 	    				"bid": this.LastTradePriceOnly,
@@ -42,7 +43,7 @@ stockQuoteApp.controller('appController', ['$scope', '$http', '$timeout', functi
 
 	    		});
 	    		
-	    		console.log($scope.tempresult);
+	    		
 	    		$scope.result = $scope.tempresult;
 	    	}
 	    })

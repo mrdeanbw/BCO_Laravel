@@ -215,10 +215,12 @@ footer li > a {
 }
 
 
+#stockQuoteApp, #newsApp {
+	font-size: 10px;
+}
 
-
-#stockQuoteApp {
-	font-size: 10px;;
+#newsApp .title {
+	margin: 0;
 }
 
 #stockQuoteApp .table > tbody > tr > td > strong {

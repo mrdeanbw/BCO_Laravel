@@ -5932,8 +5932,11 @@ footer li {
 footer li > a {
   padding: 0 10px; }
 
-#stockQuoteApp {
+#stockQuoteApp, #newsApp {
   font-size: 10px; }
+
+#newsApp .title {
+  margin: 0; }
 
 #stockQuoteApp .table > tbody > tr > td > strong {
   max-width: 0;
