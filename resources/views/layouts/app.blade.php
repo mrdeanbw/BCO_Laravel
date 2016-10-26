@@ -14,6 +14,10 @@
     <link href="/css/app.css" rel="stylesheet">
 
     @yield('css')
+    @if(Request::is( Config::get('chatter.routes.home') ) || Request::is( Config::get('chatter.routes.home') . '/*' ))
+        <!-- LINK TO YOUR CUSTOM STYLESHEET -->
+        <link rel="stylesheet" href="/css/forums.css" />
+    @endif
 
     <!-- Scripts -->
     <script>
@@ -59,8 +63,9 @@
                             <p class="navbar-text"><a href="{{ url('/members') }}">Members Area</a></p>
                             <li><a href="#">News</a></li>
                             <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="#">Forums</a></li>
+                            <li><a href="{{ url('/members/forums') }}">Forums</a></li>
                             <li><a href="#">Software</a></li>
+                            <li><a href="#">Directory</a></li>
                         @endif
 
                     </ul>

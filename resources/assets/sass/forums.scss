@@ -1,0 +1,9 @@
+@import "variables";
+
+#chatter_hero {
+	display: none;
+}
+
+#chatter #chatter_header {
+	background-color: $brand-primary !important;
+}

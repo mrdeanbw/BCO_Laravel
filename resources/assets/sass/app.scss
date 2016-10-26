@@ -30,6 +30,10 @@
 	color: $brand-primary;
 }
 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+	color: $brand-primary;
+}
+
 .navbar-cancelmargin {
 	margin: -22px;
 }
@@ -191,6 +195,7 @@ body {
 }
 
 footer {
+	font-size: 0.8em;
 	position: absolute;
 	right: 0;
 	bottom: 0;

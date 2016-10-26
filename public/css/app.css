@@ -5793,6 +5793,9 @@ button.close {
 .navbar-default .navbar-text {
   color: #24CBD3; }
 
+.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+  color: #24CBD3; }
+
 .navbar-cancelmargin {
   margin: -22px; }
 
@@ -5914,6 +5917,7 @@ body {
   min-height: 100%; }
 
 footer {
+  font-size: 0.8em;
   position: absolute;
   right: 0;
   bottom: 0;

@@ -18,3 +18,20 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/members', 'DashboardController@index');
+
+
+$chatter_url = Config::get('chatter.routes.home');
+Route::get($chatter_url, 'Chatter\ChatterController@index');
+
+Route::get($chatter_url.'/login', 'Chatter\ChatterController@login');
+Route::get($chatter_url.'/register', 'Chatter\ChatterController@register');
+
+$chatter_category_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.category');
+Route::get($chatter_category_url . '/{slug}', 'Chatter\ChatterController@index');
+
+$discussion_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.discussion');
+Route::resource($discussion_url, 'Chatter\ChatterDiscussionController');
+Route::get($discussion_url . '/{category}/{slug}', 'Chatter\ChatterDiscussionController@show');
+
+$posts_url = Config::get('chatter.routes.home') . '/posts';
+Route::resource($posts_url, 'Chatter\ChatterPostController');

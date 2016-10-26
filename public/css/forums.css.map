@@ -1,0 +1,1 @@
+{"version":3,"sources":["forums.scss"],"names":[],"mappings":"AAEA;EACC,cAAc,EACd;;AAED;EACC,qCAA2C,EAC3C","file":"forums.css","sourcesContent":["@import \"variables\";\n\n#chatter_hero {\n\tdisplay: none;\n}\n\n#chatter #chatter_header {\n\tbackground-color: $brand-primary !important;\n}"]}
