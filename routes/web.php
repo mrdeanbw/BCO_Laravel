@@ -35,3 +35,13 @@ Route::get($discussion_url . '/{category}/{slug}', 'Chatter\ChatterDiscussionCon
 
 $posts_url = Config::get('chatter.routes.home') . '/posts';
 Route::resource($posts_url, 'Chatter\ChatterPostController');
+
+
+Route::model('subscriptions', 'App\Subscription');
+Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show']]);
+
+Route::group(array('prefix' => 'subscriptions'), function() {
+	Route::get('choose', 'SubscriptionController@choose');
+	Route::get('create/{type}', 'SubscriptionController@create');	
+});
+
