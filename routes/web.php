@@ -16,37 +16,37 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::group(['middleware' => ['subscriber']], function() {
+	Route::get('/members', 'DashboardController@index');
 
-Route::get('/members', 'DashboardController@index');
+	//CHATTER FORUM ROUTES
+	$chatter_url = Config::get('chatter.routes.home');
+	Route::get($chatter_url, 'Chatter\ChatterController@index');
 
-//CHATTER FORUM ROUTES
-$chatter_url = Config::get('chatter.routes.home');
-Route::get($chatter_url, 'Chatter\ChatterController@index');
+	Route::get($chatter_url.'/login', 'Chatter\ChatterController@login');
+	Route::get($chatter_url.'/register', 'Chatter\ChatterController@register');
 
-Route::get($chatter_url.'/login', 'Chatter\ChatterController@login');
-Route::get($chatter_url.'/register', 'Chatter\ChatterController@register');
+	$chatter_category_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.category');
+	Route::get($chatter_category_url . '/{slug}', 'Chatter\ChatterController@index');
 
-$chatter_category_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.category');
-Route::get($chatter_category_url . '/{slug}', 'Chatter\ChatterController@index');
+	$discussion_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.discussion');
+	Route::resource($discussion_url, 'Chatter\ChatterDiscussionController');
+	Route::get($discussion_url . '/{category}/{slug}', 'Chatter\ChatterDiscussionController@show');
 
-$discussion_url = Config::get('chatter.routes.home') . '/' . Config::get('chatter.routes.discussion');
-Route::resource($discussion_url, 'Chatter\ChatterDiscussionController');
-Route::get($discussion_url . '/{category}/{slug}', 'Chatter\ChatterDiscussionController@show');
+	$posts_url = Config::get('chatter.routes.home') . '/posts';
+	Route::resource($posts_url, 'Chatter\ChatterPostController');
+	//END CHATTER FORUM ROUTES
+	
+	//USERS
+	Route::model('users', 'App\User');
+	Route::resource('users', 'UserController');
 
-$posts_url = Config::get('chatter.routes.home') . '/posts';
-Route::resource($posts_url, 'Chatter\ChatterPostController');
-//END CHATTER FORUM ROUTES
+	//SUBSCRIPTIONS
+	Route::model('subscriptions', 'App\Subscription');
+	Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show']]);
+});
 
-
-//USERS
-Route::model('users', 'App\User');
-Route::resource('users', 'UserController');
-
-//SUBSCRIPTIONS
-Route::model('subscriptions', 'App\Subscription');
-Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show']]);
-
-Route::group(array('prefix' => 'subscriptions'), function() {
+Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), function() {
 	Route::get('choose', 'SubscriptionController@choose');
 	Route::get('create/{type}', 'SubscriptionController@create');	
 });

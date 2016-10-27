@@ -7,7 +7,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Subscription;
+use Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class SubscriptionController extends Controller
 {
@@ -29,15 +31,21 @@ class SubscriptionController extends Controller
      */
 
     public function choose() {    	
-    	return \View::make('subscriptions.choose');	
+
+        $user = \Auth::user();
+        $subscription = $user->subscription('main');
+
+    	return \View::make('subscriptions.choose')->withSubscription($subscription);	
     }
 
     public function create($type)
     {
+        $user = \Auth::user();
+        
     	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
     	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-		
     	return \View::make('subscriptions.create')->withType($type)->withPlan($plan);       
+        
     }
 
     /**
@@ -105,6 +113,12 @@ class SubscriptionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $user = User::find($id);
+        $input = $request->all();
+        $plan_id = $input['plan_id'];
+        $user->subscription('main')->swap($plan_id);
+        Session::flash('message', 'Succesfully changed your plan!');
+        return Redirect::to('/subscriptions/'.$user->id.'/edit');
     }
 
     /**
