@@ -19,7 +19,7 @@ Auth::routes();
 
 Route::get('/members', 'DashboardController@index');
 
-
+//CHATTER FORUM ROUTES
 $chatter_url = Config::get('chatter.routes.home');
 Route::get($chatter_url, 'Chatter\ChatterController@index');
 
@@ -35,8 +35,14 @@ Route::get($discussion_url . '/{category}/{slug}', 'Chatter\ChatterDiscussionCon
 
 $posts_url = Config::get('chatter.routes.home') . '/posts';
 Route::resource($posts_url, 'Chatter\ChatterPostController');
+//END CHATTER FORUM ROUTES
 
 
+//USERS
+Route::model('users', 'App\User');
+Route::resource('users', 'UserController');
+
+//SUBSCRIPTIONS
 Route::model('subscriptions', 'App\Subscription');
 Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show']]);
 
@@ -44,4 +50,7 @@ Route::group(array('prefix' => 'subscriptions'), function() {
 	Route::get('choose', 'SubscriptionController@choose');
 	Route::get('create/{type}', 'SubscriptionController@create');	
 });
+
+//STRIPE
+Route::post('stripe/webhook', '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook');
 

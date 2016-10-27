@@ -1,15 +1,11 @@
 <?php
 
-
-/////http://itsolutionstuff.com/post/laravel-5-stripe-example-using-laravel-cashier-from-scratchexample.html
-
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Subscription;
 use Illuminate\Http\Request;
 
-class SubscriptionController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +15,6 @@ class SubscriptionController extends Controller
     public function index()
     {
         //
-        return \View::make('subscriptions.choose');	
     }
 
     /**
@@ -27,17 +22,9 @@ class SubscriptionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public function choose() {    	
-    	return \View::make('subscriptions.choose');	
-    }
-
-    public function create($type)
+    public function create()
     {
-    	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-    	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-		
-    	return \View::make('subscriptions.create')->withType($type)->withPlan($plan);       
+        //
     }
 
     /**
@@ -48,21 +35,7 @@ class SubscriptionController extends Controller
      */
     public function store(Request $request)
     {
-        //	
-        	$user= \Auth::user();
-
-            $input = $request->all();
-            $token = $input['stripeToken'];
-            
-
-             try {
-                $user->newSubscription('main', $input['plan_id'])->create($token,[
-                        'email' => $user->email
-                    ]);
-                return \View::make('subscriptions.created');
-            } catch (Exception $e) {
-                return back()->with('success',$e->getMessage());
-            }
+        //
     }
 
     /**
@@ -84,15 +57,10 @@ class SubscriptionController extends Controller
      */
     public function edit($id)
     {
-        //
         $user = User::find($id);
-        $subscription = $user->subscription('main');
 
-        \Stripe\Stripe::setApiKey("sk_test_cpqxiyOlpUl96IDvNoxKCq48");
-
-        $subscription = \Stripe\Subscription::retrieve($subscription->stripe_id);
-
-        return \View::make('subscriptions.edit')->withUser($user)->withSubscription($subscription);
+        $user->password = null;
+        return \View::make('users.edit')->withUser($user);
     }
 
     /**
