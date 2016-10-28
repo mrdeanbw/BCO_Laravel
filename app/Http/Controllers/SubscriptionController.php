@@ -38,13 +38,13 @@ class SubscriptionController extends Controller
     	return \View::make('subscriptions.choose')->withSubscription($subscription);	
     }
 
-    public function create($type)
+    public function checkout($type)
     {
         $user = \Auth::user();
         
     	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
     	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-    	return \View::make('subscriptions.create')->withType($type)->withPlan($plan);       
+    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan);       
         
     }
 
@@ -67,7 +67,7 @@ class SubscriptionController extends Controller
                 $user->newSubscription('main', $input['plan_id'])->create($token,[
                         'email' => $user->email
                     ]);
-                return \View::make('subscriptions.created');
+                return Redirect::to('/subscriptions/confirmed');
             } catch (Exception $e) {
                 return back()->with('success',$e->getMessage());
             }
@@ -130,5 +130,9 @@ class SubscriptionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function confirmed() {
+        return \View::make('subscriptions.confirmed');
     }
 }

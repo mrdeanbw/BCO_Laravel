@@ -55,7 +55,7 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::guest()) 
                             <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Why Join</a></li>
+                            <li><a href="/why-join">Why Join</a></li>
                             <li><a href="#">Non Profit Status</a></li>
                             <li><a href="#">Board</a></li>
                             <li><a href="#">Contact Us</a></li>

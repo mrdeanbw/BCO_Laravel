@@ -11,6 +11,13 @@
 //Font Awesome
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
 
+.subtle {
+	color: lighten($brand-secondary, 30%);
+}
+
+.primary {
+	color: $brand-primary;
+}
 
 .navbar-default {
     background-color: $brand-secondary;
@@ -220,6 +227,8 @@ footer li > a {
 }
 
 
+/* Dashboard */
+
 #stockQuoteApp, #newsApp {
 	font-size: 10px;
 }
@@ -233,4 +242,52 @@ footer li > a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* Subscriptions */
+
+.subplan-box {
+	padding: 0 10px;
+}
+
+.subplan-box h4 {
+	color: $brand-primary;
+	font-weight: bold;
+}
+
+.subplan-box-title {
+	text-align: center;
+}
+
+.subplan-box-title > h1, .subplan-box-title > h4 {
+	margin: 4px;
+}
+
+.subplan-box-title h1 small {
+	color: #fff;
+	opacity: 0.4;
+}
+
+.subplan-box-title p {
+	font-size: 0.8em;
+}
+
+.subplan-box .btn {
+	display: flex;
+	-webkit-box-orient: vertical;
+    -webkit-box-direction: normal; 
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
+}
+
+.subplan-box-breaker {
+	margin: 20px 0;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.ul-no-indent {
+	list-style-type: circle;
+	padding-left: 15px;
 }

@@ -62,6 +62,12 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        //Check if we have passed a plan parameter so we can immediately route to checkout rather than the choices.
+        if(isset($data['plan_id'])) {
+            $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'];
+        }
+        
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

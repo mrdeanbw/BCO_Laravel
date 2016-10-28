@@ -14,6 +14,11 @@
 Route::get('/', function () {
     return view('home');
 });
+Route::get('/home', function () {
+    return view('home');
+});
+
+Route::get('/why-join', function() { return view('public.why-join'); });
 
 Auth::routes();
 Route::group(['middleware' => ['subscriber']], function() {
@@ -43,12 +48,13 @@ Route::group(['middleware' => ['subscriber']], function() {
 
 	//SUBSCRIPTIONS
 	Route::model('subscriptions', 'App\Subscription');
-	Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show']]);
+	Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show', 'create']]);
 });
 
 Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), function() {
 	Route::get('choose', 'SubscriptionController@choose');
-	Route::get('create/{type}', 'SubscriptionController@create');	
+	Route::get('checkout/{type}', 'SubscriptionController@checkout');	
+	Route::get('confirmed', 'SubscriptionController@confirmed');	
 });
 
 //STRIPE

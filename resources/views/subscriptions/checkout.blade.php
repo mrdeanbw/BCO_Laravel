@@ -28,10 +28,13 @@
 @section('content')
 
 <div class="container">
-	<div class="col-md-8 col-md-offset-2">
-		<h3>{{ $plan->name }}</h3>
-		<p>{{ strtoupper($plan->currency)}} {{ ($plan->amount / 100) }} per {{ $plan->interval }}</p>
-
+	<div class="col-md-6 col-md-offset-3">
+		<h3><i class="fa fa-credit-card primary"></i> Checkout <small class="subtle">(step 3 of 3)</small></h3>
+		<ul class="ul-no-indent">
+			<li>You are purchasing the <strong>{{ $plan->name }}</strong> plan</li>
+			<li>You will pay <strong>${{ ($plan->amount / 100) }}</strong> now</li>
+			<li>Your subscription fee will be automatically charged to your card each <strong>{{ $plan->interval }}</strong></li>
+		</ul>
 		{!! Form::open(['url' => 'subscriptions', 'data-parsley-validate', 'id' => 'payment-form']) !!}
 		{{ Form::hidden('plan_id', $plan->id, array('id' => 'plan_id')) }}
         @if ($message = Session::get('success'))
@@ -40,8 +43,18 @@
                 <strong>{{ $message }}</strong>
         </div>
         @endif
-		<div class="form-group" id="cc-group">
-			{{ Form::label(null, 'Credit card number:') }}
+        <div class="well">
+        	<div class="form-group" id="name-group">
+			{{ Form::label(null, 'Name on Card') }} <span class="pull-right subtle"><i class="fa fa-lock" aria-hidden="true"></i> Secured</span>
+			{{ Form::text(null, null, [
+				'class'			=> 'form-control',
+				'required'  	=> 'required',
+				'data-stripe'	=> 'name',								
+				'maxlength'     => '40'
+				]) }}
+			</div>
+			<div class="form-group" id="cc-group">
+			{{ Form::label(null, 'Credit card number') }}
 			{{ Form::text(null, null, [
 				'class'			=> 'form-control',
 				'required'  	=> 'required',
@@ -54,7 +67,7 @@
 			</div>
 
 			<div class="form-group" id="ccv-group">
-				{!! Form::label(null, 'CVC (3 or 4 digit number):') !!}
+				{!! Form::label(null, 'CVC (3 or 4 digit number)') !!}
 				{!! Form::text(null, null, [
 						'class'                         => 'form-control',
 						'required'                      => 'required',
@@ -68,7 +81,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group" id="exp-m-group">
-						{!! Form::label(null, 'Ex. Month') !!}
+						{!! Form::label(null, 'Expiry Month') !!}
 						{!! Form::selectMonth(null, null, [
 							'class'                 => 'form-control',
 							'required'              => 'required',
@@ -78,7 +91,7 @@
 				</div>
 				<div class="col-md-6">
 					<div class="form-group" id="exp-y-group">
-						{!! Form::label(null, 'Ex. Year') !!}
+						{!! Form::label(null, 'Year') !!}
 						{!! Form::selectYear(null, date('Y'), date('Y') + 10, null, [
 							'class'             => 'form-control',
 							'required'          => 'required',
@@ -88,16 +101,18 @@
 				</div>
 			</div>
 			<div class="form-group">
-            	{!! Form::submit('Place your subscription order', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id' => 'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
+            	{!! Form::submit('Securely place your subscription order', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id' => 'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
              </div>
 			<div class="row">
 				<div class="col-md-12">
 				    <span class="payment-errors" style="color: red;margin-top:10px;"></span>
 				</div>
 			</div>
-
 			{{ Form::close() }}
-
+			</div>
+		<div class="payment-footer subtle">
+		<p>Your subscription will be securely processed by Stripe Inc., we ourselves do not store any of your credit card information on our servers apart from the last 4 digits of your card number and the brand, for verification purposes.</p>
+		</div>
 		</div>
 	</div>	
 

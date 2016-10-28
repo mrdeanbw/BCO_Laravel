@@ -114,7 +114,7 @@
 </div>
 </div>
 
-<div class="spanner spanner-image">
+<div class="spanner spanner-image" style="margin-bottom: -24px;">
     <div class="item" style="background-image: url(/res/s02-1200x534.jpg);">
         <div class="container">
           <div class="caption">
