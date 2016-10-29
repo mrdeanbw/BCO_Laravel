@@ -5994,4 +5994,18 @@ footer li > a {
   list-style-type: circle;
   padding-left: 15px; }
 
+/* News */
+.newsitem {
+  border-bottom: 1px solid #d6d8d9; }
+
+.newsitem > h4 {
+  margin-bottom: 2px; }
+
+.newsitem > h4 > strong > a {
+  color: #636b6f; }
+
+.newsitem .readmore {
+  font-weight: bold;
+  margin-top: -5px; }
+
 /*# sourceMappingURL=app.css.map */

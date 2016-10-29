@@ -10,6 +10,8 @@
 		</div>
 		@endif
 		
+		<a href="{{ url('/members/news') }}">Return</a>
+
 		<h3>{{ $news->title }}</h3>
 		<p>Posted {{ $news->created_at }} by {{ $news->created_by->name }}</p>
 		{!! $news->body !!}

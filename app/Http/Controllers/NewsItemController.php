@@ -25,7 +25,7 @@ class NewsItemController extends Controller
     public function index()
     {
         //        
-        $news = \App\NewsItem::orderBy('created_at', 'DESC')->paginate(10);
+        $news = \App\NewsItem::orderBy('pinned', 'DESC')->orderBy('created_at', 'DESC')->paginate(10);
         $news->load(['created_by']);                
         return \View::make('newsitems.index')->withNews($news);
     }
@@ -98,6 +98,8 @@ class NewsItemController extends Controller
     public function edit($id)
     {        
         $this->authorize('update', $id);
+        $id->load(['created_by']);
+        return \View::make('newsitems.edit')->withNews($id);
     }
 
     /**
@@ -111,6 +113,27 @@ class NewsItemController extends Controller
     {
         //        
         $this->authorize('update', $id);
+
+        $rules = array(
+            'title' => 'required|min:5|max:255',
+            'body' => 'required');
+
+        $validator = Validator::make(Request::all(), $rules);
+
+        if($validator->fails()) {
+            return Redirect::route('news.edit', [$id])
+            ->withErrors($validator)
+            ->withInput(Request::all());
+        } else {
+            $newsItem = $id;
+            $newsItem->title = Request::get('title');
+            $newsItem->body = Request::get('body');            
+            $newsItem->pinned = Request::get('pinned') ? 1 : 0;
+            $newsItem->save();
+            Session::flash('message', 'Succesfully updated your post');
+            return Redirect::route('news.show', [$newsItem]);
+        }
+
     }
 
     /**
@@ -122,5 +145,9 @@ class NewsItemController extends Controller
     public function destroy($id)
     {   
         $this->authorize('delete', $id);
+        $id->delete();
+
+        Session::flash('message', 'Post Deleted.');
+        return Redirect::route('news.index');
     }
 }
