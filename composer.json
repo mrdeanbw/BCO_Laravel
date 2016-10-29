@@ -10,7 +10,8 @@
         "devdojo/chatter": ">=0.1",
         "laravel/cashier": "~7.0",
         "stripe/stripe-php": "3.*",
-        "laravelcollective/html": "^5.2.0"
+        "laravelcollective/html": "^5.2.0",
+        "guzzlehttp/guzzle": "~6.0"
 
     },
     "require-dev": {

@@ -15,8 +15,11 @@ class CheckSubscription
      */
     public function handle($request, Closure $next)
     {
-        if ($request->user() && ! $request->user()->subscribed('main')) {
-            // This user is not a paying customer...
+        if ($request->user() && 
+                ! $request->user()->subscribed('main') && 
+                ! $request->user()->is_admin) {
+
+            // This user is not a paying customer or an admin...
             return redirect('subscriptions/choose');
         }
 

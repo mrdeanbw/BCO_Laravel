@@ -27,6 +27,21 @@
                             </div>
                         </div>
 
+                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
                         <div class="form-group{{ $errors->has('organization') ? ' has-error' : '' }}">
                             <label for="Organization" class="col-md-4 control-label">Organization</label>
 
@@ -41,15 +56,29 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
+                            <label for="city" class="col-md-4 control-label">City</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
 
-                                @if ($errors->has('email'))
+                                @if ($errors->has('city'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
+                                        <strong>{{ $errors->first('city') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('country') ? ' has-error' : '' }}">
+                            <label for="country" class="col-md-4 control-label">Country</label>
+
+                            <div class="col-md-6">
+                                <input id="country" type="text" class="form-control" name="country" value="{{ old('country') }}" required autofocus>
+
+                                @if ($errors->has('country'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('country') }}</strong>
                                     </span>
                                 @endif
                             </div>
@@ -81,6 +110,17 @@
                                     </span>
                                 @endif
                             </div>
+                        </div>
+                        
+                        <div class="form-group{{ $errors->has('recaptcha') ? ' has-error' : '' }}">
+                        <div class="col-md-6 col-md-offset-4">
+                            <div id="recaptcha" name="recaptcha" class="g-recaptcha" data-sitekey="6LdYnQoUAAAAAFW6eqyIixhyQbOWxHQmHQM_vjzH"></div>
+                            @if ($errors->has('recaptcha'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('recaptcha') }}</strong>
+                                </span>
+                            @endif
+                        </div>
                         </div>
 
                         <div class="form-group">
