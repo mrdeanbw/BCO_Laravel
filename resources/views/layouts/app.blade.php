@@ -62,7 +62,7 @@
                             <li><a href="#">Contact Us</a></li>
                         @else
                             <p class="navbar-text"><a href="{{ url('/members') }}">Members Area</a></p>
-                            <li><a href="#">News</a></li>
+                            <li><a href="{{ url('/members/news') }}">News</a></li>
                             <li><a href="#">Shipping Rates</a></li>
                             <li><a href="{{ url('/members/forums') }}">Forums</a></li>
                             <li><a href="#">Software</a></li>

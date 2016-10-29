@@ -15,6 +15,10 @@ class CreateNewsItemsTable extends Migration
     {
         Schema::create('news_items', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title', 255);
+            $table->integer('user_id')->unsigned();
+            $table->boolean('pinned')->default(false);
+            $table->text('body');
             $table->timestamps();
         });
     }

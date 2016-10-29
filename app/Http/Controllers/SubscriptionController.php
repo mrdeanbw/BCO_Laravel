@@ -60,8 +60,7 @@ class SubscriptionController extends Controller
         	$user= \Auth::user();
 
             $input = $request->all();
-            $token = $input['stripeToken'];
-            
+            $token = $input['stripeToken'];            
 
              try {
                 $user->newSubscription('main', $input['plan_id'])->create($token,[
@@ -91,8 +90,8 @@ class SubscriptionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+            //
         $user = User::find($id);
         $subscription = $user->subscription('main');
 

@@ -42,18 +42,28 @@ Route::group(['middleware' => ['subscriber']], function() {
 	Route::resource($posts_url, 'Chatter\ChatterPostController');
 	//END CHATTER FORUM ROUTES
 	
+
+	Route::group(array('prefix' => 'members'), function() {
+		//NEWS
+		Route::model('news', 'App\NewsItem');
+		Route::resource('news', 'NewsItemController');
+	});
+
 	//USERS
 	Route::model('users', 'App\User');
-	Route::resource('users', 'UserController');
+	Route::resource('users', 'UserController', ['except' => ['index', 'show', 'create', 'store', 'destroy']]);
 
 	//SUBSCRIPTIONS
 	Route::model('subscriptions', 'App\Subscription');
-	Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show', 'create']]);
+	Route::resource('subscriptions', 'SubscriptionController', ['except' => ['show', 'create', 'store']]);
+
+	
 });
 
 Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), function() {
 	Route::get('choose', 'SubscriptionController@choose');
-	Route::get('checkout/{type}', 'SubscriptionController@checkout');	
+	Route::get('checkout/{type}', 'SubscriptionController@checkout');
+	Route::post('', 'SubscriptionController@store');	
 	Route::get('confirmed', 'SubscriptionController@confirmed');	
 });
 

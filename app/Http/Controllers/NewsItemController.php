@@ -2,10 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
+use Session;
+use Validator;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
+
+use App\NewsItem;
 
 class NewsItemController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +24,10 @@ class NewsItemController extends Controller
      */
     public function index()
     {
-        //
+        //        
+        $news = \App\NewsItem::orderBy('created_at', 'DESC')->paginate(10);
+        $news->load(['created_by']);                
+        return \View::make('newsitems.index')->withNews($news);
     }
 
     /**
@@ -24,6 +38,8 @@ class NewsItemController extends Controller
     public function create()
     {
         //
+        $this->authorize('create', NewsItem::class);
+        return \View::make('newsitems.create');
     }
 
     /**
@@ -33,8 +49,30 @@ class NewsItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {        
+        $this->authorize('create', NewsItem::class);
+
+        $rules = array(
+            'title' => 'required|min:5|max:255',
+            'body' => 'required');
+
+        $validator = Validator::make(Request::all(), $rules);
+
+        if($validator->fails()) {
+            return Redirect::to('members/news/create')
+            ->withErrors($validator)
+            ->withInput(Request::all());
+        } else {
+            $user = \Auth::user();
+            $newsItem = new NewsItem;
+            $newsItem->title = Request::get('title');
+            $newsItem->body = Request::get('body');
+            $newsItem->user_id = $user->id;
+
+            $newsItem->save();
+            Session::flash('message', 'Succesfully created a new post');
+            return Redirect::route('news.show', [$newsItem]);
+        }
     }
 
     /**
@@ -46,6 +84,9 @@ class NewsItemController extends Controller
     public function show($id)
     {
         //
+        $this->authorize('view', $id);
+        $id->load(['created_by']);                
+        return \View::make('newsitems.show')->withNews($id);
     }
 
     /**
@@ -55,8 +96,8 @@ class NewsItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {        
+        $this->authorize('update', $id);
     }
 
     /**
@@ -68,7 +109,8 @@ class NewsItemController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //        
+        $this->authorize('update', $id);
     }
 
     /**
@@ -78,7 +120,7 @@ class NewsItemController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {   
+        $this->authorize('delete', $id);
     }
 }
