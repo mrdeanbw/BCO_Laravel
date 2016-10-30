@@ -5,6 +5,7 @@
 /.idea
 Homestead.json
 Homestead.yaml
+/laradock
 .env
 
 # Elastic Beanstalk Files
