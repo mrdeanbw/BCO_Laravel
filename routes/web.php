@@ -14,11 +14,13 @@
 Route::get('/', function () {
     return view('home');
 });
-Route::get('/home', function () {
+Route::get('/home', function () { 
     return view('home');
 });
 
 Route::get('/why-join', function() { return view('public.why-join'); });
+Route::get('/who-we-are', function() { return view('public.who-we-are'); });
+Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
 
 Auth::routes();
 Route::group(['middleware' => ['subscriber']], function() {

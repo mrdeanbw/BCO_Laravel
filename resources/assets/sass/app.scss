@@ -226,6 +226,14 @@ footer li > a {
 	padding: 0 10px;
 }
 
+.app {
+	min-height: 100%;
+}
+
+.pull-down {
+	bottom: 54px;
+}
+
 
 /* Dashboard */
 
@@ -310,4 +318,67 @@ footer li > a {
 .newsitem .readmore {
 	font-weight: bold;
 	margin-top: -5px;
+}
+
+/* Info pages */
+
+.info-page h3 {
+	font-weight: bold;	
+}
+
+.info-page > .row {
+	margin: 0;
+	border-bottom: 1px solid lighten($brand-secondary, 50%);
+}
+
+.info-page h4 {
+	font-weight: bold;
+	margin: 45px 0 10px 0;
+	color: $brand-primary;
+}
+
+.info-page p {
+	text-align: justify;
+}
+
+.info-page.spanner-image {
+	margin-top: -22px;	
+
+}
+
+.info-page.spanner-image > .item {
+	min-height: 100px;
+	max-height: 130px;
+	color: #fff;
+}
+
+.info-page > .action-box {
+
+	border-radius: 10px;
+	background-color: none;
+	padding: 10px;
+	margin: 50px auto;
+	text-align: center;
+	width: 50%;
+	color: $brand-primary;
+}
+
+.info-page > .action-box h2 {
+	color: $brand-secondary;
+}
+
+.info-page > .action-box p {
+	text-align: center;
+}
+
+.info-page ul {
+	list-style: none;
+	padding-left: 15px;
+}
+
+.info-page li:before {
+	font-family: 'FontAwesome';
+	content: '\f0d1';
+	margin: 0 5px 0 -15px;
+	color: $brand-primary;
 }
