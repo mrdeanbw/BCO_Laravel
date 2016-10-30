@@ -382,3 +382,27 @@ footer li > a {
 	margin: 0 5px 0 -15px;
 	color: $brand-primary;
 }
+
+/* inbox */
+.inbox-item {
+	padding: 10px 20px;
+	border-bottom: 1px solid lighten($brand-secondary, 50%);
+}
+
+.inbox-item.unread .title {
+	font-weight: bold;
+}
+
+.inbox-item a {
+	color: $brand-secondary;
+}
+
+.inbox-item.unread .title:before {
+	font-family: 'FontAwesome';
+	content: '\f003';
+	margin: 0 5px 0 0;
+}
+
+.inbox-item p {
+	margin: 0px;
+}

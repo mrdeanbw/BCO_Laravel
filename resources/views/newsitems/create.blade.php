@@ -21,6 +21,22 @@
 		<div class="form-group">			
 			{{ Form::text('title', null, array('class'=>'form-control form-control-lg', 'placeholder'=>'News Item Title')) }}
 		</div>
+
+		<div class="form-group">
+		 	<label>
+		 	{{ Form::checkbox('pinned', '1', null) }}
+		 	<i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin
+			
+			</label>
+		</div>
+
+		<div class="form-group">
+		 	<label>
+		 	{{ Form::checkbox('notify', '1', null) }}
+		 	<i class="fa fa-share" aria-hidden="true"></i> Notify Members			
+			</label>
+		</div>
+
 		<div class="form-group">
 		 {{Form::label('body', 'Content')}}
 		 {{Form::textarea('body',null,array('class' => 'form-control', 'placeholder'=>'Content', 'id' => 'summernote'))}}

@@ -6063,4 +6063,23 @@ footer li > a {
   margin: 0 5px 0 -15px;
   color: #24CBD3; }
 
+/* inbox */
+.inbox-item {
+  padding: 10px 20px;
+  border-bottom: 1px solid #d6d8d9; }
+
+.inbox-item.unread .title {
+  font-weight: bold; }
+
+.inbox-item a {
+  color: #545a5c; }
+
+.inbox-item.unread .title:before {
+  font-family: 'FontAwesome';
+  content: '\f003';
+  margin: 0 5px 0 0; }
+
+.inbox-item p {
+  margin: 0px; }
+
 /*# sourceMappingURL=app.css.map */

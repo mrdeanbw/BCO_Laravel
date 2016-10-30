@@ -6,7 +6,9 @@ use Request;
 use Session;
 use Validator;
 use App\Http\Requests;
+use App\Notifications\News;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Notification;
 
 use App\NewsItem;
 
@@ -67,12 +69,25 @@ class NewsItemController extends Controller
             $newsItem = new NewsItem;
             $newsItem->title = Request::get('title');
             $newsItem->body = Request::get('body');
+            $newsItem->pinned = Request::get('pinned') ? 1 : 0;
             $newsItem->user_id = $user->id;
 
             $newsItem->save();
             Session::flash('message', 'Succesfully created a new post');
+
+            //Send notifications
+            $notify = Request::get('notify') ? 1 : 0;
+            if($notify == 1) {
+                $this->notify_users($newsItem);
+            }
+
             return Redirect::route('news.show', [$newsItem]);
         }
+    }
+
+    private function notify_users($newsItem) {
+        $users = \App\User::all();
+        Notification::send($users, new News($newsItem));
     }
 
     /**

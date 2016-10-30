@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -89,5 +90,22 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function inbox($id) {
+        $user = User::find($id);
+        $user->load('notifications');
+        return \View::make('users.inbox')->withUser($user);
+        
+    }
+
+    public function message($user_id, $notification_id) {
+        $user = User::find($user_id);
+        $notification = \App\Notification::find($notification_id);
+        if(null === $notification->read_at) {
+            $notification->read_at = Carbon::now();
+            $notification->save();
+        }
+        return \View::make('users.message')->withUser($user)->withNotification($notification);
     }
 }

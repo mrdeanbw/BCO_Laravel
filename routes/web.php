@@ -54,6 +54,10 @@ Route::group(['middleware' => ['subscriber']], function() {
 	//USERS
 	Route::model('users', 'App\User');
 	Route::resource('users', 'UserController', ['except' => ['index', 'show', 'create', 'store', 'destroy']]);
+	Route::group(array('prefix' => 'users', 'middleware' => ['auth']), function() {
+		Route::get('/inbox/{user}', 'UserController@inbox');
+		Route::get('/inbox/{user}/{msg}', 'UserController@message');
+	});
 
 	//SUBSCRIPTIONS
 	Route::model('subscriptions', 'App\Subscription');

@@ -24,8 +24,8 @@
 
 		<div class="form-group">
 		 	<label>
-		 	<i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin
-			{{ Form::checkbox('pinned', '1', null) }}
+		 	{{ Form::checkbox('pinned', '1', null) }}
+		 	<i class="fa fa-thumb-tack" aria-hidden="true"></i> Pin			
 			</label>
 		</div>
 
