@@ -38,6 +38,11 @@
 		</div>
 
 		<div class="form-group">
+			{{ Form::label('summary', 'Summary') }}
+			{{Form::textarea('summary', null, array('class' => 'form-control', 'placeholder' => 'Summary')) }}
+		</div>
+
+		<div class="form-group">
 		 {{Form::label('body', 'Content')}}
 		 {{Form::textarea('body',null,array('class' => 'form-control', 'placeholder'=>'Content', 'id' => 'summernote'))}}
 		</div>

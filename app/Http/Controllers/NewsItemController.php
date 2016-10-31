@@ -56,6 +56,7 @@ class NewsItemController extends Controller
 
         $rules = array(
             'title' => 'required|min:5|max:255',
+            'summary' => 'required|min:5|max:255',
             'body' => 'required');
 
         $validator = Validator::make(Request::all(), $rules);
@@ -68,6 +69,7 @@ class NewsItemController extends Controller
             $user = \Auth::user();
             $newsItem = new NewsItem;
             $newsItem->title = Request::get('title');
+            $newsItem->summary = Request::get('summary');
             $newsItem->body = Request::get('body');
             $newsItem->pinned = Request::get('pinned') ? 1 : 0;
             $newsItem->user_id = $user->id;
@@ -131,6 +133,7 @@ class NewsItemController extends Controller
 
         $rules = array(
             'title' => 'required|min:5|max:255',
+            'summary' => 'required|min:5|max:255',
             'body' => 'required');
 
         $validator = Validator::make(Request::all(), $rules);
@@ -142,6 +145,7 @@ class NewsItemController extends Controller
         } else {
             $newsItem = $id;
             $newsItem->title = Request::get('title');
+            $newsItem->summary = Request::get('summary');
             $newsItem->body = Request::get('body');            
             $newsItem->pinned = Request::get('pinned') ? 1 : 0;
             $newsItem->save();

@@ -11,7 +11,7 @@ stockQuoteApp.controller('appController', ['$scope', '$http', '$timeout', functi
 
 	var url = 'http://query.yahooapis.com/v1/public/yql';
 	var symbol = "'JBHT', 'EXPD', 'UPS', 'FDX', 'CHRW', 'MAERSK-B'";
-	var data = encodeURIComponent("select * from yahoo.finance.quotes where symbol in (" +symbol+ ")");
+	var data = encodeURIComponent("select Symbol, Name, Currency, LastTradePriceOnly, MarketCapitalization, PercentChange from yahoo.finance.quotes where symbol in (" +symbol+ ")");
 
 	var str1 = url.concat("?q=",data);
 	str1=str1.concat("&format=json&diagnostics=true&env=http://datatables.org/alltables.env");

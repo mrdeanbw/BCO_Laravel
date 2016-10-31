@@ -10,7 +10,7 @@ newsApp.controller('newsAppController', ['$scope', '$http', function($scope, $ht
 
 		$scope.title = "Hello";
 		$scope.feed = [];
-		var yqlURL = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20rss(0%2C5)%20where%20url%3D'http%3A%2F%2Famericanshipper.com%2Ffeed.aspx%3Fsn%3DASDaily'&format=json&callback=";
+		var yqlURL = "https://query.yahooapis.com/v1/public/yql?q=select * from rss(0,5) where url='http://americanshipper.com/feed.aspx?sn=ASDailyShippersLogistics'&format=json&callback=";
 	   
 
 		$http.get(yqlURL)

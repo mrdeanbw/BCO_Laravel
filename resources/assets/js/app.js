@@ -15,6 +15,15 @@ require('./bootstrap');
 
 // Vue.component('example', require('./components/Example.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+
+
+
+Vue.component('market-news', require('./components/MarketNews.vue'));
+Vue.component('stock-app', require('./components/StockApp.vue'));
+Vue.component('latest-news', require('./components/LatestNews.vue'));
+Vue.component('new-members', require('./components/NewMembers.vue'));
+
+
+new Vue({
+	el: '#app'
+});

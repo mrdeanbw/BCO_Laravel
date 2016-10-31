@@ -11,7 +11,8 @@
         "laravel/cashier": "~7.0",
         "stripe/stripe-php": "3.*",
         "laravelcollective/html": "^5.2.0",
-        "guzzlehttp/guzzle": "~6.0"
+        "guzzlehttp/guzzle": "~6.0",
+        "laravel/passport": "^1.0"
 
     },
     "require-dev": {

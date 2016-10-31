@@ -38,12 +38,8 @@
 					</h4>
 					<p class="subtle"><small>Posted {{ $newsitem->created_at }} by {{ $newsitem->created_by->name }}</small></p>
 					<div class="newsitem-content">
-						@if(strlen($newsitem->body) > 500)
-							<p>{!! substr($newsitem->body, 0, 497) !!}...</p>
-							<a href="{{ url('/members/news/'.$newsitem->id) }}" class="readmore"><i class="fa fa-caret-down" aria-hidden="true"></i> Read more</a>
-						@else
-							<p>{!! $newsitem->body !!}</p>
-						@endif
+						<p>{!! $newsitem->summary !!}</p>
+						<a href="{{ url('/members/news/'.$newsitem->id) }}" class="readmore"><i class="fa fa-caret-down" aria-hidden="true"></i> Read more</a>
 					</div>
 
 				</div>

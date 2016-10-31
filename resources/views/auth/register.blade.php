@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+
+
 @section('content')
 
 
@@ -136,4 +138,8 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script src='https://www.google.com/recaptcha/api.js'></script>
 @endsection
