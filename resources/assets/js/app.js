@@ -22,6 +22,7 @@ Vue.component('market-news', require('./components/MarketNews.vue'));
 Vue.component('stock-app', require('./components/StockApp.vue'));
 Vue.component('latest-news', require('./components/LatestNews.vue'));
 Vue.component('new-members', require('./components/NewMembers.vue'));
+Vue.component('scfi-widget', require('./components/SCFI.vue'));
 
 
 new Vue({

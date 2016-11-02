@@ -38,7 +38,7 @@
 
 <style>
 
-    .assocnewsitem {
+    .assocnewsitem {        
         border-bottom: 1px solid #d6d8d9;    
         padding-bottom: 10px;
         margin-bottom: 20px;

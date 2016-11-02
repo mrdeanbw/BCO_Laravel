@@ -12,6 +12,7 @@
             <market-news></market-news>     
         </div>
         <div class="col-md-8">
+            <scfi-widget></scfi-widget>
             <latest-news></latest-news>
             <new-members></new-members>
         </div>
