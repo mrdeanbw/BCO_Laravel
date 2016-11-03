@@ -20,7 +20,7 @@
             <tr>
                 <td colspan="5"></td>
             </tr>
-            <tr v-for="item in trades(data)">
+            <tr v-for="item in trades" v-if="filterDefault ? item.default==true : true">
                 <td>{{ item.description }}</td>
                 <td>{{ item.unit }}</td>
                 <td class="col-right">{{ item.current }}</td>
@@ -29,6 +29,7 @@
             </tr>
             </tbody>
         </table>
+        <button class="btn btn-default btn-expander" @click="toggle"><i :class="{'fa': true, 'fa-caret-down': filterDefault, 'fa-caret-up': !filterDefault}" aria-hidden="true"></i> Show {{ filterDefault ? 'More' : 'Less' }} <i :class="{'fa': true, 'fa-caret-down': filterDefault, 'fa-caret-up': !filterDefault}" aria-hidden="true"></i> </button>
     </div>
 </template>
 
@@ -41,7 +42,8 @@
         data: function () {
             return {
                 data: [],
-                error: ''
+                error: '',
+                filterDefault: true
             };
         },
         created : function() {
@@ -78,7 +80,8 @@
                                 'current': current,
                                 'previous': previous,
                                 'weight': w[prop + 'w'],
-                                'change': change//(Math.round(((current - previous) / previous) * 1000) / 1000) * 100
+                                'change': change,
+                                default: obj.default
                             };
                             scfi_compiled.push(item);
 
@@ -97,32 +100,51 @@
             },
 
             getMapping: function() {
-                return [{id:'L1','sort': 1,'name':'Europe (Base port)', 'unit':'USD/TEU'},
-                {id:'L2','sort': 2,'name':'Mediterranean (Base port)', 'unit':'USD/TEU'},
-                {id:'L3','sort': 3,'name':'USWC (Base port)', 'unit':'USD/FEU'},
-                {id:'L4','sort': 4,'name':'USEC (Base port)', 'unit':'USD/FEU'},
-                {id:'L5','sort': 5,'name':'Persian Gulf and Red Sea (Dubai)', 'unit':'USD/TEU'},
-                {id:'L6','sort': 6,'name':'Australia/New Zealand (Melbourne)', 'unit':'USD/TEU'},
-                {id:'L7','sort': 7,'name':'East/West Africa (Lagos)', 'unit':'USD/TEU'},
-                {id:'L8','sort': 8,'name':'South Africa (Durban)', 'unit':'USD/TEU'},
-                {id:'L9','sort': 9,'name':'South America (Santos)', 'unit':'USD/TEU'},
-                {id:'L10','sort': 10,'name':'West Japan (Base port)', 'unit':'USD/TEU'},
-                {id:'L11','sort': 11,'name':'East Japan (Base port)', 'unit':'USD/TEU'},
-                {id:'L12','sort': 12,'name':'Southeast Asia (Singapore)', 'unit':'USD/TEU'},
-                {id:'L13','sort': 13,'name':'Korea (Pusan)', 'unit':'USD/TEU'},
-                {id:'L14','sort': 14,'name':'Taiwan (Kaohsiung)', 'unit':'USD/TEU'},
-                {id:'L15','sort': 15,'name':'Hong Kong (Hong Kong)', 'unit':'USD/TEU'},
-                {id:'L20','sort': 16,'name':'Other', 'unit':'USD/TEU'},
-                {id:'T','sort': 0,'name':'Comprehensive Index', 'unit':'USD/TEU'}];
+                return [{id:'L1','sort': 1,'name':'Europe (Base port)', 'unit':'USD/TEU', default: true},
+                {id:'L2','sort': 2,'name':'Mediterranean (Base port)', 'unit':'USD/TEU', default: false},
+                {id:'L3','sort': 3,'name':'USWC (Base port)', 'unit':'USD/FEU', default: true},
+                {id:'L4','sort': 4,'name':'USEC (Base port)', 'unit':'USD/FEU', default: true},
+                {id:'L5','sort': 5,'name':'Persian Gulf and Red Sea (Dubai)', 'unit':'USD/TEU', default:'true'},
+                {id:'L6','sort': 6,'name':'Australia/New Zealand (Melbourne)', 'unit':'USD/TEU', default:'true'},
+                {id:'L7','sort': 7,'name':'East/West Africa (Lagos)', 'unit':'USD/TEU', default:'true'},
+                {id:'L8','sort': 8,'name':'South Africa (Durban)', 'unit':'USD/TEU', default:'true'},
+                {id:'L9','sort': 9,'name':'South America (Santos)', 'unit':'USD/TEU', default:'true'},
+                {id:'L10','sort': 10,'name':'West Japan (Base port)', 'unit':'USD/TEU', default:'true'},
+                {id:'L11','sort': 11,'name':'East Japan (Base port)', 'unit':'USD/TEU', default:'true'},
+                {id:'L12','sort': 12,'name':'Southeast Asia (Singapore)', 'unit':'USD/TEU', default:'true'},
+                {id:'L13','sort': 13,'name':'Korea (Pusan)', 'unit':'USD/TEU', default:'true'},
+                {id:'L14','sort': 14,'name':'Taiwan (Kaohsiung)', 'unit':'USD/TEU', default:'true'},
+                {id:'L15','sort': 15,'name':'Hong Kong (Hong Kong)', 'unit':'USD/TEU', default:'true'},
+                {id:'L20','sort': 16,'name':'Other', 'unit':'USD/TEU', default:'true'},
+                {id:'T','sort': 0,'name':'Comprehensive Index', 'unit':'USD/TEU', default:'true'}];
             },
             comprehensive: function(data) {
                 return data.filter(function(item) {
                     return item.id === 'T';
                 })
             },
-            trades: function(data) {
-                return data.filter(function(item) {
+            // trades: function(data, filterDefault) {             
+            //     var filter = filterDefault;   
+            //     return data.filter(function(item, filter) {
+            //         if (filter) {
+            //             return item.id !== 'T' && item.id !== 'L20' && item.default==true;
+            //         }
+            //         else {
+            //             return item.id !== 'T' && item.id !== 'L20';
+            //         }
+            //     })
+            // },
+            toggle: function() {
+                this.filterDefault = !this.filterDefault;                
+                
+            }
+
+        },
+        computed: {
+            trades: function() {                
+                return this.data.filter(function(item) {               
                     return item.id !== 'T' && item.id !== 'L20';
+                
                 })
             }
         }
@@ -130,5 +152,11 @@
 </script>
 
 <style>
-
+    .btn-expander {
+        width: 100%;
+        border-radius: 0;
+        font-size: 9px;
+        padding: 0;
+        margin-top: -50px;
+    }
 </style>

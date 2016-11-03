@@ -40,7 +40,7 @@
         }, 
         methods: {
             loadData: function() {
-                var url = "http://query.yahooapis.com/v1/public/yql?q=select Symbol, Name, Currency, LastTradePriceOnly, MarketCapitalization, PercentChange from yahoo.finance.quotes where symbol in (" + this.symbols + ") order by symbol&format=json&diagnostics=true&env=http://datatables.org/alltables.env";
+                var url = "http://query.yahooapis.com/v1/public/yql?q=select * from yahoo.finance.quotes where symbol in (" + this.symbols + ") order by symbol&format=json&diagnostics=true&env=http://datatables.org/alltables.env";
 
                 this.$http.jsonp(url, {'jsonp': 'callback'}).then((response) => {            
                     this.error = '';
