@@ -1,6 +1,4 @@
-
 <template>
-
     <div class="scfi">
         <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> SCFI</h3>
         <table class="table table-striped table-hover table-condensed">
@@ -28,7 +26,7 @@
                 <td class="col-right">{{ item.current }}</td>
                 <td class="col-right">{{ item.previous }}</td>
                 <td class="col-right">{{ item.change > 0 ? '+' : '' }}{{item.change}}%</td>
-            </tr>           
+            </tr>
             </tbody>
         </table>
     </div>
@@ -53,10 +51,10 @@
         methods: {
             loadData:  function() {
                 this.$http.jsonp("http://index.chineseshipping.com.cn/servlet/scfiGetContrast?SpecifiedDate=", {'jsonp': 'jc'}).then((response) => {
-                    this.error = ''; 
+                    this.error = '';
                     var scfi = response.body.scfi;
                     var pre_scfi = response.body.scfi_pre;
-                    var w = response.body.scfi_w;                    
+                    var w = response.body.scfi_w;
 
                     var scfi_compiled = [];
 
@@ -64,10 +62,10 @@
                         if(scfi.data.hasOwnProperty(prop)) {
 
                             var id = prop;
-                            var mapping = this.getMapping();     
+                            var mapping = this.getMapping();
 
                             var obj = window.$.grep(mapping, function(e) { return e.id == id;})[0];
-                                
+
                             var current = parseFloat(scfi.data[prop]);
                             var previous = parseFloat(pre_scfi.data[prop]);
                             var change = Math.round((current - previous) / previous * 1000) / 10;
@@ -75,7 +73,7 @@
                             var item = {
                                 id: prop,
                                 sort: obj.sort,
-                                'description': obj.name,                            
+                                'description': obj.name,
                                 'unit': obj.unit,
                                 'current': current,
                                 'previous': previous,
@@ -84,10 +82,10 @@
                             };
                             scfi_compiled.push(item);
 
-                            
+
                         }
                     }
-                    scfi_compiled.sort(function(a,b) {                        
+                    scfi_compiled.sort(function(a,b) {
                         return (a.sort > b.sort) ? 1 : ((b.sort > a.sort) ? -1 : 0);
                     });
                     console.log(scfi_compiled);
@@ -131,6 +129,6 @@
     }
 </script>
 
-<style>   
+<style>
 
 </style>

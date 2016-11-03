@@ -22,6 +22,10 @@ Route::get('/why-join', function() { return view('public.why-join'); });
 Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
 
+Route::get('register-js', function() {
+	return view('auth.register-js');
+});
+
 Auth::routes();
 Route::group(['middleware' => ['subscriber']], function() {
 	Route::get('/members', 'DashboardController@index');

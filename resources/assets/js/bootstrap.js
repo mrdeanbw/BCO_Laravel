@@ -16,6 +16,8 @@ require('bootstrap-sass');
  * and simple, leaving you to focus on building your next great project.
  */
 
+window.GOOGLE_AUTOCOMPLETE_KEY = "AIzaSyD0UM740B5dh5gXlSZv7KUS97HmvoKz2Ms";
+
 window.Vue = require('vue');
 require('vue-resource');
 

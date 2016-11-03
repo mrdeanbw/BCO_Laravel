@@ -1,13 +1,12 @@
-
 <template>
 
     <div class="assocnews">
-        <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> Association News</h3>    
+        <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> Association News</h3>
         <div v-for="item in newsitems" class="assocnewsitem">
             <h5 class="title-line"><a :href="'members/news/' + item.id">{{ item.title }}</a></h5>
             <p class="subtle date-line">{{ item.pubDate }}</p>
             <p class="description-line" v-html="item.summary"></p>
-        </div>        
+        </div>
     </div>
 </template>
 
@@ -26,7 +25,7 @@
         methods: {
             loadData:  function() {
                 this.$http.get("/api/latest_news").then((response) => {
-                    this.error = ''; 
+                    this.error = '';
                     this.newsitems = response.body;
                 }, (response) => {
                     this.error = 'Unable to retrieve news.';
@@ -38,8 +37,8 @@
 
 <style>
 
-    .assocnewsitem {        
-        border-bottom: 1px solid #d6d8d9;    
+    .assocnewsitem {
+        border-bottom: 1px solid #d6d8d9;
         padding-bottom: 10px;
         margin-bottom: 20px;
     }

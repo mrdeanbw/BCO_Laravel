@@ -6,6 +6,7 @@
  */
 
 require('./bootstrap');
+require('./GoogleAutoCompleteStore');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -23,6 +24,8 @@ Vue.component('stock-app', require('./components/StockApp.vue'));
 Vue.component('latest-news', require('./components/LatestNews.vue'));
 Vue.component('new-members', require('./components/NewMembers.vue'));
 Vue.component('scfi-widget', require('./components/SCFI.vue'));
+Vue.component('register-widget', require('./components/RegisterWidget.vue'));
+Vue.component('google-places', require('./components/GoogleAutocomplete.vue'));
 
 
 new Vue({
