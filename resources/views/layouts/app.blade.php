@@ -58,8 +58,8 @@
                             <li><a href="/who-we-are">Who We Are</a></li>
                             <li><a href="/why-join">Why Join</a></li>
                             <li><a href="/non-profit-status">Non Profit Status</a></li>
-                            <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="#">Board</a></li>
+                            <li><a href="/shippingrates">Shipping Rates</a></li>
+                            <li><a href="/board">Board</a></li>
                             <li><a href="#">Contact Us</a></li>
                         @else
                             <p class="navbar-text"><a href="{{ url('/members') }}">Members Area</a></p>

@@ -18,9 +18,14 @@ Route::get('/home', function () {
     return view('home');
 });
 
+//Public pages
 Route::get('/why-join', function() { return view('public.why-join'); });
 Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
+Route::get('/board', function() { return view('public.board'); });
+Route::get('/shippingrates', function() { return view('public.shippingrates'); });
+
+
 
 Route::get('register-js', function() {
 	return view('auth.register-js');

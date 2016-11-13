@@ -32,7 +32,7 @@ return [
     */
 
     'titles' => [
-        'discussion' => 'Discussion',
+        'discussion' => 'Group',
         'category' => 'Category',
     ],
 

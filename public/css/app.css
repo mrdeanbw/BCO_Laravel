@@ -6101,4 +6101,25 @@ footer li > a {
 .expander-header h3 {
   margin-top: 5px; }
 
+.boardmember .col-md-4 {
+  padding-left: 0; }
+
+.boardmember .bm-img {
+  padding: 0 auto; }
+
+.boardmember img {
+  max-width: 150px; }
+
+.boardmember h4 {
+  margin: 0; }
+
+.boardmember p {
+  margin: 0; }
+
+.boardmember .bm-info {
+  padding: 5px; }
+
+.boardmembers {
+  width: 100%; }
+
 /*# sourceMappingURL=app.css.map */
