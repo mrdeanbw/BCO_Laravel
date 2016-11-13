@@ -26,7 +26,7 @@
 				'inputs': {
 					route: 'long_name',
 					country: 'long_name',
-					administrative_area_level_1: 'long_name',
+					administrative_area_level_1: 'short_name',
 					locality: 'long_name',
 					postal_code: 'short_name'
 				},
@@ -98,7 +98,7 @@
 				this.autocomplete = new google.maps.places.Autocomplete(
 			        this.$refs.complete,
 			        {
-			            types: ['geocode']
+			            types: ['(cities)']			            
 			        }
 			    );
 
@@ -113,8 +113,7 @@
 			pipeAddress: function ()
 			{
 				var data  = {};
-				var place = this.autocomplete.getPlace();
-
+				var place = this.autocomplete.getPlace();				
 				if (place.address_components !== undefined) {
 
 					for (var i = 0; i < place.address_components.length; i++) {

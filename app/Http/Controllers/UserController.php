@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Redirect;
 
 class UserController extends Controller
 {
@@ -107,5 +109,24 @@ class UserController extends Controller
             $notification->save();
         }
         return \View::make('users.message')->withUser($user)->withNotification($notification);
+    }
+
+    public function update_password(Request $request, $id) {
+        $user = User::find($id);
+
+        $rules = array(
+            'password' => 'required|min:6|confirmed');
+
+        $validator = Validator::make($request->all(), $rules);
+        die(json_encode($request->all()));
+        if($validator->fails()) {
+            return Redirect::to('users/'.$id.'/edit')
+            ->withErrors($validator)
+            ->withInput($request->all());
+        } else {            
+            Session::flash('message', 'Succesfully created a new post');
+            
+            return Redirect::route('users.edit', [$id]);
+        }
     }
 }

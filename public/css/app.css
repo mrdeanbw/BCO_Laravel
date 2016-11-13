@@ -6085,4 +6085,20 @@ footer li > a {
 .col-right {
   text-align: right; }
 
+/* Modal Overlay */
+/*
+.exp-collapsed {
+	height: 0;
+}
+*/
+.exp-collapsed .container {
+  height: 0;
+  overflow: hidden; }
+
+.expander-header {
+  margin-top: -20px; }
+
+.expander-header h3 {
+  margin-top: 5px; }
+
 /*# sourceMappingURL=app.css.map */

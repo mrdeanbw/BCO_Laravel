@@ -8,11 +8,24 @@
           <div class="caption">
               <h3>SHIPPING SAVINGS</h3>
               <p>Members Save Big On Parcel, LTL/Ground, Air, and Ocean Shipping Rates</p>
-              <a href="#" class="btn btn-primary">Learn More</a>
+              <button class="btn btn-primary" id="btn-save">Learn More</button>
           </div>
       </div>
   </div>
+  <div id="savings-expander" class="spanner-expander exp-collapsed">  
+    <div class="container">
+        <div class="expander-header">
+            <h3>
+                Members Save Big on Shipping Rates
+                <button id="btn-save-close" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </h3>        
+        </div>
+        <canvas id="myChart" class="container"></canvas>
+    </div>
 </div>
+</div>
+
+
 
 <div class="spanner spanner-dark">
     <div class="container">
@@ -64,7 +77,7 @@
           <div class="caption right">
               <h3>BUYING POWER</h3>
               <p>When Shippers Pool Their Volume Together Everone Wins</p>
-              <a href="#" class="btn btn-primary">Learn More</a>
+              <a href="{{ url('/why-join') }}" class="btn btn-primary">Learn More</a>
           </div>
       </div>
   </div>
@@ -120,9 +133,23 @@
           <div class="caption">
             <h3>NON-PROFIT</h3>
             <p>BCO Shippers Association is a 501(c)3 organization dedicated to serving its members to gain BCO Power!</p>
-            <a href="#" class="btn btn-primary">Learn More</a>
+        <a href="{{ url('non-profit-status') }}" class="btn btn-primary">Learn More</a>
         </div>
     </div>
 </div>
 
+
+
+        
+
+
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{{ Html::script('js/home.js') }}
+
+@endsection
+
+@section('js')
+    
 @endsection

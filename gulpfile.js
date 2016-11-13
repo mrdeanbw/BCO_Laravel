@@ -18,5 +18,7 @@ elixir((mix) => {
        .webpack('app.js');
     mix.sass('forums.scss');
     mix.copy('node_modules/bootstrap-sass/assets/fonts/bootstrap/','public/fonts/bootstrap');
-    mix.copy('resources/assets/summernote/', 'public/summernote')
+    mix.copy('resources/assets/summernote/', 'public/summernote');
+    mix.copy('node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js', 'public/js');
+    mix.copy('resources/assets/js/home.js', 'public/js');
 });

@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'organization' => 'required|max:255',
             'city' => 'required|max:100',
             'country' => 'required|max:100',
+            'state' => 'required',
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required',
         ]);
@@ -82,13 +83,29 @@ class RegisterController extends Controller
             $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'];
         }
         
+
+        //Parse cargotypes
+        $options = ['perishable', 'hazardous', 'fragile', 'liquid'];
+        $cargotypes = [];
+        foreach($options as $option) {
+            if(isset($data[$option])) {
+               array_push($cargotypes, $option);
+            }    
+        }
+        $cargotypes = implode(', ', $cargotypes);
+
+        //Create user
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'organization' => $data['organization'],
             'city' => $data['city'],
             'country' => $data['country'],
+            'state' => isset($data['state']) ? $data['state'] : null,            
             'password' => bcrypt($data['password']),
+            'industry_type' => $data['type'],
+            'primary_commodity' => $data['commodity'],
+            'cargo_types' => $cargotypes
         ]);
     }
 

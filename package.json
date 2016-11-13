@@ -15,5 +15,8 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3"
   },
-  "dependencies": {}
+  "dependencies": {
+    "pwstrength-bootstrap": "^2.0.3",
+    "vuex": "^2.0.0"
+  }
 }

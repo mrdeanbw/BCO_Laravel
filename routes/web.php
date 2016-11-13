@@ -61,6 +61,7 @@ Route::group(['middleware' => ['subscriber']], function() {
 	Route::group(array('prefix' => 'users', 'middleware' => ['auth']), function() {
 		Route::get('/inbox/{user}', 'UserController@inbox');
 		Route::get('/inbox/{user}/{msg}', 'UserController@message');
+		Route::put('/update_pwd/{user}', 'UserController@update_password');
 	});
 
 	//SUBSCRIPTIONS
