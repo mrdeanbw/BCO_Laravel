@@ -32,6 +32,7 @@ return [
     */
 
     'titles' => [
+        'forum' => 'BCO PowerGRID',
         'discussion' => 'Group',
         'category' => 'Category',
     ],

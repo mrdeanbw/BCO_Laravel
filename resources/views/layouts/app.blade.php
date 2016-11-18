@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,14 +61,14 @@
                             <li><a href="/non-profit-status">Non Profit Status</a></li>
                             <li><a href="/shippingrates">Shipping Rates</a></li>
                             <li><a href="/board">Board</a></li>
-                            <li><a href="#">Contact Us</a></li>
+                            <li><a href="/contact-us">Contact Us</a></li>
                         @else
                             <p class="navbar-text"><a href="{{ url('/members') }}">Members Area</a></p>
                             <li><a href="{{ url('/members/news') }}">News</a></li>
+                            <li><a href="{{ url('/members/forums') }}">PowerGRID</a></li>
                             <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="{{ url('/members/forums') }}">Forums</a></li>
                             <li><a href="#">Software</a></li>
-                            <li><a href="#">Directory</a></li>
+                            <li><a href="{{ url('/members/directory') }}">Directory</a></li>
                         @endif
 
                     </ul>

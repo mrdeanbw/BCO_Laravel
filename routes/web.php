@@ -24,7 +24,7 @@ Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
 Route::get('/board', function() { return view('public.board'); });
 Route::get('/shippingrates', function() { return view('public.shippingrates'); });
-
+Route::get('contact-us', function() { return view('public.contact'); });
 
 
 Route::get('register-js', function() {
@@ -58,6 +58,10 @@ Route::group(['middleware' => ['subscriber']], function() {
 		//NEWS
 		Route::model('news', 'App\NewsItem');
 		Route::resource('news', 'NewsItemController');
+
+		Route::group(array('prefix' => 'directory', 'middleware' => ['auth']), function() {
+			Route::get('/', 'DirectoryController@index');
+		});
 	});
 
 	//USERS
