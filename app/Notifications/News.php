@@ -30,8 +30,18 @@ class News extends Notification
      * @return array
      */
     public function via($notifiable)
-    {
-        return ['database'];
+    {   
+        $vias = [];
+
+        $settings = $notifiable->privacy_settings;
+        if($settings->news_dm) {
+            array_push($vias, 'database');
+        }
+        if($settings->news_email) {
+            array_push($vias, 'mail');
+        }
+        
+        return $vias;
     }
 
     /**
@@ -43,9 +53,11 @@ class News extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', 'https://laravel.com')
-                    ->line('Thank you for using our application!');
+                    ->subject('BCOPower News: '. $this->newsItem->title)
+                    ->greeting("Hi, we've posted a new article that you might enjoy.")
+                    ->line($this->newsItem->summary)
+                    ->action('Go to the news article', url('/members/news/'.$this->newsItem->id))
+                    ->line('Thank you for using BCOPower!');
     }
 
     /**
@@ -56,11 +68,11 @@ class News extends Notification
      */
     public function toArray($notifiable)
     {
-        return [
-            //
+        return [            
             'subject' => $this->newsItem->title,
             'url' => 'members/news/'.$this->newsItem->id,
-            'from_name' => env('APP_NAME') . ' News'
+            'from_name' => env('APP_NAME') . ' News',
+            'body' => $this->newsItem->summary
         ];
     }
 }

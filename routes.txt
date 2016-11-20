@@ -1,0 +1,84 @@
++--------+-----------+---------------------------------------------+-----------------------+----------------------------------------------------------------------------+--------------------------+
+| Domain | Method    | URI                                         | Name                  | Action                                                                     | Middleware               |
++--------+-----------+---------------------------------------------+-----------------------+----------------------------------------------------------------------------+--------------------------+
+|        | GET|HEAD  | /                                           |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | api/latest_news                             |                       | App\Http\Controllers\ApiController@latest_news                             | api,auth:api             |
+|        | GET|HEAD  | api/new_members                             |                       | App\Http\Controllers\ApiController@new_members                             | api,auth:api             |
+|        | GET|HEAD  | api/user                                    |                       | Closure                                                                    | api,auth:api             |
+|        | GET|HEAD  | board                                       |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | contact-us                                  |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | home                                        |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | login                                       | login                 | App\Http\Controllers\Auth\LoginController@showLoginForm                    | web,guest                |
+|        | POST      | login                                       |                       | App\Http\Controllers\Auth\LoginController@login                            | web,guest                |
+|        | POST      | logout                                      | logout                | App\Http\Controllers\Auth\LoginController@logout                           | web                      |
+|        | GET|HEAD  | members                                     |                       | App\Http\Controllers\DashboardController@index                             | web,subscriber,auth      |
+|        | GET|HEAD  | members/directory                           |                       | App\Http\Controllers\DirectoryController@index                             | web,subscriber,auth,auth |
+|        | GET|HEAD  | members/forums                              |                       | App\Http\Controllers\Chatter\ChatterController@index                       | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/category/{slug}              |                       | App\Http\Controllers\Chatter\ChatterController@index                       | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/discussion                   | discussion.index      | App\Http\Controllers\Chatter\ChatterDiscussionController@index             | web,subscriber,auth      |
+|        | POST      | members/forums/discussion                   | discussion.store      | App\Http\Controllers\Chatter\ChatterDiscussionController@store             | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/discussion/create            | discussion.create     | App\Http\Controllers\Chatter\ChatterDiscussionController@create            | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/discussion/{category}/{slug} |                       | App\Http\Controllers\Chatter\ChatterDiscussionController@show              | web,subscriber,auth      |
+|        | DELETE    | members/forums/discussion/{discussion}      | discussion.destroy    | App\Http\Controllers\Chatter\ChatterDiscussionController@destroy           | web,subscriber,auth      |
+|        | PUT|PATCH | members/forums/discussion/{discussion}      | discussion.update     | App\Http\Controllers\Chatter\ChatterDiscussionController@update            | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/discussion/{discussion}      | discussion.show       | App\Http\Controllers\Chatter\ChatterDiscussionController@show              | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/discussion/{discussion}/edit | discussion.edit       | App\Http\Controllers\Chatter\ChatterDiscussionController@edit              | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/login                        |                       | App\Http\Controllers\Chatter\ChatterController@login                       | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/posts                        | posts.index           | App\Http\Controllers\Chatter\ChatterPostController@index                   | web,subscriber,auth      |
+|        | POST      | members/forums/posts                        | posts.store           | App\Http\Controllers\Chatter\ChatterPostController@store                   | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/posts/create                 | posts.create          | App\Http\Controllers\Chatter\ChatterPostController@create                  | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/posts/{post}                 | posts.show            | App\Http\Controllers\Chatter\ChatterPostController@show                    | web,subscriber,auth      |
+|        | DELETE    | members/forums/posts/{post}                 | posts.destroy         | App\Http\Controllers\Chatter\ChatterPostController@destroy                 | web,subscriber,auth      |
+|        | PUT|PATCH | members/forums/posts/{post}                 | posts.update          | App\Http\Controllers\Chatter\ChatterPostController@update                  | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/posts/{post}/edit            | posts.edit            | App\Http\Controllers\Chatter\ChatterPostController@edit                    | web,subscriber,auth      |
+|        | GET|HEAD  | members/forums/register                     |                       | App\Http\Controllers\Chatter\ChatterController@register                    | web,subscriber,auth      |
+|        | GET|HEAD  | members/news                                | news.index            | App\Http\Controllers\NewsItemController@index                              | web,subscriber,auth      |
+|        | POST      | members/news                                | news.store            | App\Http\Controllers\NewsItemController@store                              | web,subscriber,auth      |
+|        | GET|HEAD  | members/news/create                         | news.create           | App\Http\Controllers\NewsItemController@create                             | web,subscriber,auth      |
+|        | GET|HEAD  | members/news/{news}                         | news.show             | App\Http\Controllers\NewsItemController@show                               | web,subscriber,auth      |
+|        | PUT|PATCH | members/news/{news}                         | news.update           | App\Http\Controllers\NewsItemController@update                             | web,subscriber,auth      |
+|        | DELETE    | members/news/{news}                         | news.destroy          | App\Http\Controllers\NewsItemController@destroy                            | web,subscriber,auth      |
+|        | GET|HEAD  | members/news/{news}/edit                    | news.edit             | App\Http\Controllers\NewsItemController@edit                               | web,subscriber,auth      |
+|        | GET|HEAD  | non-profit-status                           |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | oauth/authorize                             |                       | \Laravel\Passport\Http\Controllers\AuthorizationController@authorize       | web,auth                 |
+|        | POST      | oauth/authorize                             |                       | \Laravel\Passport\Http\Controllers\ApproveAuthorizationController@approve  | web,auth                 |
+|        | DELETE    | oauth/authorize                             |                       | \Laravel\Passport\Http\Controllers\DenyAuthorizationController@deny        | web,auth                 |
+|        | POST      | oauth/clients                               |                       | \Laravel\Passport\Http\Controllers\ClientController@store                  | web,auth                 |
+|        | GET|HEAD  | oauth/clients                               |                       | \Laravel\Passport\Http\Controllers\ClientController@forUser                | web,auth                 |
+|        | DELETE    | oauth/clients/{client_id}                   |                       | \Laravel\Passport\Http\Controllers\ClientController@destroy                | web,auth                 |
+|        | PUT       | oauth/clients/{client_id}                   |                       | \Laravel\Passport\Http\Controllers\ClientController@update                 | web,auth                 |
+|        | GET|HEAD  | oauth/personal-access-tokens                |                       | \Laravel\Passport\Http\Controllers\PersonalAccessTokenController@forUser   | web,auth                 |
+|        | POST      | oauth/personal-access-tokens                |                       | \Laravel\Passport\Http\Controllers\PersonalAccessTokenController@store     | web,auth                 |
+|        | DELETE    | oauth/personal-access-tokens/{token_id}     |                       | \Laravel\Passport\Http\Controllers\PersonalAccessTokenController@destroy   | web,auth                 |
+|        | GET|HEAD  | oauth/scopes                                |                       | \Laravel\Passport\Http\Controllers\ScopeController@all                     | web,auth                 |
+|        | POST      | oauth/token                                 |                       | \Laravel\Passport\Http\Controllers\AccessTokenController@issueToken        |                          |
+|        | POST      | oauth/token/refresh                         |                       | \Laravel\Passport\Http\Controllers\TransientTokenController@refresh        | web,auth                 |
+|        | GET|HEAD  | oauth/tokens                                |                       | \Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@forUser | web,auth                 |
+|        | DELETE    | oauth/tokens/{token_id}                     |                       | \Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@destroy | web,auth                 |
+|        | POST      | password/email                              |                       | App\Http\Controllers\Auth\ForgotPasswordController@sendResetLinkEmail      | web,guest                |
+|        | GET|HEAD  | password/reset                              |                       | App\Http\Controllers\Auth\ForgotPasswordController@showLinkRequestForm     | web,guest                |
+|        | POST      | password/reset                              |                       | App\Http\Controllers\Auth\ResetPasswordController@reset                    | web,guest                |
+|        | GET|HEAD  | password/reset/{token}                      |                       | App\Http\Controllers\Auth\ResetPasswordController@showResetForm            | web,guest                |
+|        | POST      | register                                    |                       | App\Http\Controllers\Auth\RegisterController@register                      | web,guest                |
+|        | GET|HEAD  | register                                    |                       | App\Http\Controllers\Auth\RegisterController@showRegistrationForm          | web,guest                |
+|        | GET|HEAD  | register-js                                 |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | shippingrates                               |                       | Closure                                                                    | web                      |
+|        | POST      | stripe/webhook                              |                       | \Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook          | web                      |
+|        | POST      | subscriptions                               |                       | App\Http\Controllers\SubscriptionController@store                          | web,auth                 |
+|        | GET|HEAD  | subscriptions                               | subscriptions.index   | App\Http\Controllers\SubscriptionController@index                          | web,subscriber           |
+|        | GET|HEAD  | subscriptions/checkout/{type}               |                       | App\Http\Controllers\SubscriptionController@checkout                       | web,auth                 |
+|        | GET|HEAD  | subscriptions/choose                        |                       | App\Http\Controllers\SubscriptionController@choose                         | web,auth                 |
+|        | GET|HEAD  | subscriptions/confirmed                     |                       | App\Http\Controllers\SubscriptionController@confirmed                      | web,auth                 |
+|        | PUT|PATCH | subscriptions/{subscription}                | subscriptions.update  | App\Http\Controllers\SubscriptionController@update                         | web,subscriber           |
+|        | DELETE    | subscriptions/{subscription}                | subscriptions.destroy | App\Http\Controllers\SubscriptionController@destroy                        | web,subscriber           |
+|        | GET|HEAD  | subscriptions/{subscription}/edit           | subscriptions.edit    | App\Http\Controllers\SubscriptionController@edit                           | web,subscriber           |
+|        | GET|HEAD  | users/inbox/{user}                          |                       | App\Http\Controllers\UserController@inbox                                  | web,subscriber,auth,auth |
+|        | GET|HEAD  | users/inbox/{user}/{msg}                    |                       | App\Http\Controllers\UserController@message                                | web,subscriber,auth,auth |
+|        | GET|HEAD  | users/privacy/{user}                        |                       | App\Http\Controllers\PrivacyController@edit                                | web,subscriber,auth,auth |
+|        | PUT       | users/privacy/{user}                        | privacy.update        | Closure                                                                    | web,subscriber,auth      |
+|        | PUT       | users/update_pwd/{user}                     |                       | App\Http\Controllers\UserController@update_password                        | web,subscriber,auth,auth |
+|        | PUT|PATCH | users/{user}                                | users.update          | App\Http\Controllers\UserController@update                                 | web,subscriber,auth      |
+|        | GET|HEAD  | users/{user}/edit                           | users.edit            | App\Http\Controllers\UserController@edit                                   | web,subscriber,auth      |
+|        | GET|HEAD  | who-we-are                                  |                       | Closure                                                                    | web                      |
+|        | GET|HEAD  | why-join                                    |                       | Closure                                                                    | web                      |
++--------+-----------+---------------------------------------------+-----------------------+----------------------------------------------------------------------------+--------------------------+

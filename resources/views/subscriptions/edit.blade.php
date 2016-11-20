@@ -29,6 +29,5 @@
 	<a href=""  class="btn btn-primary">Update your payment details</a>
 	@endif
 	
-	<p>{{ $subscription }}</p>
-	<p>{{ $user }}
+	
 @endsection

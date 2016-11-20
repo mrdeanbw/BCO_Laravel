@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -6121,5 +6121,13 @@ footer li > a {
 
 .boardmembers {
   width: 100%; }
+
+.directory-search {
+  padding: 12px 8px;
+  width: 100%;
+  border-top: 1px solid #d6d8d9; }
+
+.directory-search .form-control {
+  width: 200px; }
 
 /*# sourceMappingURL=app.css.map */

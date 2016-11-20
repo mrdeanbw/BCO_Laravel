@@ -31,4 +31,12 @@ class User extends Authenticatable
         'password', 'remember_token', 'is_admin', 'stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at',
     ];
    
+    public function is_subscribed() {
+        return $this->subscribed('main');
+    }
+
+    public function privacy_settings() {
+        return $this->hasOne('App\PrivacySettings');
+    }
+
 }

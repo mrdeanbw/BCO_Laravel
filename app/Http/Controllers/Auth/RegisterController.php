@@ -94,8 +94,7 @@ class RegisterController extends Controller
         }
         $cargotypes = implode(', ', $cargotypes);
 
-        //Create user
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'organization' => $data['organization'],
@@ -107,6 +106,12 @@ class RegisterController extends Controller
             'primary_commodity' => $data['commodity'],
             'cargo_types' => $cargotypes
         ]);
+
+        $privacy_settings = new \App\PrivacySettings();
+        $privacy_settings->user_id = $user->id;
+        $privacy_settings->save();
+
+        return $$user;
     }
 
     protected function verify_reCaptcha(array $data) {

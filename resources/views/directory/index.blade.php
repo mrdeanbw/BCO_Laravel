@@ -10,16 +10,15 @@
 		</div>
 		@endif
 		<h3><i class="fa fa-compass primary" aria-hidden="true"></i> Member Directory</h3>
-		{{ Form::open(array('method' => 'GET', 'url'=>'members/directory', 'class' => 'form-inline')) }}
-		<div class="form-group">
-		    <label for="search_name">Organization</label>		    
+		{{ Form::open(array('method' => 'GET', 'url'=>'members/directory', 'class' => 'form-inline directory-search')) }}
+		<div class="form-group">			
+		    <label for="search_name"> Search the Directory&nbsp;</label>		    
 		    {{ Form::text('org', Request::get('org'), array('class'=>'form-control', 'placeholder'=>'Organization')) }}
 		  </div>
-		  <div class="form-group">
-		    <label for="search_email">Name</label>		    
+		  <div class="form-group">		    
 		    {{ Form::text('name', Request::get('name'), array('class'=>'form-control', 'placeholder'=>'Name')) }}
 		  </div>
-		  <button type="submit" class="btn btn-default">Search</button>
+		  <button type="submit" class="btn btn-primary">Search</button>
 		{{ Form::close() }}
 
 		{{ $members->links() }}		
@@ -60,7 +59,10 @@
 						{{ $member->industry_type }}
 					</td>
 					<td>
+						@if($member->privacy_settings->member_message_allow)
 						<button class="btn btn-primary btn-xs"><i class="fa fa-envelope" aria-hidden="true"></i></button>
+						@endif
+						
 					</td>
 				</tr>
 				@endforeach

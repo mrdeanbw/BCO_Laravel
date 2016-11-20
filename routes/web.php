@@ -24,12 +24,12 @@ Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
 Route::get('/board', function() { return view('public.board'); });
 Route::get('/shippingrates', function() { return view('public.shippingrates'); });
-Route::get('contact-us', function() { return view('public.contact'); });
+Route::get('/contact-us', function() { return view('public.contact'); });
+Route::post('/contact-us', 'ContactController@store')->name('contact.store');
 
-
-Route::get('register-js', function() {
-	return view('auth.register-js');
-});
+// Route::get('register-js', function() {
+// 	return view('auth.register-js');
+// });
 
 Auth::routes();
 Route::group(['middleware' => ['subscriber']], function() {
@@ -71,6 +71,8 @@ Route::group(['middleware' => ['subscriber']], function() {
 		Route::get('/inbox/{user}', 'UserController@inbox');
 		Route::get('/inbox/{user}/{msg}', 'UserController@message');
 		Route::put('/update_pwd/{user}', 'UserController@update_password');
+		Route::get('/privacy/{user}', 'PrivacyController@show')->name('privacy.show');
+		Route::put('/privacy/{user}', 'PrivacyController@update')->name('privacy.update');
 	});
 
 	//SUBSCRIPTIONS

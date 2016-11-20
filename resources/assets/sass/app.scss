@@ -9,7 +9,7 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
 //Font Awesome
-@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
 .subtle {
 	color: lighten($brand-secondary, 30%);
@@ -455,4 +455,15 @@ footer li > a {
 
 .boardmembers {
 	width: 100%;
+}
+
+
+.directory-search {
+	padding: 12px 8px;
+	width: 100%;
+	border-top: 1px solid lighten($brand-secondary, 50%);
+}
+
+.directory-search .form-control {
+	width: 200px;
 }

@@ -91,11 +91,15 @@
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
-                                    <li><a href="{{ url('users/'.Auth::user()->id.'/edit') }}">Your Profile</a></li>
-                                    <li><a href="{{ url('subscriptions/'.Auth::user()->id.'/edit') }}">Your Subscription</a
-                                    ></li>
+                                    <li><a href="{{ url('users/'.Auth::user()->id.'/edit') }}"><i class="fa fa-id-badge" aria-hidden="true"></i> Your Profile</a></li>
+
+                                    @if(Auth::user()->is_subscribed())
+                                    <li><a href="{{ url('subscriptions/'.Auth::user()->id.'/edit') }}"><i class="fa fa-credit-card" aria-hidden="true"></i> Your Subscription</a></li>
+                                    @endif
+
+                                    <li><a href="{{ url('users/privacy/'.Auth::user()->id) }}"><i class="fa fa-shield" aria-hidden="true"></i> Privacy Settings</a></li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="{{ url('users/inbox/'.Auth::user()->id) }}">Inbox @if($noti_count > 0) 
+                                    <li><a href="{{ url('users/inbox/'.Auth::user()->id) }}"><i class="fa fa-inbox" aria-hidden="true"></i> Inbox @if($noti_count > 0) 
                                         <span class="badge">{{ $noti_count }}</span>
                                     @endif</a></li>
                                     <li role="separator" class="divider"></li>
@@ -103,7 +107,7 @@
                                         <a href="{{ url('/logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            <i class="fa fa-sign-out" aria-hidden="true"></i> Logout
                                         </a>
 
                                         <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
@@ -123,6 +127,7 @@
     <footer>
 
         <div class="container">
+        
             <ul>
                 <li>Copyright &copy; 2016. All rights reserved.</li>
                 <li><a href="#">Terms of Use</a></li>
