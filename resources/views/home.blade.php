@@ -8,7 +8,7 @@
           <div class="caption">
               <h3>SHIPPING SAVINGS</h3>
               <p>Members Save Big On Parcel, LTL/Ground, Air, and Ocean Shipping Rates</p>
-              <button class="btn btn-primary" id="btn-save">Learn More</button>
+              <button class="btn btn-primary" id="btn-show-savings">Learn More</button>
           </div>
       </div>
   </div>
@@ -17,10 +17,10 @@
         <div class="expander-header">
             <h3>
                 Members Save Big on Shipping Rates
-                <button id="btn-save-close" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button id="btn-show-savings-close" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </h3>        
         </div>
-        <canvas id="myChart" class="container"></canvas>
+        <canvas id="myChart" class="container" style="height: 400px;"></canvas>
     </div>
 </div>
 </div>

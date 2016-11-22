@@ -1,6 +1,7 @@
 //Hello
 $(document).ready(function() {
 	var ctx = document.getElementById("myChart");
+	
 	var myChart = new Chart(ctx, {
 	    type: 'bar',
 	    data: {
@@ -50,6 +51,16 @@ $(document).ready(function() {
 	        	display: false
 	        }
 	    }
+	});	
+
+	$('#btn-show-savings').click(function() {
+		$('#myChart').height = 300;
+		$('#myChart').width = 300;
+		$('#savings-expander .container').animate({'height': '400px', 'padding': '30px'}, 200);
 	});
+
+	$('#btn-show-savings-close').click(function() {
+		$('#savings-expander .container').animate({'height': 0, 'padding': '0px'}, 200);
+	})
 });
 
