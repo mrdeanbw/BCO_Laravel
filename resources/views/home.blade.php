@@ -83,6 +83,79 @@
   </div>
 </div>
 
+<div class="spanner spanner-image">
+    <div id="member-spotlight" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#member-spotlight" data-slide-to="0" class="active"></li>
+        <li data-target="#member-spotlight" data-slide-to="1"></li>
+        <li data-target="#member-spotlight" data-slide-to="2"></li>        
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        <div class="item active">
+            <div class="spotlight">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="http://www.gd.com/sites/default/files/gd_facebook.png" />
+                        </td>
+                        <td>
+                            <strong>BCO Power has helped us optimize our sourcing...</strong>
+                            <i>John - VP Logistics</i>
+                        </td>                
+
+                        </table>
+                </div>
+        </div>
+
+        <div class="item">
+            <div class="spotlight">
+                <table>
+                    <tr>
+                       <td>
+                           <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus porta sapien massa, vel fermentum sapien mollis id.</strong>
+                           <i>Bob - CPO</i>
+                       </td>                
+                        <td>
+                           <img src="http://mms.businesswire.com/media/20150318005919/en/458119/5/PG.jpg" />
+                       </td>
+
+                   </table>
+               </div>
+      </div>
+
+      <div class="item">
+           <div class="spotlight">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/e/e8/Shell_logo.svg/648px-Shell_logo.svg.png" />
+                        </td>
+                        <td>
+                            <strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</strong>
+                            <i>Alice - CTO</i>
+                        </td>                
+
+                        </table>
+                </div>
+      </div>
+      
+  </div>
+
+  
+  <a class="left carousel-control" href="#member-spotlight" role="button" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+</a>
+<a class="right carousel-control" href="#member-spotlight" role="button" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+</a>
+</div>
+</div>
+
 <div class="spanner spanner-light">
     <div class="container">
      <div class="row">
@@ -133,23 +206,23 @@
           <div class="caption">
             <h3>NON-PROFIT</h3>
             <p>BCO Shippers Association is a 501(c)3 organization dedicated to serving its members to gain BCO Power!</p>
-        <a href="{{ url('non-profit-status') }}" class="btn btn-primary">Learn More</a>
+            <a href="{{ url('non-profit-status') }}" class="btn btn-primary">Learn More</a>
         </div>
     </div>
 </div>
 
 
 
-        
+
 
 
 <script
-  src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 {{ Html::script('js/home.js') }}
 
 @endsection
 
 @section('js')
-    
+
 @endsection

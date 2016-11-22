@@ -467,3 +467,23 @@ footer li > a {
 .directory-search .form-control {
 	width: 200px;
 }
+
+
+/* Member Spotlight */
+#member-spotlight {
+	min-height: 200px;
+}
+
+#member-spotlight .spotlight {
+	height: 200px;	
+	padding: 20px 60px;	
+}
+
+.spotlight table {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.spotlight img {
+	max-height: 140px;
+}
