@@ -5,7 +5,7 @@
 				<div class="subplan-box-title">
 					<h4>Standard</h4>
 					<h1><small>$</small> 24<small>.00</small></h1>
-					<p>per active user, per month</p>
+					<p>per month</p>
 				</div>
 				<div>
 				@if(Auth::guest())
@@ -38,11 +38,11 @@
 				<div class="subplan-box-title">
 					<h4>Plus</h4>
 					<h1><small>$</small> 89<small>.00</small></h1>
-					<p>per active user, per month</p>
+					<p>per month</p>
 				</div>			
 				<div>
 				@if(Auth::guest())
-					<a href="{{ url('register?cpl=silver') }}" class="btn btn-primary btn-lg">Buy Plus</a>
+					<a href="{{ url('register?cpl=silver') }}" class="btn btn-primary btn-lg">Buy Plus</a>					
 				@else
 					@if(!isset($subscription) or $subscription->stripe_plan != 'bcopower-silver')
 						@if(!isset($subscription)) 
@@ -71,15 +71,15 @@
 				<div class="subplan-box-title">
 					<h4>Premiere</h4>
 					<h1><small>$</small> 399<small>.00</small></h1>
-					<p>per active user, per month</p>
+					<p>per month</p>
 				</div>
 				<div>
 				@if(Auth::guest())
-					<a href="{{ url('register?cpl=gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>
+					<a href="{{ url('register?cpl=gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>				
 				@else
 					@if(!isset($subscription) or $subscription->stripe_plan != 'bcopower-gold')
 						@if(!isset($subscription)) 
-							<a href="{{ url('subscriptions/checkout/gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>
+							<a href="{{ url('subscriptions/checkout/gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>					
 						@else
 							{!! Form::model($subscription, ['route' => ['subscriptions.update', Auth::user()->id], 'method' => 'PUT']) !!}
 							{{ Form::submit('Switch to Premiere', array('class' => 'btn btn-primary')) }}
@@ -99,7 +99,17 @@
 					<li>BCO Power Rate System of Ground, Air, and Ocean rates</li>
 					<li>Access to the BCO Power HUB and forums</li>
 					<li>Monthly industry updates</li>
-				</ul>			
+				</ul>
+				<div>
+				@if(Auth::guest())					
+					<a href="{{ url('/register?cpl=gold&t=1') }}" class="btn btn-default">Or take a 14 day trial</a>
+				@else
+					@if(!isset($subscription))												
+						<a href="{{ url('/subscriptions/checkout/gold?t=1') }}" class="btn btn-default">Or take a 14 day trial</a>
+					@endif
+				@endif
+				</div>
+
 			</div>
 		
 		</div>

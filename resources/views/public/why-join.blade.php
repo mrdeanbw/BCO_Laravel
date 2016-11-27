@@ -75,7 +75,7 @@
 		<h2>Convinced?<h2>
 		<h3>Choose one of our plans below.</h3>
 		<p>Or feel free to contact us if you have any questions</p>
-		<a href="{{ url('/contact') }}" class="btn btn-default">Contact</a>
+		<a href="{{ url('/contact-us') }}" class="btn btn-default">Contact</a>
 	</div>
 
 </div>

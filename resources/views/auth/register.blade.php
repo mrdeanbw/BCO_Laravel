@@ -14,6 +14,7 @@
                     {{ csrf_field() }}
                     @if(null !== Request::get('cpl'))
                     {{ Form::hidden('plan_id', Request::get('cpl'), array('id' => 'plan_id')) }}
+                    {{ Form::hidden('trial', Request::get('t'), array('id' => 'trial')) }}
                     @endif
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name" class="col-md-4 control-label">Name</label>

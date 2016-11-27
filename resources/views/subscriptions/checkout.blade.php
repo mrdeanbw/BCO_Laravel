@@ -27,16 +27,31 @@
 
 @section('content')
 
-<div class="container">
+<div class="container">	
 	<div class="col-md-6 col-md-offset-3">
 		<h3><i class="fa fa-credit-card primary"></i> Checkout <small class="subtle">(step 3 of 3)</small></h3>
 		<ul class="ul-no-indent">
-			<li>You are purchasing the <strong>{{ $plan->name }}</strong> plan</li>
-			<li>You will pay <strong>${{ ($plan->amount / 100) }}</strong> now</li>
-			<li>Your subscription fee will be automatically charged to your card each <strong>{{ $plan->interval }}</strong></li>
+			<li>You are purchasing the <strong>{{ $plan->name }}</strong> plan
+			@if($trial)
+			 trial access
+			@endif
+			</li>
+			<li>You will pay <strong>${{ ($plan->amount / 100) }}</strong> 
+			@if(!$trial)			
+				now</li>
+			@else
+				on <strong>{{ \Carbon\Carbon::now()->addDays(14)->toDateString() }}</strong> unless you cancel your subscription before that date
+			@endif
+			<li>Your subscription fee will be automatically charged to your card each <strong>{{ $plan->interval }}</strong>
+			@if($trial)
+			 from the start of your subscription
+			@endif
+			</li>
+
 		</ul>
 		{!! Form::open(['url' => 'subscriptions', 'data-parsley-validate', 'id' => 'payment-form']) !!}
 		{{ Form::hidden('plan_id', $plan->id, array('id' => 'plan_id')) }}
+		{{ Form::hidden('trial', ($trial == 1 ? 1 : 0), array('id' => 'trial')) }}
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
           <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -103,6 +118,11 @@
 			<div class="form-group">
             	{!! Form::submit('Securely place your subscription order', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id' => 'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
              </div>
+             @if($trial)
+             <div class="alert alert-warning">
+             We won't charge your card until your trial expires.
+             </div>
+             @endif
 			<div class="row">
 				<div class="col-md-12">
 				    <span class="payment-errors" style="color: red;margin-top:10px;"></span>

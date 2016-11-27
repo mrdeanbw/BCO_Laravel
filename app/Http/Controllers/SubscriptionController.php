@@ -5,10 +5,10 @@
 
 namespace App\Http\Controllers;
 
+use Request;
 use App\User;
 use App\Subscription;
 use Session;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class SubscriptionController extends Controller
@@ -40,11 +40,13 @@ class SubscriptionController extends Controller
 
     public function checkout($type)
     {
+        $trial = (Request::get('t') == 1);
+
         $user = \Auth::user();
         
     	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
     	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan);       
+    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan)->withTrial($trial);       
         
     }
 
@@ -59,13 +61,22 @@ class SubscriptionController extends Controller
         //	
         	$user= \Auth::user();
 
-            $input = $request->all();
+            $input = Request::all();
             $token = $input['stripeToken'];            
 
              try {
-                $user->newSubscription('main', $input['plan_id'])->create($token,[
-                        'email' => $user->email
-                    ]);
+                if($input['trial'] == 1) {
+                    $user->newSubscription('main', $input['plan_id'])
+                        ->trialDays(14)
+                        ->create($token,[
+                            'email' => $user->email
+                        ]);
+                } 
+                else {
+                    $user->newSubscription('main', $input['plan_id'])->create($token,[
+                            'email' => $user->email
+                        ]);
+                }
                 return Redirect::to('/subscriptions/confirmed');
             } catch (Exception $e) {
                 return back()->with('success',$e->getMessage());

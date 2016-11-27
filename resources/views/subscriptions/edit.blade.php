@@ -5,16 +5,25 @@
 
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
-    @endif
+    @endif    
+	<h4>{{ $subscription->plan->name }}
 
-	<h4>{{ $subscription->plan->name }}</h4>
+	@if($subscription->status == 'trialing')
+	 <strong>Trial</strong>
+	@endif
+	</h4>
 	<p>Created on: {{ date('d/m/y', $subscription->created) }}</p>
 	<p>Amount: {{ strtoupper($subscription->plan->currency) }} {{ ($subscription->plan->amount / 100) }} per {{ $subscription->plan->interval }}</p>
 	<p>Current period from: {{ date('d/m/y', $subscription->current_period_start) }} to {{ date('d/m/y', $subscription->current_period_end) }}</p>
+	@if($subscription->status == 'trialing')
+		 <p><strong>You are currently on a trial which will end {{ date('d/m/y', $subscription->trial_end) }}, your card will be charged as from that date unless you cancel.</strong></p>
+	@endif
 	
 	@if( ! $subscription->cancel_at_period_end)
-	<a href="{{url('subscriptions/choose')}}" class="btn btn-primary">Change your Plan</a>
-	<a href=""  class="btn btn-link">Cancel your Subscription</a>
+		@if($subscription->status !== 'trialing')
+			<a href="{{url('subscriptions/choose')}}" class="btn btn-primary">Change your Plan</a>
+		@endif
+		<a href=""  class="btn btn-link">Cancel your Subscription</a>
 	@else
 		<div class="alert alert-info" role="alert">This subscription has been cancelled on {{date('d/m/y', $subscription->canceled_at)}} and will expire at the current period end.
 

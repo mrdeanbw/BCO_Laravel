@@ -80,7 +80,12 @@ class RegisterController extends Controller
 
         //Check if we have passed a plan parameter so we can immediately route to checkout rather than the choices.
         if(isset($data['plan_id'])) {
-            $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'];
+            $append = '';
+            if(isset($data['trial']) && $data['trial'] == 1) {
+                $append='?t=1';
+            }
+
+            $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'].$append;
         }
         
 
@@ -111,7 +116,7 @@ class RegisterController extends Controller
         $privacy_settings->user_id = $user->id;
         $privacy_settings->save();
 
-        return $$user;
+        return $user;
     }
 
     protected function verify_reCaptcha(array $data) {

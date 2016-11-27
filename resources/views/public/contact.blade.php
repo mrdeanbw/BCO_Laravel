@@ -12,7 +12,21 @@
 </div>
 
 
-<div class="container info-page">	
+<div class="container info-page">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4" style="margin-top: 20px;">
+		
+			<p style="text-align: center;">
+				<strong class="primary">BCO Power has its registered office at</strong><br>
+				211 E 43rd Street 6th Floor<br>
+				New York, NY 10017<br>
+				United States of America<br>
+				<i class="fa fa-phone primary" aria-hidden="true"></i> 1-646-694-1190<br>
+				<i class="fa fa-at primary" aria-hidden="true"></i> <a href="mailto:membership@bcopower.org">membership@bcopower.org</a><br>
+			</p>
+		
+		</div>
+	</div>	
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h3>Send us an enquiry</h3>
@@ -61,6 +75,7 @@
 
 			{{ Form::submit('Send', array('class' => 'btn btn-primary'))}}
 			{{ Form::close() }}
+			<br>
 		</div>
 	</div>
 </div>
