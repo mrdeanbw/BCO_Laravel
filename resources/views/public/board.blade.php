@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="spanner info-page spanner-image">
-	<div class="item" style="background-image: url('res/banner1-1200x376.jpg');">
+	<div class="item" style="background-image: url('/res/banner1-1200x376.jpg');">
 		<div class="container">
 			<div class="caption">
 				<h3>BCO Power Board</h3>              

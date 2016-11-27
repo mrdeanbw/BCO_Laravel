@@ -67,7 +67,7 @@
                             <li><a href="{{ url('/members/news') }}">News</a></li>
                             <li><a href="{{ url('/members/forums') }}">PowerGRID</a></li>
                             <li><a href="#">Shipping Rates</a></li>
-                            <li><a href="#">Software</a></li>
+                            <li><a href="{{ url('/members/software') }}">Software</a></li>
                             <li><a href="{{ url('/members/directory') }}">Directory</a></li>
                         @endif
 

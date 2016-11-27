@@ -62,6 +62,8 @@ Route::group(['middleware' => ['subscriber']], function() {
 		Route::group(array('prefix' => 'directory', 'middleware' => ['auth']), function() {
 			Route::get('/', 'DirectoryController@index');
 		});
+
+		Route::get('/software', function() {return view('software.index'); });
 	});
 
 	//USERS
