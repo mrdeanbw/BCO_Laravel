@@ -30,6 +30,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token', 'is_admin', 'stripe_id', 'card_brand', 'card_last_four', 'trial_ends_at',
     ];
+
+    protected $dates = [
+        'trial_ends_at',
+    ];
    
     public function is_subscribed() {
         return $this->subscribed('main');

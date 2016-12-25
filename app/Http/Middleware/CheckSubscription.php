@@ -17,6 +17,7 @@ class CheckSubscription
     {
         if ($request->user() && 
                 ! $request->user()->subscribed('main') && 
+                ! $request->user()->onTrial() &&
                 ! $request->user()->is_admin) {
 
             // This user is not a paying customer or an admin...

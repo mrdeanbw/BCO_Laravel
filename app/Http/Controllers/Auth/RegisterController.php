@@ -77,15 +77,16 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
+        $isTrial = (isset($data['trial']) && $data['trial'] == 1);
         //Check if we have passed a plan parameter so we can immediately route to checkout rather than the choices.
         if(isset($data['plan_id'])) {
             $append = '';
-            if(isset($data['trial']) && $data['trial'] == 1) {
+            if($isTrial) {
                 $append='?t=1';
-            }
-
-            $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'].$append;
+                $this->redirectTo = '/subscriptions/confirmed';
+            } else {
+                $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'].$append;    
+            }            
         }
         
 
@@ -109,8 +110,14 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
             'industry_type' => $data['type'],
             'primary_commodity' => $data['commodity'],
-            'cargo_types' => $cargotypes
+            'cargo_types' => $cargotypes,
+            
         ]);
+
+        if($isTrial) {
+            $user->trial_ends_at = \Carbon\Carbon::now()->addDays(30);
+            $user->save();
+        }
 
         $privacy_settings = new \App\PrivacySettings();
         $privacy_settings->user_id = $user->id;

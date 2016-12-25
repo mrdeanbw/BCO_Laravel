@@ -1,6 +1,20 @@
 <div class="spanner spanner-dark">
 	<div class="container">
 		<div class="row">
+			<div class="col-md-6 col-md-offset-3" style="border-left: none;">
+				
+				@if(Auth::guest())					
+					<a href="{{ url('/register?cpl=gold&t=1') }}" class="btn btn-primary btn-lg btn-block" style="font-size: 24px;">Register for a free Premiere Trial</a>
+				@else
+					@if(!isset($subscription))												
+						<a href="{{ url('/subscriptions/checkout/gold?t=1') }}" class="btn btn-primary btn-lg btn-block" style="font-size: 24px;">Register for a free Premiere Trial</a>
+					@endif
+				@endif
+				<p><center>Free for 30 days, after that we offer the following plans</center></p>
+				<br>
+			</div>
+		</div>
+		<div class="row">
 			<div class="col-md-4 subplan-box">
 				<div class="subplan-box-title">
 					<h4>Standard</h4>
@@ -9,11 +23,11 @@
 				</div>
 				<div>
 				@if(Auth::guest())
-					<a href="{{ url('register?cpl=bronze') }}" class="btn btn-primary btn-lg">Buy Standard</a>
+					{{-- <a href="{{ url('register?cpl=bronze') }}" class="btn btn-primary btn-lg">Buy Standard</a> --}}
 				@else
 					@if(!isset($subscription) or $subscription->stripe_plan != 'bcopower-bronze')
 						@if(!isset($subscription)) 
-							<a href="{{ url('subscriptions/checkout/bronze') }}" class="btn btn-primary btn-lg">Buy Standard</a>
+							{{-- <a href="{{ url('subscriptions/checkout/bronze') }}" class="btn btn-primary btn-lg">Buy Standard</a> --}}
 						@else
 							{!! Form::model($subscription, ['route' => ['subscriptions.update', Auth::user()->id], 'method' => 'PUT']) !!}
 							{{ Form::submit('Switch to Standard', array('class' => 'btn btn-primary')) }}
@@ -42,11 +56,11 @@
 				</div>			
 				<div>
 				@if(Auth::guest())
-					<a href="{{ url('register?cpl=silver') }}" class="btn btn-primary btn-lg">Buy Plus</a>					
+					{{-- <a href="{{ url('register?cpl=silver') }}" class="btn btn-primary btn-lg">Buy Plus</a>					 --}}
 				@else
 					@if(!isset($subscription) or $subscription->stripe_plan != 'bcopower-silver')
 						@if(!isset($subscription)) 
-							<a href="{{ url('subscriptions/checkout/silver') }}" class="btn btn-primary btn-lg">Buy Plus</a>
+							{{-- <a href="{{ url('subscriptions/checkout/silver') }}" class="btn btn-primary btn-lg">Buy Plus</a> --}}
 						@else
 							{!! Form::model($subscription, ['route' => ['subscriptions.update', Auth::user()->id], 'method' => 'PUT']) !!}
 							{{ Form::submit('Switch to Plus', array('class' => 'btn btn-primary')) }}
@@ -75,11 +89,11 @@
 				</div>
 				<div>
 				@if(Auth::guest())
-					<a href="{{ url('register?cpl=gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>				
+					{{-- <a href="{{ url('register?cpl=gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>				 --}}
 				@else
 					@if(!isset($subscription) or $subscription->stripe_plan != 'bcopower-gold')
 						@if(!isset($subscription)) 
-							<a href="{{ url('subscriptions/checkout/gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>					
+							{{-- <a href="{{ url('subscriptions/checkout/gold') }}" class="btn btn-primary btn-lg">Buy Premiere</a>					 --}}
 						@else
 							{!! Form::model($subscription, ['route' => ['subscriptions.update', Auth::user()->id], 'method' => 'PUT']) !!}
 							{{ Form::submit('Switch to Premiere', array('class' => 'btn btn-primary')) }}
@@ -100,14 +114,7 @@
 					<li>Access to the BCO Power HUB and forums</li>
 					<li>Monthly industry updates</li>
 				</ul>
-				<div>
-				@if(Auth::guest())					
-					<a href="{{ url('/register?cpl=gold&t=1') }}" class="btn btn-default">Or take a 14 day trial</a>
-				@else
-					@if(!isset($subscription))												
-						<a href="{{ url('/subscriptions/checkout/gold?t=1') }}" class="btn btn-default">Or take a 14 day trial</a>
-					@endif
-				@endif
+				<div>				
 				</div>
 
 			</div>

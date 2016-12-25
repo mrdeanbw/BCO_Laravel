@@ -44,9 +44,15 @@ class SubscriptionController extends Controller
 
         $user = \Auth::user();
         
-    	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-    	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan)->withTrial($trial);       
+        if(!$trial) {
+        	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
+        	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan)->withTrial($trial);       
+        } else {
+            $user->trial_ends_at = \Carbon\Carbon::now()->addDays(30);
+            $user->save();
+            return Redirect::to('/subscriptions/confirmed');
+        }
         
     }
 
