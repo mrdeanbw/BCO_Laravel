@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-4 control-label">My goods are</label>
+                        <label class="col-md-4 control-label">Special needs</label>
                         <div class="col-md-8">                                                                
                             <div class="checkbox">
                                 <label>
