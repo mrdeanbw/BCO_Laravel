@@ -104,8 +104,8 @@ class SubscriptionController extends Controller
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $subscription = \Stripe\Subscription::retrieve($subscription->stripe_id);
-
-        return \View::make('subscriptions.edit')->withUser($user)->withSubscription($subscription);
+        $invoices = $user->invoicesIncludingPending();
+        return \View::make('subscriptions.edit')->withUser($user)->withSubscription($subscription)->withInvoices($invoices);
     }
 
     public function cancel($id) {

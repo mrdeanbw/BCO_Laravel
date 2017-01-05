@@ -83,6 +83,22 @@
         </div>
     </div>
 	
+    <h4 class="primary">Invoices</h4>
+    <table class="table table-striped">
+    @foreach ($invoices as $invoice)
+        <tr>
+            <td>{{ $invoice->date()->toFormattedDateString() }}
+            {!! $invoice->asStripeInvoice()->paid ? '<span class="label label-success">Paid</span>' : '<span class="label label-warning">Unpaid</span>'!!}</span>           
+            </td>
+            <td>{{ $invoice->total() }}</td>
+            <td><a href="/subscriptions/invoice/{{ $invoice->id }}">Download</a></td>
+            
+        </tr>
+    @endforeach    
+    </table>
+    <p class="subtle"><small>Plan downgrades will show invoices witha 0 total amount and discount on the next invoice.</small></p>
+
+
 	
 
 	

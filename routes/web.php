@@ -95,6 +95,13 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 	Route::get('/testmail', function() {
 		Auth::user()->notify(new \App\Notifications\TrialEnding(4));
 	});
+
+	Route::get('invoice/{invoice}', function (Request $request, $invoiceId) {
+    return Request::user()->downloadInvoice($invoiceId, [
+        'vendor'  => 'BCO Power',
+        'product' => 'BCO Power Membership Subscription',
+    ]);
+	});
 });
 
 //STRIPE
