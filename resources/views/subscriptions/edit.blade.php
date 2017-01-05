@@ -13,9 +13,10 @@
 		    
 		    <a href="{{url('subscriptions/choose')}}" class="btn btn-primary">Change your Plan</a>	
 		    		    
-		    <a href=""  class="btn btn-default">Update your payment details</a>
+		    <a href="{{url('subscriptions/'.$user->id.'/card')}}"  class="btn btn-default">Update your payment details</a>
 
-		    <a href=""  class="btn btn-default">Cancel your Subscription</a>
+		    <a href="{{url('subscriptions/'.$user->id.'/cancel')}}"  class="btn btn-default">Cancel your Subscription</a>
+            <a href="{{url('subscriptions/testmail')}}" class="btn btn-default">Test</a>
 		    
 	    @else
 		    
@@ -71,9 +72,17 @@
     	</div>
     </div>
 
-    
-
-	<div class="alert alert-info" role="alert">This subscription has been cancelled on {{date('d M y', $subscription->canceled_at)}} and will expire at the current period end.</div>
+    <div class="row">
+        <div class="col-md-4">
+            Subscription notes
+        </div>
+        <div class="col-md-8">
+            @if($subscription->cancel_at_period_end)
+                This subscription has been cancelled on {{date('d M y', $subscription->canceled_at)}} and will expire at the current period end.
+            @endif
+        </div>
+    </div>
+	
 	
 
 	

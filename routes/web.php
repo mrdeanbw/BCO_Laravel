@@ -90,6 +90,11 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 	Route::post('', 'SubscriptionController@store');	
 	Route::get('confirmed', 'SubscriptionController@confirmed');	
 	Route::get('{user}/cancel', 'SubscriptionController@cancel');
+	Route::get('{user}/card', 'SubscriptionController@edit_card');
+	Route::post('{user}/update_card', 'SubscriptionController@update_card');	
+	Route::get('/testmail', function() {
+		Auth::user()->notify(new \App\Notifications\TrialEnding(4));
+	});
 });
 
 //STRIPE

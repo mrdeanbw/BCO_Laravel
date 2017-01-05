@@ -29,14 +29,27 @@
 
 <div class="container">	
 	<div class="col-md-6 col-md-offset-3">
-		<h3><i class="fa fa-credit-card primary"></i> Checkout</h3>
-		<ul class="ul-no-indent">
-			<li>You are purchasing the <strong>{{ $plan->name }}</strong> plan</li>
-			<li>You will pay <strong>${{ ($plan->amount / 100) }}</strong> now</li>			
-			<li>Your subscription fee will be automatically charged to your card each <strong>{{ $plan->interval }}</strong></li>
-		</ul>
-		{!! Form::open(['url' => 'subscriptions', 'id' => 'payment-form']) !!}
-		{{ Form::hidden('plan_id', $plan->id, array('id' => 'plan_id')) }}		
+		
+		@if($type != "edit")
+			<h3><i class="fa fa-credit-card primary"></i> Checkout</h3>
+			<ul class="ul-no-indent">
+				<li>You are purchasing the <strong>{{ $plan->name }}</strong> plan</li>
+				<li>You will pay <strong>${{ ($plan->amount / 100) }}</strong> now</li>			
+				<li>Your subscription fee will be automatically charged to your card each <strong>{{ $plan->interval }}</strong></li>
+			</ul>
+
+			{!! Form::open(['url' => 'subscriptions', 'id' => 'payment-form']) !!}
+			{{ Form::hidden('plan_id', $plan->id, array('id' => 'plan_id')) }}		
+		@else
+			<h3><i class="fa fa-credit-card primary"></i> Update your card</h3>
+			<ul class="ul-no-indent">
+				<li>Provide new card details and submit them so to update your subscription</li>
+			</ul>
+
+			{!! Form::open(['url' => 'subscriptions/'.Auth::user()->id.'/update_card', 'id' => 'payment-form']) !!}
+		@endif
+		
+
         @if ($message = Session::get('success'))
         <div class="alert alert-success alert-block">
           <button type="button" class="close" data-dismiss="alert">×</button> 
@@ -99,7 +112,11 @@
 				</div>
 			</div>
 			<div class="form-group">
+				@if( $type != 'edit' )
             	{!! Form::submit('Securely place your subscription order', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id' => 'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
+            	@else
+            	{!! Form::submit('Securely update your card details.', ['class' => 'btn btn-lg btn-block btn-primary btn-order', 'id'=>'submitBtn', 'style' => 'margin-bottom: 10px;']) !!}
+            	@endif
             </div>
 			<div class="row">
 				<div class="col-md-12">

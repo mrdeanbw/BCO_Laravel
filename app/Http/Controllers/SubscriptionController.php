@@ -39,16 +39,17 @@ class SubscriptionController extends Controller
     }
 
     public function checkout($type)
-    {
-        
+    {       
+        $user = \Auth::user();                    
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+        $plan = \Stripe\Plan::retrieve("bcopower-".$type);
+        return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan);       
+    }
 
-        $user = \Auth::user();        
-        
-    	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-    	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan);       
-        
-        
+    public function edit_card($id) {
+        $user = User::find($id);
+
+        return \View::make('subscriptions.checkout')->withType('edit')->withPlan(null);
     }
 
     /**
@@ -136,6 +137,17 @@ class SubscriptionController extends Controller
         $plan_id = $input['plan_id'];
         $user->subscription('main')->swap($plan_id);
         Session::flash('message', 'Succesfully changed your plan!');
+        return Redirect::to('/subscriptions/'.$user->id.'/edit');
+    }
+
+    public function update_card(Request $request, $id) {
+        $user = User::find($id);
+
+        $input = Request::all();
+        $token = $input['stripeToken']; 
+
+        $user->updateCard($token);
+        Session::flash('message', 'Succesfully updated your card details.');
         return Redirect::to('/subscriptions/'.$user->id.'/edit');
     }
 

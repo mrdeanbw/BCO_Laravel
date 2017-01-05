@@ -26,6 +26,21 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        $schedule->call(function() {
+
+            $users = \App\User::all();
+            foreach($users as $user) {
+                if($user->onTrial()) {
+                    $days_left = $user->trial_days_left();
+                    if($days_left == 5 || $days_left == 1) {
+                        $user->notify(new \App\Notifications\TrialEnding($days_left));                    
+                    }
+                }
+            }
+
+
+        })->everyMinute();
     }
 
     /**
