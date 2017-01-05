@@ -89,6 +89,7 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 	Route::get('checkout/{type}', 'SubscriptionController@checkout');
 	Route::post('', 'SubscriptionController@store');	
 	Route::get('confirmed', 'SubscriptionController@confirmed');	
+	Route::get('{user}/cancel', 'SubscriptionController@cancel');
 });
 
 //STRIPE

@@ -1,42 +1,82 @@
 @extends('users.profile')
 
-@section('details')
-	<h3>Subscription Details</h3>
+@section('details')	
 
     @if (Session::has('message'))
         <div class="alert alert-info">{{ Session::get('message') }}</div>
-    @endif    
-	<h4>{{ $subscription->plan->name }}
+    @endif
 
-	@if($subscription->status == 'trialing')
-	 <strong>Trial</strong>
-	@endif
-	</h4>
-	<p>Created on: {{ date('d/m/y', $subscription->created) }}</p>
-	<p>Amount: {{ strtoupper($subscription->plan->currency) }} {{ ($subscription->plan->amount / 100) }} per {{ $subscription->plan->interval }}</p>
-	<p>Current period from: {{ date('d/m/y', $subscription->current_period_start) }} to {{ date('d/m/y', $subscription->current_period_end) }}</p>
-	@if($subscription->status == 'trialing')
-		 <p><strong>You are currently on a trial which will end {{ date('d/m/y', $subscription->trial_end) }}, your card will be charged as from that date unless you cancel.</strong></p>
-	@endif
+    <br>
+
+    <div class="btn-group btn-group-sm" role="group" aria-label="...">
+	    @if( ! $subscription->cancel_at_period_end)	
+		    
+		    <a href="{{url('subscriptions/choose')}}" class="btn btn-primary">Change your Plan</a>	
+		    		    
+		    <a href=""  class="btn btn-default">Update your payment details</a>
+
+		    <a href=""  class="btn btn-default">Cancel your Subscription</a>
+		    
+	    @else
+		    
+		    <a href=""  class="btn btn-primary">Reactivate Subscription</a>
+		    
+	    @endif
+    </div>
+
+    <br><br>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		Subscription
+    	</div>
+    	<div class="col-md-8">
+    		<span>{{ $subscription->plan->name }} {!! !$subscription->cancel_at_period_end ? '<span class="label label-success">Active</span>' : '<span class="label label-warning">Cancelled</span>'!!}</span>    		
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		Subscribed on
+    	</div>
+    	<div class="col-md-8">
+    		{{ date('d M y', $subscription->created) }}
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		Amount
+    	</div>
+    	<div class="col-md-8">
+    		{{ strtoupper($subscription->plan->currency) }} {{ ($subscription->plan->amount / 100) }} / {{ $subscription->plan->interval }}
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		Current Billing Period
+    	</div>
+    	<div class="col-md-8">
+    		{{ date('d M y', $subscription->current_period_start) }} to {{ date('d M y', $subscription->current_period_end) }}
+    	</div>
+    </div>
+
+    <div class="row">
+    	<div class="col-md-4">
+    		Payment details
+    	</div>
+    	<div class="col-md-8">
+    		{{ $user->card_brand }} &bull;&bull;&bull;&bull;  &bull;&bull;&bull;&bull;  &bull;&bull;&bull;&bull; {{ $user->card_last_four }}
+    	</div>
+    </div>
+
+    
+
+	<div class="alert alert-info" role="alert">This subscription has been cancelled on {{date('d M y', $subscription->canceled_at)}} and will expire at the current period end.</div>
 	
-	@if( ! $subscription->cancel_at_period_end)
-		@if($subscription->status !== 'trialing')
-			<a href="{{url('subscriptions/choose')}}" class="btn btn-primary">Change your Plan</a>
-		@endif
-		<a href=""  class="btn btn-link">Cancel your Subscription</a>
-	@else
-		<div class="alert alert-info" role="alert">This subscription has been cancelled on {{date('d/m/y', $subscription->canceled_at)}} and will expire at the current period end.
 
-		<a href=""  class="btn btn-warning">Reactivate Subscription</a>
-		</div>
-	@endif
-
-
-	<h4>Payment Details</h4>
-	<p>Card: {{ $user->card_brand }}: &bull;&bull;&bull;&bull;  &bull;&bull;&bull;&bull;  &bull;&bull;&bull;&bull; {{ $user->card_last_four }}</p>
-	@if( ! $subscription->cancel_at_period_end)
-	<a href=""  class="btn btn-primary">Update your payment details</a>
-	@endif
+	
 	
 	
 @endsection

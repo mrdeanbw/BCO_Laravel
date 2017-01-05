@@ -19,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'organization', 'city', 'country', 'state', 'industry_type', 'primary_commodity', 'cargo_types',
+        'name', 'email', 'password', 'organization', 'city', 'country', 'state', 'industry_type', 'primary_commodity', 'cargo_types', 'trial_ends_at',
     ];
 
     /**
@@ -41,6 +41,11 @@ class User extends Authenticatable
 
     public function privacy_settings() {
         return $this->hasOne('App\PrivacySettings');
+    }
+
+    public function trial_days_left() {
+        $today = \Carbon\Carbon::today();
+        return $today->diffInDays($this->trial_ends_at);
     }
 
 }

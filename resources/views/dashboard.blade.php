@@ -5,13 +5,11 @@
 <div class="container">
 
     <h2>Member Information Hub</h2>
-    @if(Auth::user()->onTrial('main') || Auth::user()->onTrial())
-    <div class="alert alert-info" role="alert"><strong>Info</strong>   &bull;   
-    You are currently in your trial period, 
-        @if(Auth::user()->onTrial('main'))
-            check your subscription information <a href="{{ url('subscriptions/'.Auth::user()->id.'/edit') }}">here</a>
-        @else
-            which will expire {{Auth::user()->trial_ends_at}}
+    @if(Auth::user()->onTrial())
+    <div class="alert {{ Auth::user()->trial_days_left() > 5 ? 'alert-info' : 'alert-warning'}}" role="alert">
+        <strong>{{ Auth::user()->trial_days_left() > 5 ? 'Info' : 'Warning' }}</strong> &bull; You are currently in your trial period, which will expire in {{Auth::user()->trial_days_left()}} day(s)
+        @if(Auth::user()->trial_days_left() <= 5)
+            <a href="{{url('/subscriptions/choose')}}" class="btn btn-sm btn-link"> Upgrade Now</a>
         @endif
     </div>
     @endif

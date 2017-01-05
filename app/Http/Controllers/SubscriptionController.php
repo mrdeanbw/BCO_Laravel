@@ -40,19 +40,14 @@ class SubscriptionController extends Controller
 
     public function checkout($type)
     {
-        $trial = (Request::get('t') == 1);
-
-        $user = \Auth::user();
         
-        if(!$trial) {
-        	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
-        	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
-        	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan)->withTrial($trial);       
-        } else {
-            $user->trial_ends_at = \Carbon\Carbon::now()->addDays(30);
-            $user->save();
-            return Redirect::to('/subscriptions/confirmed');
-        }
+
+        $user = \Auth::user();        
+        
+    	\Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+    	$plan = \Stripe\Plan::retrieve("bcopower-".$type);
+    	return \View::make('subscriptions.checkout')->withType($type)->withPlan($plan);       
+        
         
     }
 
@@ -68,21 +63,14 @@ class SubscriptionController extends Controller
         	$user= \Auth::user();
 
             $input = Request::all();
+            
             $token = $input['stripeToken'];            
 
              try {
-                if($input['trial'] == 1) {
-                    $user->newSubscription('main', $input['plan_id'])
-                        ->trialDays(14)
-                        ->create($token,[
-                            'email' => $user->email
-                        ]);
-                } 
-                else {
-                    $user->newSubscription('main', $input['plan_id'])->create($token,[
-                            'email' => $user->email
-                        ]);
-                }
+                
+                $user->newSubscription('main', $input['plan_id'])->create($token,['email' => $user->email]);
+                $user->trial_ends_at = null;
+                $user->save();
                 return Redirect::to('/subscriptions/confirmed');
             } catch (Exception $e) {
                 return back()->with('success',$e->getMessage());
@@ -108,15 +96,29 @@ class SubscriptionController extends Controller
      */
     public function edit($id)
     {   
-            //
-        $user = User::find($id);
+        
+        $user = User::find($id);        
         $subscription = $user->subscription('main');
 
-        \Stripe\Stripe::setApiKey("sk_test_cpqxiyOlpUl96IDvNoxKCq48");
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
 
         $subscription = \Stripe\Subscription::retrieve($subscription->stripe_id);
 
         return \View::make('subscriptions.edit')->withUser($user)->withSubscription($subscription);
+    }
+
+    public function cancel($id) {
+        $user = User::find($id);
+        
+        $subscription = $user->subscription('main');
+
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET_KEY'));
+
+        $subscription = \Stripe\Subscription::retrieve($subscription->stripe_id);
+        if($subscription->cancel_at_period_end) {
+            return Redirect::to('/subscriptions/'.$user->id.'/edit');
+        }
+        return \View::make('subscriptions.cancel')->withUser($user)->withSubscription($subscription);
     }
 
     /**
@@ -130,7 +132,7 @@ class SubscriptionController extends Controller
     {
         //
         $user = User::find($id);
-        $input = $request->all();
+        $input = Request::all();
         $plan_id = $input['plan_id'];
         $user->subscription('main')->swap($plan_id);
         Session::flash('message', 'Succesfully changed your plan!');
@@ -144,8 +146,11 @@ class SubscriptionController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {        
+        $user = User::find($id);
+        $user->subscription('main')->cancel();
+        Session::flash('message', 'Your subscription will be cancelled at the end of the current billing period');
+        return Redirect::to('/subscriptions/'.$user->id.'/edit');
     }
 
     public function confirmed() {

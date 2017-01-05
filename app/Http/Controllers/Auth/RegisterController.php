@@ -28,7 +28,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/subscriptions/choose';
+    protected $redirectTo = '/subscriptions/confirmed';
 
     /**
      * Create a new controller instance.
@@ -48,7 +48,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        $validator =Validator::make($data, [
+        $validator = Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'organization' => 'required|max:255',
@@ -76,20 +76,7 @@ class RegisterController extends Controller
      * @return User
      */
     protected function create(array $data)
-    {
-        $isTrial = (isset($data['trial']) && $data['trial'] == 1);
-        //Check if we have passed a plan parameter so we can immediately route to checkout rather than the choices.
-        if(isset($data['plan_id'])) {
-            $append = '';
-            if($isTrial) {
-                $append='?t=1';
-                $this->redirectTo = '/subscriptions/confirmed';
-            } else {
-                $this->redirectTo = '/subscriptions/checkout/'.$data['plan_id'].$append;    
-            }            
-        }
-        
-
+    {        
         //Parse cargotypes
         $options = ['perishable', 'hazardous', 'fragile', 'liquid'];
         $cargotypes = [];
@@ -111,13 +98,11 @@ class RegisterController extends Controller
             'industry_type' => $data['type'],
             'primary_commodity' => $data['commodity'],
             'cargo_types' => $cargotypes,
+            'trial_ends_at' => \Carbon\Carbon::now()->addDays(30),
             
-        ]);
-
-        if($isTrial) {
-            $user->trial_ends_at = \Carbon\Carbon::now()->addDays(30);
-            $user->save();
-        }
+        ]);        
+        
+        $user->save();        
 
         $privacy_settings = new \App\PrivacySettings();
         $privacy_settings->user_id = $user->id;
@@ -144,8 +129,7 @@ class RegisterController extends Controller
 
             if($response->getStatusCode() == 200) {
                 $body = json_decode($response->getBody()->getContents());
-                // echo(json_encode($body));
-                // die(json_encode($body->success));
+                
                 $errorcodes = '';                
                 if(property_exists($body, 'error-codes')) {
                     $errorcodes = $body->{'error-codes'};
