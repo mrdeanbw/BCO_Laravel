@@ -14,8 +14,8 @@
     </div>
     @endif
     <div class="row">
-        <div class="col-md-4">            
-            <stock-app symbols="'EXPD', 'JBHT', 'UPS', 'FDX', 'CHRW'"></stock-app>
+        <div class="col-md-4">                        
+            <stock-app symbols="{{Auth::user()->stocksymbols == null ? "'EXPD', 'JBHT', 'UPS', 'FDX', 'CHRW'" : Auth::user()->stocksymbols}}"></stock-app>
             <market-news></market-news>     
         </div>
         <div class="col-md-8">

@@ -45,4 +45,11 @@ class ApiController extends Controller
 
 		return $members;
 	}
+
+	public function update_user_stocksymbols(Request $request) {
+		$user = $request->user();
+		$user->stocksymbols = $request->get('symbols');
+		$user->save();
+		return 1;
+	}
 }
