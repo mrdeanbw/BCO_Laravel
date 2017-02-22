@@ -1,12 +1,13 @@
 <template>
 
     <div class="assocnews">
-        <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> Association News</h3>
+        <h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> Association News</h3>
         <div v-for="item in newsitems" class="assocnewsitem">
-            <h5 class="title-line"><a :href="'members/news/' + item.id">{{ item.title }}</a></h5>
+            <h5 class="title-line"><a :href="'members/news/' + item.id"><strong>{{ item.title }}</strong></a></h5>
             <p class="subtle date-line">{{ item.pubDate }}</p>
             <p class="description-line" v-html="item.summary"></p>
         </div>
+        <a href="/members/news" class="readmore"><i class="fa fa-caret-down" aria-hidden="true"></i> Read more</a>
     </div>
 </template>
 

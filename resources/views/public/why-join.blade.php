@@ -1,16 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="spanner info-page spanner-image">
-	<div class="item" style="background-image: url('res/banner1-1200x376.jpg');">
-		<div class="container">
-          <div class="caption">
-              <h3>Why Join</h3>              
-          </div>
-      </div>
-	</div>
-</div>
-
 
 <div class="container info-page">
 	<div class="row">
@@ -70,16 +60,33 @@
 			<p>Many associations assess a per shipment fee onto every shipment moved through their association. At BCO Shippers Association, there's no "per shipment" fee, but just an annual fee to pay for the administration of the organization.</p>
 		</div>
 	</div>
+	
+	<div class="row">
+		<div class='col-md-12'>
+			<h4>SHIPPING RATES</h4>
+			<p>BCO Power provides more competitive shipping rates as your company is pooled together of other shippers to give everyone an advantage in procuring rates from different vendors. BCO Power provides rates for the following modes:</p>
+			<ul>
+				<li>Air</li>
+				<li>Ground LTL / Haulage</li>
+				<li>Ocean FCL</li>
+				<li>Ocean LCL</li>
+				<li>Parcel</li>
+			</ul>
+		</div>
+	</div>
 
 	<div class="action-box">
-		<h2>Convinced?<h2>
-		<h3>Choose one of our plans below.</h3>
+		<h3>Convinced?<h3>
+		<h2>Sign up now!</h2>
+		<p>Free till at least 2018, after that we'll offer you paid plans</p>
 		<p>Or feel free to contact us if you have any questions</p>
 		<a href="{{ url('/contact-us') }}" class="btn btn-default">Contact</a>
 	</div>
 
+
+
 </div>
-@include('subscriptions.choices')
+{{-- @include('subscriptions.choices') --}}
 
 
 <div class="spanner spanner-image" style="margin-bottom: -24px;">

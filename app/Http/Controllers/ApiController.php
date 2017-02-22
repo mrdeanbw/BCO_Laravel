@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use DevDojo\Chatter\Models\Post;
+use DevDojo\Chatter\Models\Discussion;
 
 class ApiController extends Controller
 {
@@ -51,5 +53,11 @@ class ApiController extends Controller
 		$user->stocksymbols = $request->get('symbols');
 		$user->save();
 		return 1;
+	}
+
+	public function latest_forum_posts () {
+		$posts = Post::with('discussion', 'user')->latest()->limit(5)->get();
+
+		return $posts;
 	}
 }

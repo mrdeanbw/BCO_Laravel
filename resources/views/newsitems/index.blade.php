@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-	<div class="col-md-12">
+<div class="container news">
+	
 
 		@if (Session::has('message'))
 		<div class="panel-body">
@@ -14,7 +14,8 @@
 		 		<a href="{{ url('members/news/create') }}" class="btn btn-primary pull-right">Post News Item</a>
 		 	@endcan		 
 		</h3>
-		<br>
+		
+		<div class="newslist">
 		@foreach($news as $newsitem)
 			@can('view', $newsitem)
 				<div class="newsitem">
@@ -47,7 +48,7 @@
 		@endforeach
 
 		{{ $news->links() }}
-
-	</div>
+		</div>
+	
 </div>
 @endsection

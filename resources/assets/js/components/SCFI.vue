@@ -1,6 +1,6 @@
 <template>
     <div class="scfi">
-        <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> SCFI</h3>
+        <h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> SCFI</h3>
         <table class="table table-striped table-hover table-condensed">
             <thead>
                 <tr>

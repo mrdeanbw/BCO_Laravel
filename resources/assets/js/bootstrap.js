@@ -18,6 +18,8 @@ require('bootstrap-sass');
 window.GOOGLE_AUTOCOMPLETE_KEY = "AIzaSyD0UM740B5dh5gXlSZv7KUS97HmvoKz2Ms";
 
 window.Vue = require('vue');
+window.Vue.config.debug = false;
+window.Vue.config.silent = true;
 require('vue-resource');
 
 /**
@@ -44,3 +46,9 @@ Vue.http.interceptors.push((request, next) => {
 //     broadcaster: 'pusher',
 //     key: 'your-pusher-key'
 // });
+
+window.angular = require('angular');
+require('angular-route');
+require('angular-material');
+require('angular-messages');
+require('angular-route');

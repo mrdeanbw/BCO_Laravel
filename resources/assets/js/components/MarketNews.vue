@@ -2,9 +2,9 @@
 <template>
 
     <div class="marketnews">
-        <h3><i class="fa fa-newspaper-o primary" aria-hidden="true"></i> Industry News</h3>    
+        <h3><i class="fa fa-newspaper-o" aria-hidden="true"></i> Industry News</h3>    
         <div v-for="item in newsitems" class="marketnewsitem">
-            <h5 class="title-line"><a :href="item.link" target="_blank">{{ item.title }}</a></h5>
+            <h5 class="title-line"><a :href="item.link" target="_blank"><strong>{{ item.title }}</strong></a></h5>
             <p class="subtle date-line">{{ item.pubDate }}</p>
             <p class="description-line">{{ item.description }}</p>
         </div>

@@ -1,0 +1,279 @@
+
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Angular Material
+@import "node_modules/angular-material/angular-material.scss";
+
+//Font Awesome
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+
+@import "navbar";
+
+@import "homepage";
+
+@import "dashboard";
+
+@import "ratesapp";
+
+@import "directory";
+
+@import "news";
+
+
+html, body, #app, #content {
+	min-height: 100%;
+	height: 100%;
+	background-color: rgb(250,250,250);
+}
+
+#content {
+ 	padding-top: 51px;
+ 	padding-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+	#content {
+		padding-top: 101px;	
+ 	}
+ }
+
+.center {
+	text-align: center;
+}
+
+
+
+/* Subscriptions */
+
+.subplan-box {
+	padding: 0 10px;
+}
+
+.subplan-box h4 {
+	color: $brand-primary;
+	font-weight: bold;
+}
+
+.subplan-box-title {
+	text-align: center;
+}
+
+.subplan-box-title > h1, .subplan-box-title > h4 {
+	margin: 4px;
+}
+
+.subplan-box-title h1 small {
+	color: #fff;
+	opacity: 0.4;
+}
+
+.subplan-box-title p {
+	font-size: 0.8em;
+}
+
+.subplan-box .btn {
+	display: flex;
+	-webkit-box-orient: vertical;
+    -webkit-box-direction: normal; 
+	flex-direction: column;
+	width: 100%;
+	text-align: center;
+}
+
+.subplan-box-breaker {
+	margin: 20px 0;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.ul-no-indent {
+	list-style-type: circle;
+	padding-left: 15px;
+}
+
+
+
+
+/* Info pages */
+
+.info-page h3 {
+	font-weight: bold;	
+}
+
+.info-page > .row {
+	margin: 0;
+	border-bottom: 1px solid lighten($brand-secondary, 50%);
+}
+
+.info-page h4 {
+	font-weight: bold;
+	margin: 45px 0 10px 0;
+	color: $brand-primary;
+}
+
+.info-page p {
+	text-align: justify;
+}
+
+.info-page.spanner-image {
+	margin-top: -22px;	
+
+}
+
+.info-page.spanner-image > .item {
+	min-height: 100px;
+	max-height: 130px;
+	color: #fff;
+}
+
+.info-page > .action-box {
+
+	border-radius: 10px;
+	background-color: none;
+	padding: 10px;
+	margin: 50px auto;
+	text-align: center;
+	width: 50%;
+	color: $brand-primary;
+}
+
+.info-page > .action-box h2 {
+	color: $brand-secondary;
+}
+
+.info-page > .action-box p {
+	text-align: center;
+}
+
+.info-page ul {
+	list-style: none;
+	padding-left: 15px;
+}
+
+.info-page li:before {
+	font-family: 'FontAwesome';
+	content: '\f0d1';
+	margin: 0 5px 0 -15px;
+	color: $brand-primary;
+}
+
+/* inbox */
+.inbox-item {
+	padding: 10px 20px;
+	border-bottom: 1px solid lighten($brand-secondary, 50%);
+}
+
+.inbox-item.unread .title {
+	font-weight: bold;
+}
+
+.inbox-item a {
+	color: $brand-secondary;
+}
+
+.inbox-item.unread .title:before {
+	font-family: 'FontAwesome';
+	content: '\f003';
+	margin: 0 5px 0 0;
+}
+
+.inbox-item p {
+	margin: 0px;
+}
+
+.col-right {
+	text-align: right;
+}
+
+/* Modal Overlay */
+/*
+.exp-collapsed {
+	height: 0;
+}
+*/
+.exp-collapsed .container {
+	height: 0;
+	overflow: hidden;
+}
+
+.expander-header {
+	margin-top: -20px;
+}
+
+.expander-header h3 {
+	margin-top: 5px;
+}
+
+.boardmember .col-md-4 {
+	padding-left: 0;
+}
+
+.boardmember .bm-img {
+	padding: 0 auto;
+}
+
+.boardmember img {
+	max-width: 150px;
+
+}
+.boardmember h4 {
+	margin: 0;
+}
+.boardmember p {
+	margin: 0;
+}
+
+.boardmember .bm-info {
+	padding: 5px;
+}
+
+.boardmembers {
+	width: 100%;
+}
+
+
+
+
+
+/* Member Spotlight */
+#member-spotlight {
+	min-height: 200px;
+}
+
+#member-spotlight .spotlight {
+	height: 200px;	
+	padding: 20px 60px;	
+}
+
+.spotlight table {
+	width: 50%;
+	margin: 0 auto;
+}
+
+.spotlight img {
+	max-height: 140px;
+}
+
+.software-providers {
+
+}
+
+.software-providers td {
+	padding: 15px;
+}
+
+.software-providers img {
+	max-width: 110px;
+}
+
+
+
+

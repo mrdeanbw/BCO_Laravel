@@ -17,6 +17,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 	Route::get('/latest_news', 'ApiController@latest_news');
 	Route::get('/new_members', 'ApiController@new_members');
 	Route::post('/user/edit_symbols', 'ApiController@update_user_stocksymbols');
+	Route::get('/forum_posts', 'ApiController@latest_forum_posts');
 });
 
 

@@ -1,21 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="spanner info-page spanner-image">
-	<div class="item" style="background-image: url('res/a-bg-1200x381.jpg');">
-		<div class="container">
-			<div class="caption">
-				<h3>Non Profit Status</h3>              
-			</div>
-		</div>
-	</div>
-</div>
-
 
 <div class="container info-page">
 	<div class="row">
 		<div class='col-md-12'>
-		<h3>BCO POWER</h3>
+		<h3>BCO POWER IS A NON-PROFIT CORPORATATION</h3>
 
 			
 			<p>BCO Shippers Association is a 501(c)3 non-profit corporation organized in the state of Delaware, USA.
@@ -34,6 +24,7 @@ BCO Shippers Association does not have any shareholders; instead it is operated 
 		<h2>Want to take advantage of our buying power?</h2>
 		<h3>Register today.</h3>		
 		<a href="{{ url('/register') }}" class="btn btn-default">Register Here</a>
+		<p>Free till at least 2018, after that we'll offer you paid plans</p>
 	</div>
 
 </div>

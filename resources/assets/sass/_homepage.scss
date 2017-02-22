@@ -1,0 +1,168 @@
+.btn-sqr {
+	border-radius: 0px;
+	font-size: 1em;
+	padding: 20px;
+	color: $brand-secondary;
+}
+
+.banner-block .text-block {
+	padding: 100px 0;		
+}
+
+.primary-bg {
+	background-color: $brand-primary;
+	color: $brand-secondary;
+}
+
+.text-block h1 {
+	margin-top: 5px;	
+}
+
+.video-block {
+	width: auto;
+	padding: 0;
+	position: relative;
+}
+
+
+.video-block video {
+	width: 100% !important;		
+	border: none;
+	color: #fff;
+	object-fit: cover;
+}
+
+
+.text-block .tag-line {
+	font-size: 0.8em;
+	color: lighten($brand-secondary, 20%);
+	text-transform: uppercase;
+	margin: 0;
+}
+
+@media only screen and (min-width : 768px) {
+    .is-table-row {
+        display: table;        
+    }
+    .is-table-row [class*="col-"] {
+        float: none;
+        display: table-cell;
+        vertical-align: top;
+    }
+}
+
+.usp {
+	text-align: center;
+	padding: 0 40px;
+	font-size: 1.5em;
+}
+
+.usp .fa {
+	font-size: 56px;
+    border-radius: 42px;
+    background-color: #fff;
+    padding: 16px 0;
+    color: $brand-primary;
+    width: 84px;
+    height: 84px;
+}
+
+.top-border-light {
+	border-top: 1px solid #fff;
+}
+
+
+
+.spanner {
+	padding: 20px 0;
+	min-height: 400px;
+}
+
+.spanner-dark {
+	background-color: $brand-secondary;
+	color: #fff;
+}
+
+.spanner-light {
+	background-color: $brand-primary;
+	color: $brand-secondary;
+}
+
+.spanner-dark h2 {
+	color: $brand-primary;		
+}
+
+.spanner-light h2 {
+	color: #fff;
+}
+
+.spanner-dark a {
+	color: #fff;
+}
+
+.spanner-dark a:hover {
+	color: $brand-primary;
+	text-decoration: none;
+}
+
+.spanner-light a {
+	color: $brand-secondary;
+}
+
+.spanner-light a:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.spanner .col-md-6 {
+	border-left: 1px solid $brand-primary;	
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spanner .btn-default {
+	@extend .btn-default;
+}
+
+.spanner .btn-default:hover {
+	@extend .btn-default:hover;
+}
+
+.spanner .btn-primary {
+	@extend .btn-primary;
+}
+
+.spanner .btn-primary:hover {
+	@extend .btn-primary:hover;
+}
+
+.spanner-text-pane {
+
+}
+
+.spanner-image {
+	padding: 0;
+}
+
+.spanner-image > .item {
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	min-height: 300px;
+	height: 50%;
+	max-height: 700px;
+	width: 100%;	
+	display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spanner-image > .item > .container > .caption {	
+	width: 25%;
+}
+
+.spanner-image > .item > .container > .caption.right {	
+	@extend .pull-right;
+	text-align: right;
+}

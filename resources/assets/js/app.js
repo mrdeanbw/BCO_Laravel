@@ -25,7 +25,7 @@ Vue.component('new-members', require('./components/NewMembers.vue'));
 Vue.component('scfi-widget', require('./components/SCFI.vue'));
 Vue.component('location-widget', require('./components/RegisterLocationWidget.vue'));
 Vue.component('google-places', require('./components/GoogleAutocomplete.vue'));
-
+Vue.component('power-grid', require('./components/PowerGrid.vue'));
 
 
 new Vue({

@@ -2,7 +2,7 @@
 <template>
 
     <div>    
-        <h3><i class="fa fa-users primary" aria-hidden="true"></i> New Members</h3>    
+        <h3><i class="fa fa-users" aria-hidden="true"></i> New Members</h3>    
         <p v-for="member in members">
             {{ member.name}} - {{ member.organization }}
         </p>        

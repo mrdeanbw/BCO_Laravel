@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container directory">
+	<h3><i class="fa fa-compass primary" aria-hidden="true"></i> Member Directory</h3>
 	<div class="col-md-12">
 
 		@if (Session::has('message'))
@@ -9,7 +10,6 @@
 			<div class="alert alert-info">{{ Session::get('message') }}</div>
 		</div>
 		@endif
-		<h3><i class="fa fa-compass primary" aria-hidden="true"></i> Member Directory</h3>
 		{{ Form::open(array('method' => 'GET', 'url'=>'members/directory', 'class' => 'form-inline directory-search')) }}
 		<div class="form-group">			
 		    <label for="search_name"> Search the Directory&nbsp;</label>		    
@@ -20,7 +20,8 @@
 		  </div>
 		  <button type="submit" class="btn btn-primary">Search</button>
 		{{ Form::close() }}
-
+	</div>
+	<div class="col-md-12">
 		{{ $members->links() }}		
 		<table class="table table-striped table-hover">
 			<thead>

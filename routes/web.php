@@ -12,18 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('newhome');
 });
 Route::get('/home', function () { 
-    return view('home');
+    return view('newhome');
 });
 
 //Public pages
 Route::get('/why-join', function() { return view('public.why-join'); });
 Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
-Route::get('/board', function() { return view('public.board'); });
-Route::get('/shippingrates', function() { return view('public.shippingrates'); });
 Route::get('/contact-us', function() { return view('public.contact'); });
 Route::post('/contact-us', 'ContactController@store')->name('contact.store');
 
@@ -62,6 +60,11 @@ Route::group(['middleware' => ['subscriber']], function() {
 		Route::group(array('prefix' => 'directory', 'middleware' => ['auth']), function() {
 			Route::get('/', 'DirectoryController@index');
 		});
+
+		Route::get('/rates', function() { return \View::make('rates.index');});
+		Route::post('/rates/ltl', 'RatesController@ltl');
+		Route::post('/rates/fcl', 'RatesController@fcl');
+		Route::get('/rates/locations', 'RatesController@query_locations');
 
 		Route::get('/software', function() {return view('software.index'); });
 	});

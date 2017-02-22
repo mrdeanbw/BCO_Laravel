@@ -7,3 +7,18 @@
 #chatter #chatter_header {
 	background-color: $brand-primary !important;
 }
+
+.chatter_home {
+ 	padding-top: 20px; 	
+}
+
+#chatter .chatter_container {
+	margin-top: 0px !important;
+}
+
+.chatter_home .row {
+	background-color: #fff;
+	margin-top: 20px;
+	box-shadow: 0 1px 2px rgba(0,0,0,.5);
+	padding: 20px 0;
+}

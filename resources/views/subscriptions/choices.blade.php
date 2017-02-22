@@ -4,9 +4,7 @@
 			<div class="col-md-6 col-md-offset-3" style="border-left: none;">
 				
 				@if(Auth::guest())					
-					<a href="{{ url('/register') }}" class="btn btn-primary btn-lg btn-block" style="font-size: 24px;">Register for a free Premiere Trial</a>			
-					<p><center>Free for 30 days, after that we offer the following plans</center></p>
-					<br>
+					<a href="{{ url('/register') }}" class="btn btn-primary btn-lg btn-block" style="font-size: 24px;">Register for a free Premiere Trial</a>
 				@endif
 			</div>
 		</div>

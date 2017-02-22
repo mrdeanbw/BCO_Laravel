@@ -98,7 +98,7 @@ class RegisterController extends Controller
             'industry_type' => $data['type'],
             'primary_commodity' => $data['commodity'],
             'cargo_types' => $cargotypes,
-            'trial_ends_at' => \Carbon\Carbon::now()->addDays(30),
+            'trial_ends_at' => \Carbon\Carbon::createFromDate(2017, 12, 31, 'Europe/London'),
             
         ]);        
         

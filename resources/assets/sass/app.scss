@@ -1,4 +1,5 @@
 
+
 // Fonts
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
 
@@ -7,6 +8,9 @@
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+// Angular Material
+@import "node_modules/angular-material/angular-material.scss";
 
 //Font Awesome
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
@@ -20,17 +24,28 @@
 }
 
 .navbar-default {
-    background-color: $brand-secondary;
+    background-color: #fff;
     border-color: $brand-primary;
+    font-size: 0.9em;
+}
+
+.navbar-default .navbar-nav .navbar-btn {
+	margin: 18px 0;
 }
 
 .navbar-default .navbar-nav li a {
-	color: #fff;
+	color: $brand-secondary;
+	line-height: 45px;
+	text-transform: uppercase;
+	padding: 10px 8px;
 }
 
 .navbar-default .navbar-nav li a:hover, 
 .navbar-default .navbar-nav li  a:focus {
 	color: $brand-primary;
+	font-weight: bold;
+	cursor: hand;
+	border-bottom: 5px solid $brand-primary;
 }
 
 .navbar-default .navbar-text {
@@ -56,6 +71,7 @@
 
 .spanner {
 	padding: 20px 0;
+	min-height: 400px;
 }
 
 .spanner-dark {
@@ -498,4 +514,13 @@ footer li > a {
 
 .software-providers img {
 	max-width: 110px;
+}
+
+
+
+
+/* Rates */ 
+
+#ratesForm md-tabs md-input-container {
+	margin-bottom: 1px;
 }

@@ -1,0 +1,59 @@
+.navbar-default {
+	border-bottom: 1px solid $input-border;
+}
+
+@media(min-width: 768px) {
+	
+	.navbar .logo {
+		max-height: 80px;		
+	}
+
+	.navbar-nav li a {
+		line-height: 76px;
+		padding: 3px 6px;
+	}
+
+	.navbar-nav li p {
+		line-height: 80px;
+	}
+}
+
+@media(min-width: 1100px) {
+
+	.navbar .logo {
+		max-height: 100px;		
+	}
+
+	.navbar-nav li a {
+		line-height: 90px;
+		padding: 5px 8px;
+	}
+
+	.navbar-nav li p {
+		line-height: 100px;
+	}
+
+}
+.navbar-nav li a {
+	font-size: 0.9em;	
+	text-transform: uppercase;
+}
+
+.navbar-nav li p {	
+	margin: 0;
+	color: $input-border;
+}
+
+.navbar-nav .dropdown-menu li a {
+	line-height: 32px;
+}
+
+.navbar-nav li a:hover {
+	border-bottom: 5px solid $brand-primary;
+	padding-bottom: 0px;
+}
+
+.navbar-nav .active {
+	border-bottom: 5px solid darken($brand-primary, 10%);
+	padding-bottom: 0px;
+}

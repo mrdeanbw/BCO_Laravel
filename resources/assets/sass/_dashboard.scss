@@ -1,0 +1,51 @@
+
+.dashboard {
+	
+	.col-md-6, .col-md-12 {
+		padding: 0;
+	}
+
+	.dashboard-block {		
+		padding: 10px;
+		margin: 10px;
+		margin-bottom: 20px;
+		box-shadow: 0 1px 2px rgba(0,0,0,.5);
+
+	}
+
+	.primary {
+		background-color: $brand-primary;
+	}
+
+	.secondary {
+		background-color: $brand-secondary;
+		color: #efefef;
+	}
+
+	.white {
+		background-color: #efefef;		
+	}
+
+	h3 {
+		margin-top: 1px;
+	}
+}
+
+
+
+
+
+#stockQuoteApp, #newsApp {
+	font-size: 10px;
+}
+
+#newsApp .title {
+	margin: 0;
+}
+
+#stockQuoteApp .table > tbody > tr > td > strong {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

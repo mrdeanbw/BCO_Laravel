@@ -27,7 +27,7 @@
 
 
 
-<div class="spanner spanner-dark">
+<div class="spanner spanner-light">
     <div class="container">
      <div class="row">
         <div class="col-md-2 col-xs-12">
@@ -63,7 +63,7 @@
                     Find out why BCO Power is the fastest growing Shippers Association
                 </h2>
                 <p>
-                    <a href="">View all of our member-only advantages</a> or <a href="{{ url('/register') }}" class="btn btn-primary btn-sm">become a member</a> now!
+                    <a href="">View all of our member-only advantages</a> or <a href="{{ url('/register') }}" class="btn btn-default btn-sm">become a member</a> now!
                 </p>
             </div>
         </div>
