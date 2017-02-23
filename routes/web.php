@@ -64,6 +64,7 @@ Route::group(['middleware' => ['subscriber']], function() {
 		Route::get('/rates', function() { return \View::make('rates.index');});
 		Route::post('/rates/ltl', 'RatesController@ltl');
 		Route::post('/rates/fcl', 'RatesController@fcl');
+		Route::post('/rates/parcel', 'RatesController@parcel');
 		Route::get('/rates/locations', 'RatesController@query_locations');
 
 		Route::get('/software', function() {return view('software.index'); });

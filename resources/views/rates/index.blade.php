@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('content')
+@section('content') 
 <style>
 	footer {
 		display: none;
@@ -35,7 +35,11 @@
 						</md-item-template>
 						<md-not-found>
 							No locations matching "[[ searchOriginText ]]" were found.					
-						</md-not-found>					
+						</md-not-found>
+						<div ng-messages="ratesForm.originAutoCompleteField.$error" ng-if="ratesForm.$submitted || ratesForm.originAutoCompleteField.$touched">
+								<div ng-message="required">You must select a valid origin location to continue</div>
+								<div ng-message="md-require-match">Please select an existing origin from the list</div>				    		
+							</div>				
 					</md-autocomplete>
 
 					<md-autocomplete
@@ -58,7 +62,11 @@
 						</md-item-template>
 						<md-not-found>
 							No locations matching "[[ searchDestinationText ]]" were found.					
-						</md-not-found>						
+						</md-not-found>
+						<div ng-messages="ratesForm.destinationAutoCompleteField.$error" ng-if="ratesForm.$submitted || ratesForm.destinationAutoCompleteField.$touched">
+								<div ng-message="required">You must select a valid destination location to continue</div>
+								<div ng-message="md-require-match">Please select an existing destination from the list</div>				    		
+							</div>						
 					</md-autocomplete>
 					
 						<md-datepicker 
@@ -208,8 +216,50 @@
 
 						
 					</md-tab>
-					<md-tab label="Parcel" ng-disabled="true">
+					<md-tab label="Parcel">
 						<md-content class="md-padding">
+							<md-input-container>
+								<label>Payment Terms</label>
+								<md-select name="pkgTerms" ng-model="query.parcel.terms" ng-required="ui.selectedTabIndex == 2">
+									<md-option value="PREPAID">Prepaid</md-option>
+									<md-option value="BCWA">Bill Consignee by Account#</md-option>
+									<md-option value="BCNA">Bill Consignee by address</md-option>
+									<md-option value="TPBILL">Third Party</md-option>
+								</md-select>
+							</md-input-container>
+							<div>
+								<div layout="row" flex ng-repeat="pkg in query.parcel.packages">
+									<md-input-container class="md-block" flex>
+										<label ng-if="$index==0">Packaging</label>
+										<md-select name="pkgPackaging" ng-model="pkg.packaging" aria-label="Packaging" ng-required="ui.selectedTabIndex == 2">
+											<md-option value="CUSTOM">Your packaging</md-option>
+											<md-option value="PAK">Carrier supplied Pak</md-option>
+											<md-option value="BOX">Carrier supplied Box</md-option>
+											<md-option value="TUBE">Carrier supplied tube</md-option>
+											<md-option value="LETTER">Carrier supplied envelope</md-option>
+											<md-option value="BOX10KG">Carrier supplied 10kg box</md-option>
+											<md-option value="BOX25KG">Carrier supplied 25kg box</md-option>
+											<md-option value="FLAT">Carrier supplied flat</md-option>
+											<md-option value="CARD">Card</md-option>
+											<md-option value="FLATRATE_ENV">USPS Flat Rate Envelope</md-option>
+											<md-option value="FLATRATE_PADDEDENV">USPS Flat Rate Padded Env.</md-option>	
+										</md-select>
+									</md-input-container>
+									<md-input-container class="md-block" flex="20">
+										<label ng-if="$index == 0">Weight</label>
+										<input name="pkgWeight" type="number" ng-model="pkg.weight" aria-label="Weight" ng-required="ui.selectedTabIndex == 2">
+									</md-input-container>
+									<md-input-container class="md-block" flex>
+										<label ng-if="$index==0">Proof of Delivery</label>
+										<md-select name="pkgProof" ng-model="pkg.pod" aria-label="Proof" ng-required="ui.selectedTabIndex == 2">
+											<md-option value="NONE">None</md-option>
+											<md-option value="INDIRECT">Indirect proof (Driver confirmation)</md-option>
+											<md-option value="DIRECT">Direct signature</md-option>
+											<md-option value="ADULT">Adult signature only</md-option>
+										</md-select>
+									</md-input-container>
+								</div>							
+							</div>
 						</md-content>
 					</md-tab>
 				</md-tabs>
@@ -222,7 +272,7 @@
 		</form>	
 
 		<div class="error-panel md-whiteframe-2dp" layout-padding ng-show="warning != ''">
-			<h3>Sorry</h3>
+			<h3>Sorry...</h3>
 			<p>[[ warning ]]</p>
 		</div>
 
@@ -264,6 +314,14 @@
 					<md-divider></md-divider>
 				</md-list-item>
 			</md-list>
+		</div>
+
+		<div class="results-panel md-whiteframe-2dp" ng-show="parcel_result != null" layout-padding>
+			<center>
+				<h3><strong>US$ [[ parcel_result.rate.total_price ]]</strong></h3>
+				<p>Your [[ parcel_result.rate.carrier ]] service rate from [[ parcel_result.rate.from ]] to [[ parcel_result.rate.to ]]</p>
+			</center>
+			
 		</div>
 	</div>
 </md-content>

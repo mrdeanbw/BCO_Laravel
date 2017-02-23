@@ -99,7 +99,7 @@ ratesApp.config(function ($mdThemingProvider) {
 ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $scope, $log) {
 
 	$scope.ui = {
-		selectedTabIndex: 1,
+		selectedTabIndex: 2,
 	}
 
 	$scope.warning = '';
@@ -130,7 +130,14 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 				}
 			]
 		},
-		parcel: {},
+		parcel: {
+			terms: null,
+			packages: [{
+				weight: 20,
+				packaging: 'CUSTOM',
+				pod: 'NONE'
+			}]
+		},
 		origin: null,
 		destination: null,
 		shipdate: new Date()
@@ -237,6 +244,8 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 
 	function queryRates() {
 		if(!$scope.ratesForm.$valid) { $scope.warning="There are errors in the form, please correct the highlighted fields and try again"; return;  }
+		$scope.results = [];
+		$scope.parcel_result = null;
 		$scope.ratesForm.$busy = true;
 		switch($scope.ui.selectedTabIndex) {
 			case 0:
@@ -246,10 +255,10 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 				queryLTL();
 				break;
 			case 2: 
-				alert('Parcel');
+				queryParcel();
 				break;
 			default: 
-				alert('Wrong');
+				break;
 		}
 	}
 
@@ -298,7 +307,7 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 			} 
 			$scope.ratesForm.$busy = false;
 		}, function(errorResponse) {
-			alert(errorResponse.code);
+			$scope.warning = 'Something went wrong processing your request, please try again later or contact an administrator.';
 			$scope.ratesForm.$busy = false;
 		});
 
@@ -337,41 +346,60 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 			}
 			$scope.ratesForm.$busy = false;		
 		}, function(errorResponse) {
-			alert(errorResponse);
+			$scope.warning = 'Something went wrong processing your request, please try again later or contact an administrator.';
 			$scope.ratesForm.$busy = false;
 		});
 
 	}
 
-	function queryShipStoreLCL() {
-
-		var payload = {
-			"Shipment": {
-				"RequestType": "RATE",				
-				"Source": "MANUAL",
-				"ServiceCode": "ARE_API.ARE.UPS.G",
-				"Terms": "PREPAID",
-				"ShipDate": "2/16/2016",
-				"ShipTo_Address1": "1234 main",
-				"ShipTo_City": "Kansas City",
-				"ShipTo_State": "MO",
-				"ShipTo_Zip": "64133",
-				"ShipTo_Country": "US",
-				"Packages": [{
-					"Weight": 2,
-					"Packaging": "CUSTOM",
-					"POD": "NONE"
-				}],
-				"ClientID": "B4F6E4E4-7795-49FB-BE2D-FAA28E49F66C",
-				"ProfileId": "9AF87637-34E3-49AA-A832-73FDD214456D"
-
-
-			}
+	function queryParcel() {
+		var query = $scope.query;
+		$scope.warning = '';
+		
+		if(!query.origin.us_domestic || !query.destination.us_domestic) {
+			$scope.warning = 'Currently only US Domestic locations are supported for parcel rates, please select a different origin / destination.';
+			$scope.ratesForm.$busy = false;
+			return ;
 		}
 
-		$http.post('http://arecloudship.com/api/shipment', payload).then(function(successResponse) {
-			
-		})
+		var payload = {
+			from: query.origin,
+			to: query.destination,
+			ship_day: query.shipdate.toDateString(),
+			terms: query.parcel.terms,
+			packages: []
+		}
+
+		for (var i = 0; i < query.parcel.packages.length; i++) {
+			var pkg = query.parcel.packages[i];
+
+			payload.packages.push({
+				Weight: pkg.weight,
+				Packaging: pkg.packaging,
+				POD: pkg.pod
+			});
+		}
+
+		$http.post('/members/rates/parcel', payload).then(function(successResponse) {
+			$scope.ratesForm.$busy = false;
+			$scope.parcel_result = successResponse.data;
+
+			if(!$scope.parcel_result.success) {
+				$scope.warning = $scope.parcel_result.error;				
+				$scope.parcel_result = null;
+				return;
+			}
+
+			if($scope.parcel_result.rate.total_price == 0) {
+				$scope.warning = "No rate found...";
+				$scope.parcel_result = null;
+				return;
+			}
+
+		}, function(errorResponse) {
+			$scope.warning = 'Something went wrong processing your request, please try again later or contact an administrator.';
+			$scope.ratesForm.$busy = false;
+		});
 	}
 
 
