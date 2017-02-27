@@ -99,7 +99,7 @@ ratesApp.config(function ($mdThemingProvider) {
 ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $scope, $log) {
 
 	$scope.ui = {
-		selectedTabIndex: 2,
+		selectedTabIndex: 0,
 	}
 
 	$scope.warning = '';
@@ -133,9 +133,9 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 		parcel: {
 			terms: null,
 			packages: [{
-				weight: 20,
-				packaging: 'CUSTOM',
-				pod: 'NONE'
+				weight: null,
+				packaging: null,
+				pod: null
 			}]
 		},
 		origin: null,
