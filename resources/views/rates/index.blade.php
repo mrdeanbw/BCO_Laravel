@@ -318,6 +318,7 @@
 
 		<div class="results-panel md-whiteframe-2dp" ng-show="parcel_result != null" layout-padding>
 			<center>
+				<img src="/res/ups.png" style="max-width: 180px; padding: 10px;" />
 				<h3><strong>US$ [[ parcel_result.rate.total_price ]]</strong></h3>
 				<p>Your [[ parcel_result.rate.carrier ]] service rate from [[ parcel_result.rate.from ]] to [[ parcel_result.rate.to ]]</p>
 			</center>

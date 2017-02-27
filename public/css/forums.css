@@ -1,19 +1,24 @@
 #chatter_hero {
-  display: none; }
+  display: none;
+}
 
 #chatter #chatter_header {
-  background-color: #24CBD3 !important; }
+  background-color: #24CBD3 !important;
+}
 
 .chatter_home {
-  padding-top: 20px; }
+  padding-top: 20px;
+}
 
 #chatter .chatter_container {
-  margin-top: 0px !important; }
+  margin-top: 0px !important;
+}
 
 .chatter_home .row {
   background-color: #fff;
   margin-top: 20px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  padding: 20px 0; }
+  padding: 20px 0;
+}
 
 /*# sourceMappingURL=forums.css.map */
