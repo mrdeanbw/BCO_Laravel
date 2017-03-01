@@ -96,7 +96,7 @@ class RatesController extends Controller
 
 		if($response->getStatusCode() == 200) {
 			$body = json_decode($response->getBody());			
-			dd($body);
+			
 			return response()->json($body);
 		} else {
 			return response()->json('error', 500);
