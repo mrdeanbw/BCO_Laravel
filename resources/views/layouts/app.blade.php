@@ -84,11 +84,19 @@
 						<li class="hidden-xs"><p>|</p></li>
 						<li><a class="{{ Request::is('members/forums*') ? 'active' : ''}}" href="{{ url('/members/forums') }}">PowerGRID</a></li>
 						<li class="hidden-xs"><p>|</p></li>
+                         @if(Auth::user()->admin_verifier)
                         <li><a class="{{ Request::is('members/rates*') ? 'active' : ''}}" href="{{ url('/members/rates') }}">Shipping Rates</a></li>
                         <li class="hidden-xs"><p>|</p></li>
+                        @endif
                         <li><a class="{{ Request::is('members/software*') ? 'active' : ''}}" href="{{ url('/members/software') }}">Software</a></li>
+                         @if(Auth::user()->admin_verifier)
                         <li class="hidden-xs"><p>|</p></li>
                         <li><a class="{{ Request::is('members/directory*') ? 'active' : ''}}" href="{{ url('/members/directory') }}">Directory</a></li>
+                        @endif
+                        @if(Auth::user()->is_admin)
+                        <li class="hidden-xs"><p>|</p></li>
+                        <li><a class="{{ Request::is('admincp/*') ? 'active' : ''}}" href="{{ url('/admincp/') }}"><strong>AdminCP</strong></a></li>
+                        @endif
 					@endif
 				</ul>
 
@@ -106,7 +114,7 @@
                                     @if($noti_count > 0) 
                                         <span class="badge">{{ $noti_count }}</span>
                                     @endif
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    <i class="fa fa-user-circle" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span>
                                 
                                 </a>
 

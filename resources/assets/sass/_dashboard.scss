@@ -1,6 +1,10 @@
 
+.container-fluid.dashboard {
+	padding-top: 20px;
+}
+
 .dashboard {
-	
+
 	.col-md-6, .col-md-12 {
 		padding: 0;
 	}
@@ -28,6 +32,33 @@
 
 	h3 {
 		margin-top: 1px;
+	}
+
+	.embed-responsive {
+		margin-bottom: 20px;
+	}
+
+	.nav-pills > li.active > a {
+		color: #545a5c;
+		border: 1px solid #20b6bd;
+	}
+
+	.nav-pills > li > a {
+		color: #545a5c;
+		font-size: 1.2em;
+		border: 1px solid transparent;
+		border-radius: 0px;
+	}
+
+	.nav-pills > li > a:hover {
+		color: $brand-primary;
+		color: #fff;
+    	background-color: #1da1a7;
+		border: 1px solid #178489;
+	}
+
+	.col-md-8 .dashboard-block:nth-child(1) {
+		margin-top: 0px;		
 	}
 }
 

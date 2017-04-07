@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -118,22 +117,46 @@
                         <div class="col-md-8">
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios1" value="exporter" checked>
+                                    <input type="radio" name="type" id="optionsRadios1" value="Exporter" checked>
                                     Exporter
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios2" value="importer">
+                                    <input type="radio" name="type" id="optionsRadios2" value="Importer">
                                     Importer
                                 </label>
                             </div>
                             <div class="radio">
                                 <label>
-                                    <input type="radio" name="type" id="optionsRadios3" value="both">
-                                    Both
+                                    <input type="radio" name="type" id="optionsRadios3" value="3PL NVOCC Forwarder">
+                                    3PL / NVOCC / Forwarder
                                 </label>
                             </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios4" value="Carrier">
+                                    Carrier
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios5" value="Software Provider">
+                                    Software Provider
+                                </label>
+                            </div>
+                            <div class="radio {{ $errors->has('typeOther') ? ' has-error' : '' }}">
+                                <label>
+                                    <input type="radio" name="type" id="optionsRadios6" value="Other">
+                                    Other: <input type="text" name="typeOther">
+                                </label>
+                                 @if ($errors->has('typeOther'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('typeOther') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                           
                         </div>
                     </div>
 
@@ -156,6 +179,7 @@
                                 <option value="beverages">Beverages</option>
                                 <option value="oil">Oil &amp; Gas</option>
                                 <option value="government">Govt/Defense</option>
+                                <option value="ecommerce">eCommerce</option>
                                 <option value="other">Other</option>
                             </select>
                             @if ($errors->has('commodity'))
@@ -171,27 +195,37 @@
                         <div class="col-md-8">                                                                
                             <div class="checkbox">
                                 <label>
-                                  <input type="checkbox" name="perishable"> Perishable
-                              </label>
-                          </div>
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox" name="hazardous"> Hazardous
-                          </label>
-                      </div>
-                      <div class="checkbox">
-                        <label>
-                          <input type="checkbox" name="fragile"> Fragile
-                      </label>
-                  </div>
-                  <div class="checkbox">
-                    <label>
-                      <input type="checkbox" name="liquid"> Liquid
-                  </label>
-              </div>
-          </div>
-      </div>                        
-
+                                    <input type="checkbox" name="perishable"> Refrigirated /  Perishable
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="hazardous"> Hazardous
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                   <input type="checkbox" name="fragile"> Fragile
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="liquid"> Liquid
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="highvalue"> High Value
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="shippersowned"> Shippers Owned
+                                </label>
+                            </div>
+                        </div>
+                    </div>                        
+      
       <hr>
 
       <div class="form-group{{ $errors->has('recaptcha') ? ' has-error' : '' }}">

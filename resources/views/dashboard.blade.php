@@ -2,10 +2,10 @@
 
 @section('content')
 
-<div class="container dashboard">
+<div class="container-fluid dashboard">
 
-    <h2>Member Information Hub</h2>
-    @if(Auth::user()->onTrial())
+    
+    @if(Auth::user()->onTrial() && Auth::user()->trial_days_left() <= 30)
     <div class="alert {{ Auth::user()->trial_days_left() > 5 ? 'alert-info' : 'alert-warning'}}" role="alert">
         <strong>{{ Auth::user()->trial_days_left() > 5 ? 'Info' : 'Warning' }}</strong> &bull; You are currently in your trial period, which will expire in {{Auth::user()->trial_days_left()}} day(s)
         @if(Auth::user()->trial_days_left() <= 5)
@@ -13,31 +13,40 @@
         @endif
     </div>
     @endif
-    <div class="row">
-        <div class="col-md-12" style="margin-bottom: -10px">
-            <div class="dashboard-block white row">
-                <div class="col-md-6">
-                    <h3>Shipping Rates</h3>
-                    <p>Use our new online app to get your BCO Power negociated FCL, LCL and Parcel rates</p>
-                </div>
-                <div class="col-md-6">
-                    <a href="{{ url('/members/rates') }}" class="btn btn-primary btn-lg btn-sqr">GET STARTED WITH RATES</a>
-                </div>
+
+    <div class="row">        
+        <div class="col-md-2 col-sm-3 col-xs-4">    
+             
+            <ul class="nav nav-pills nav-stacked">
+                <li role="presentation" class="{{ Request::is('members') ? 'active' : ''}}"><a href="{{ url('/members/') }}"><i class="fa fa-fw fa-newspaper-o" aria-hidden="true"></i> BCOPower News</a></li>
+                @if(Auth::user()->admin_verifier)
+                <li role="presentation"><a href="{{ url('/members/rates') }}"><i class="fa fa-fw fa-file-text" aria-hidden="true"></i> Shipping Rates</a></li>
+                @endif
+                <li role="presentation"><a href="{{ url('/members/forums') }}"><i aria-hidden="true" class="fa fa-fw fa-comments-o"></i> Power Grid</a></li>                
+                <li role="presentation" class="{{ Request::is('members/industry-news') ? 'active' : ''}}"><a href="{{ url('/members/industry-news') }}"><i class="fa fa-fw fa-newspaper-o" aria-hidden="true"></i> Industry News</a></li>
+                <li role="presentation" class="{{ Request::is('members/stock-quotes') ? 'active' : ''}}"><a href="{{ url('/members/stock-quotes') }}"><i class="fa fa-fw fa-usd" aria-hidden="true"></i> Stock Quotes</a></li>
+                <li role="presentation" class="{{ Request::is('members/benchmarking') ? 'active' : ''}}"><a href="{{ url('/members/benchmarking') }}"><i class="fa fa-fw fa-line-chart" aria-hidden="true"></i> Benchmarking</a></li>
+                <li role="presentation"><a href="#"><i class="fa fa-fw fa-calculator" aria-hidden="true"></i> Duties & Taxes</a></li>
+                <li role="presentation"><a href="#"><i class="fa fa-fw fa-retweet" aria-hidden="true"></i> Refer a Colleague</a></li>                
+            </ul>
+        </div>
+        <div class="col-md-8 col-sm-7 col-xs-6">
+            @yield('dashboard-content')                       
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-4">            
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DDRFz-1xCOQ?ecver=1"></iframe>
             </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/cUcd5_ktdGw?ecver=1"></iframe>
+            </div>
+            <div class="embed-responsive embed-responsive-16by9">
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0bCLWeycGMA?ecver=1"></iframe>                
+            </div>
+            
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">                        
-            <stock-app class="dashboard-block primary" symbols="{{Auth::user()->stocksymbols == null ? "EXPD,JBHT,UPS,FDX,CHRW" : Auth::user()->stocksymbols}}"></stock-app>
-            <market-news class="dashboard-block secondary" ></market-news>     
-        </div>
-        <div class="col-md-6">
-            <power-grid class="dashboard-block primary"></power-grid>
-            <scfi-widget class="dashboard-block white" ></scfi-widget>
-            <new-members class="dashboard-block primary" ></new-members>
-            <latest-news class="dashboard-block secondary" ></latest-news>
-        </div>
-    </div>
+    </div>    
+
 </div>
 
 

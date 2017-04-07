@@ -57,6 +57,7 @@ class RegisterController extends Controller
             'state' => 'required',
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required',
+            'typeOther' => 'requiredIf:type,Other'
         ]);
 
         $validator->after(function($validator) use ($data)  {
@@ -65,7 +66,7 @@ class RegisterController extends Controller
                 $validator->errors()->add('recaptcha', 'reCaptcha failed verification');
             }
         });
-
+        
         return $validator;
     }
 
@@ -78,7 +79,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {        
         //Parse cargotypes
-        $options = ['perishable', 'hazardous', 'fragile', 'liquid'];
+        $options = ['perishable', 'hazardous', 'fragile', 'liquid', 'highvalue', 'shippersowned'];
         $cargotypes = [];
         foreach($options as $option) {
             if(isset($data[$option])) {
@@ -99,6 +100,8 @@ class RegisterController extends Controller
             'primary_commodity' => $data['commodity'],
             'cargo_types' => $cargotypes,
             'trial_ends_at' => \Carbon\Carbon::createFromDate(2017, 12, 31, 'Europe/London'),
+            'verification_token' => str_random(40),
+            'other_industry_type' => $data['typeOther']
             
         ]);        
         
@@ -107,6 +110,9 @@ class RegisterController extends Controller
         $privacy_settings = new \App\PrivacySettings();
         $privacy_settings->user_id = $user->id;
         $privacy_settings->save();
+
+        $user->notify(new \App\Notifications\EmailConfirmationRequired());
+        event(new \App\Events\NewRegistration($user));
 
         return $user;
     }
@@ -145,4 +151,6 @@ class RegisterController extends Controller
             return true;
         }
     }
+
+   
 }

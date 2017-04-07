@@ -34053,6 +34053,10 @@ md-tooltip.md-show {
   text-align: right;
 }
 
+.container-fluid.dashboard {
+  padding-top: 20px;
+}
+
 .dashboard .col-md-6, .dashboard .col-md-12 {
   padding: 0;
 }
@@ -34079,6 +34083,33 @@ md-tooltip.md-show {
 
 .dashboard h3 {
   margin-top: 1px;
+}
+
+.dashboard .embed-responsive {
+  margin-bottom: 20px;
+}
+
+.dashboard .nav-pills > li.active > a {
+  color: #545a5c;
+  border: 1px solid #20b6bd;
+}
+
+.dashboard .nav-pills > li > a {
+  color: #545a5c;
+  font-size: 1.2em;
+  border: 1px solid transparent;
+  border-radius: 0px;
+}
+
+.dashboard .nav-pills > li > a:hover {
+  color: #24CBD3;
+  color: #fff;
+  background-color: #1da1a7;
+  border: 1px solid #178489;
+}
+
+.dashboard .col-md-8 .dashboard-block:nth-child(1) {
+  margin-top: 0px;
 }
 
 #stockQuoteApp, #newsApp {
@@ -34400,6 +34431,10 @@ html, body, #app, #content {
 
 .software-providers img {
   max-width: 110px;
+}
+
+.btn-primary, .spanner .btn-primary {
+  color: #636b6f;
 }
 
 /*# sourceMappingURL=appnew.css.map */

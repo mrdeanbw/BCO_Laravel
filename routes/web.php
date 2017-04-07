@@ -29,9 +29,16 @@ Route::post('/contact-us', 'ContactController@store')->name('contact.store');
 // 	return view('auth.register-js');
 // });
 
+Route::get('/member/verify', 'Auth\VerifyEmailController@verify_email');
+Route::post('/member/verify/resend', 'Auth\VerifyEmailController@resend_verification');
+
 Auth::routes();
-Route::group(['middleware' => ['subscriber']], function() {
+Route::group(['middleware' => ['subscriber', 'emailverification']], function() {
 	Route::get('/members', 'DashboardController@index');
+	Route::get('/members/industry-news', 'DashboardController@industry_news');
+	Route::get('/members/stock-quotes', 'DashboardController@stock_quotes');
+	Route::get('/members/benchmarking', 'DashboardController@benchmarking
+	');
 
 	//CHATTER FORUM ROUTES
 	$chatter_url = Config::get('chatter.routes.home');
@@ -57,16 +64,17 @@ Route::group(['middleware' => ['subscriber']], function() {
 		Route::model('news', 'App\NewsItem');
 		Route::resource('news', 'NewsItemController');
 
-		Route::group(array('prefix' => 'directory', 'middleware' => ['auth']), function() {
+		Route::group(array('prefix' => 'directory', 'middleware' => ['auth', 'adminverification']), function() {
 			Route::get('/', 'DirectoryController@index');
 		});
 
-		Route::get('/rates', function() { return \View::make('rates.index');});
-		Route::post('/rates/ltl', 'RatesController@ltl');
-		Route::post('/rates/fcl', 'RatesController@fcl');
-		Route::post('/rates/parcel', 'RatesController@parcel');
-		Route::get('/rates/locations', 'RatesController@query_locations');
-
+		Route::group(array('prefix' => 'rates', 'middleware' => ['adminverification']), function() {
+			Route::get('/', function() { return \View::make('rates.index');});
+			Route::post('/ltl', 'RatesController@ltl');
+			Route::post('/fcl', 'RatesController@fcl');
+			Route::post('/parcel', 'RatesController@parcel');
+			Route::get('/locations', 'RatesController@query_locations');
+		});
 		Route::get('/software', function() {return view('software.index'); });
 	});
 
@@ -99,7 +107,7 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 	Route::get('/testmail', function() {
 		Auth::user()->notify(new \App\Notifications\TrialEnding(4));
 	});
-
+	
 	Route::get('invoice/{invoice}', function (Request $request, $invoiceId) {
     return Request::user()->downloadInvoice($invoiceId, [
         'vendor'  => 'BCO Power',
@@ -108,6 +116,18 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 	});
 });
 
+Route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admincp']], function() {
+	Route::get('/', function() { return 'AdminCP';});
+});
+
 //STRIPE
 Route::post('stripe/webhook', '\Laravel\Cashier\Http\Controllers\WebhookController@handleWebhook');
 
+
+
+
+
+
+Route::get('/test', function() {
+		event(new \App\Events\NewRegistration(Auth::user()));
+	});

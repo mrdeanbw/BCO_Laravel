@@ -23,6 +23,18 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        return view('dashboard.news');
+    }
+
+    public function industry_news() {
+        return view('dashboard.industrynews');
+    }
+
+    public function stock_quotes() {
+        return view('dashboard.stockquotes');
+    }
+
+    public function benchmarking() {
+        return view('dashboard.benchmarking');
     }
 }
