@@ -117,7 +117,7 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 });
 
 Route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admincp']], function() {
-	Route::get('/', function() { return 'AdminCP';});
+	Route::get('/', 'AdminCPController@index');
 });
 
 //STRIPE
