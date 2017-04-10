@@ -5,7 +5,11 @@
 
     <div class="container">
         <h3>User Management</h3>
-
+        @if (Session::has('message'))
+			<div class="panel-body">
+				<div class="alert alert-info">{{ Session::get('message') }}</div>
+			</div>
+		@endif
 
         <table class="table table-striped table-hover">
             <tbody>
@@ -15,7 +19,7 @@
                         @if(!$u->email_verified && !$u->is_admin)
                         <span class="label label-warning"><i class="fa fa-envelope" aria-hidden="true" tooltip="Email not verified" role="tooltip"></i> Unconfirmed</span>
                         @endif
-                        @if(!$u->email_verified && !$u->is_admin)
+                        @if(!$u->admin_verifier && !$u->is_admin)
                          <span class="label label-danger"><i class="fa fa-check-square-o" aria-hidden="true"></i> Unverified</span>
                         @endif
                         @if($u->is_admin) 
@@ -35,17 +39,19 @@
                         {{ $u->created_at->diffForHumans() }}
                     </td>
                     <td>
-                        @if(!$u->email_verified && !$u->is_admin)
-                        <a class="btn btn-success btn-sm" href="#">Verify</a>
+                        @if(!$u->admin_verifier && !$u->is_admin)
+                        <a class="btn btn-success btn-sm" href="{{ url('/admincp/u/toggle/' . $u->id) }}">Verify</a>
                         @elseif(!$u->is_admin)
-                        <a class="btn btn-danger btn-sm" href="#">Revoke Verification</a>
+                        <a class="btn btn-danger btn-sm" href="{{ url('/admincp/u/toggle/' . $u->id) }}">Revoke Verification</a>
                         @endif
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
-
+        <center>
+            {{ $users->links() }}
+        </center>
     </div>
 
 @endsection
