@@ -132,7 +132,7 @@ class RatesController extends Controller
 			'RequestType' => 'RATE',
 			'OrderNumber' => 'BCOPOWER',
 			'Source'=> 'MANUAL',
-			'ServiceCode'=> 'ARE_API.ARE.UPS.G',
+			'ServiceCode'=> $data['service'],
 			'ProfileId' => '9AF87637-34E3-49AA-A832-73FDD214456D',
 			'ClientID' => 'B4F6E4E4-7795-49FB-BE2D-FAA28E49F66C',
 

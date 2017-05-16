@@ -227,6 +227,12 @@
 									<md-option value="TPBILL">Third Party</md-option>
 								</md-select>
 							</md-input-container>
+							<md-input-container>
+								<label>Service</label>
+								<md-select name="serviceCode" ng-model="query.parcel.service" ng-required="ui.selectedTabIndex == 2">
+									<md-option ng-repeat="s in query.parcel.services" ng-value="s.code">[[ s.name ]]</md-option>									
+								</md-select>
+							</md-input-container>
 							<div>
 								<div layout="row" flex ng-repeat="pkg in query.parcel.packages">
 									<md-input-container class="md-block" flex>
@@ -318,7 +324,8 @@
 
 		<div class="results-panel md-whiteframe-2dp" ng-show="parcel_result != null" layout-padding>
 			<center>
-				<img src="/res/ups.png" style="max-width: 180px; padding: 10px;" />
+				<img ng-src="/res/carriers/[[parcel_result.carrier_code.carrier]].png" style="max-width: 180px; padding: 10px;" />
+				
 				<h3><strong>US$ [[ parcel_result.rate.total_price ]]</strong></h3>
 				<p>Your [[ parcel_result.rate.carrier ]] service rate from [[ parcel_result.rate.from ]] to [[ parcel_result.rate.to ]]</p>
 			</center>
