@@ -88,7 +88,7 @@
                         <li><a class="{{ Request::is('members/rates*') ? 'active' : ''}}" href="{{ url('/members/rates') }}">Shipping Rates</a></li>
                         <li class="hidden-xs"><p>|</p></li>
                         @endif
-                        <li><a class="{{ Request::is('members/software*') ? 'active' : ''}}" href="{{ url('/members/software') }}">Software</a></li>
+                        <li><a class="{{ Request::is('members/software*') ? 'active' : ''}}" href="{{ url('/members/software') }}">Partners</a></li>
                          @if(Auth::user()->admin_verifier)
                         <li class="hidden-xs"><p>|</p></li>
                         <li><a class="{{ Request::is('members/directory*') ? 'active' : ''}}" href="{{ url('/members/directory') }}">Directory</a></li>

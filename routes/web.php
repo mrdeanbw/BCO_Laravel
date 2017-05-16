@@ -33,12 +33,13 @@ Route::get('/member/verify', 'Auth\VerifyEmailController@verify_email');
 Route::post('/member/verify/resend', 'Auth\VerifyEmailController@resend_verification');
 
 Auth::routes();
-Route::group(['middleware' => ['subscriber', 'emailverification']], function() {
+Route::group(['middleware' => ['subscriber', 'emailverification', 'auth']], function() {
 	Route::get('/members', 'DashboardController@index');
 	Route::get('/members/industry-news', 'DashboardController@industry_news');
 	Route::get('/members/stock-quotes', 'DashboardController@stock_quotes');
-	Route::get('/members/benchmarking', 'DashboardController@benchmarking
-	');
+	Route::get('/members/benchmarking', 'DashboardController@benchmarking');
+	Route::get('/members/refer', 'DashboardController@refer');
+	Route::post('/members/refer', 'DashboardController@refer_submit');
 
 	//CHATTER FORUM ROUTES
 	$chatter_url = Config::get('chatter.routes.home');

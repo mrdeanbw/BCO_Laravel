@@ -16,6 +16,9 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\NewRegistration' => [
             'App\Listeners\NewRegistrationListener',
         ],
+        'App\Events\NewReferral' => [ 
+            'App\Listeners\NewReferralListener',
+        ]
     ];
 
     /**
