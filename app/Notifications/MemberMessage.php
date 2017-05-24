@@ -73,7 +73,7 @@ class MemberMessage extends Notification
             'from_name' => $this->from->name.' at '.$this->from->organization,
             'subject' => $this->subject,
             'body' => $this->body,
-            'url' => '/users/compose/'.$this->from->id.'/'.$notifiable->id
+            'url' => '/users/compose/'.$notifiable->id.'/'.$this->from->id
         ];
     }
 }
