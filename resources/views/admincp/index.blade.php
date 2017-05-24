@@ -36,6 +36,13 @@
                         {{ $u->organization }}
                     </td>
                     <td>
+                    <select>
+                    <option>Exporter</option>
+                    <option value="importer">Importer</option>
+                    </select>
+                        
+                    </td>
+                    <td>
                         {{ $u->created_at->diffForHumans() }}
                     </td>
                     <td>

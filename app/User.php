@@ -13,13 +13,15 @@ class User extends Authenticatable
     use Billable;
     use HasApiTokens;
 
+    protected $appends = ['distance'];
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'organization', 'city', 'country', 'state', 'industry_type', 'primary_commodity', 'cargo_types', 'trial_ends_at', 'other_industry_type', 'email_verified', 'verification_token', 'admin_verifier'
+        'name', 'email', 'password', 'organization', 'city', 'country', 'state', 'industry_type', 'primary_commodity', 'cargo_types', 'trial_ends_at', 'other_industry_type', 'email_verified', 'verification_token', 'admin_verifier', 'lat', 'lng'
     ];
 
     /**
@@ -46,6 +48,12 @@ class User extends Authenticatable
     public function trial_days_left() {
         $today = \Carbon\Carbon::today();
         return $today->diffInDays($this->trial_ends_at);
+    }
+
+    public function getDistanceAttribute() {
+        $mylat = \Auth::user()->lat;
+        $mylng = \Auth::user()->lng;
+        return sqrt(pow(69.1 * ($this->lat - $mylat),2) + pow(69.1 * ($mylng - $this->lng) * cos($this->lat / 57.3), 2));
     }
 
 }

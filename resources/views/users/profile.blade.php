@@ -15,12 +15,15 @@
 			
 			<li role="presentation" class="{{ Request::is('users/privacy/*') ? 'active' : '' }}"><a href="{{ url('users/privacy/'.$user->id) }}">Privacy</a></li>
 
-			<li role="presentation" class="{{ Request::is('users/inbox/*') ? 'active' : '' }}"><a href="{{ url('users/inbox/'.$user->id) }}">Inbox
+			<li role="presentation" class="{{ Request::is('users/inbox/'.\Auth::user()->id) ? 'active' : '' }}"><a href="{{ url('users/inbox/'.$user->id) }}">Inbox
 				<?php $noti_count= count(Auth::user()->unreadNotifications);  ?>
 				@if($noti_count > 0) 
 				<span class="badge">{{ $noti_count }}</span>
 				@endif
 			</a></li>
+
+			<li role="presentation" class="{{ Request::is('users/compose/*') ? 'active' : 'hidden'}}"><a href="#">New Message</a></li>
+			<li role="presentation" class="{{ Request::is('users/inbox/*/*') ? 'active' : 'hidden'}}"><a href="#">Message</a></li>
 
 			
 		</ul>

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Request;
 use App\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Requests;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
 
@@ -95,20 +96,21 @@ class UserController extends Controller
     }
 
     public function inbox($id) {
-        $user = User::find($id);
+        $user = \Auth::user();
         $user->load('notifications');
         return \View::make('users.inbox')->withUser($user);
         
     }
 
     public function message($user_id, $notification_id) {
-        $user = User::find($user_id);
-        $notification = \App\Notification::find($notification_id);
+        $user = \Auth::user();
+        $notification = \App\Notification::where('id', $notification_id)->where('notifiable_id', $user->id)->firstOrFail();
+        
         if(null === $notification->read_at) {
             $notification->read_at = Carbon::now();
             $notification->save();
         }
-        return \View::make('users.message')->withUser($user)->withNotification($notification);
+        return \View::make('users.message')->withUser($user)->withNotification($notification)->withData(json_decode($notification->data))->withReply($notification_id);
     }
 
     public function update_password(Request $request, $id) {
@@ -128,5 +130,27 @@ class UserController extends Controller
             
             return Redirect::route('users.edit', [$id]);
         }
+    }
+
+    public function compose(Request $request, $user_id, $to_id) {
+
+        $user = \Auth::user();
+        $to = \App\User::findOrFail($to_id);
+        if(null == Request::get('reply')) {
+            return \View::make('users.compose')->withUser($user)->withTo($to)->withInput(['subject' => '', 'body'=>'']);
+        } else {
+            
+            $notification = \App\Notification::where('id', Request::get('reply'))->firstOrFail();
+            $notification = json_decode($notification->data);
+            
+            return \View::make('users.compose')->withUser($user)->withTo($to)->withInput(['subject' => (substr( $notification->subject, 0, 2 ) === "RE" ? '' : 'RE: ').$notification->subject, 'body' => '<br /><br />[<b>'.$notification->from_name.'</b>]:<br />' .$notification->body ]);
+        }
+    }
+
+    public function send_message(Request $request) {
+        
+        $to_user = \App\User::findOrFail(Request::get('to_id'));
+        $to_user->notify(new \App\Notifications\MemberMessage(\Auth::user(), Request::get('subject'), Request::get('body')));
+        return Redirect::route('inbox', [\Auth::user()->id]);
     }
 }

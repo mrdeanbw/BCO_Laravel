@@ -296,7 +296,7 @@
 							<span>[[result.transit_days]] days</span>
 						</div>
 						<span flex></span>
-						<span flex="50">[[result.description]]</span> 
+						<span flex="50"><div>[[result.description]]</div><div>ExFreight</div></span> 
 						<span class="subtle" data-toggle="tooltip" title="[[transformExKey(result.door_service)]]" style="font-size: 1.5em">
 							<span ng-if="result.door_service == 'door_to_port'">
 								<i class="fa fa-home" aria-hidden="true"></i> 

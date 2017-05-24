@@ -83,8 +83,10 @@ Route::group(['middleware' => ['subscriber', 'emailverification', 'auth']], func
 	Route::model('users', 'App\User');
 	Route::resource('users', 'UserController', ['except' => ['index', 'show', 'create', 'store', 'destroy']]);
 	Route::group(array('prefix' => 'users', 'middleware' => ['auth']), function() {
-		Route::get('/inbox/{user}', 'UserController@inbox');
+		Route::get('/inbox/{user}', 'UserController@inbox')->name('inbox');
 		Route::get('/inbox/{user}/{msg}', 'UserController@message');
+		Route::get('/compose/{user}/{to}', 'UserController@compose');
+		Route::post('/compose/send', 'UserController@send_message')->name('message.send');
 		Route::put('/update_pwd/{user}', 'UserController@update_password');
 		Route::get('/privacy/{user}', 'PrivacyController@show')->name('privacy.show');
 		Route::put('/privacy/{user}', 'PrivacyController@update')->name('privacy.update');

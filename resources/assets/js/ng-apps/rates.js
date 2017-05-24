@@ -919,11 +919,12 @@ ratesApp.controller('indexCtrl', ['$http', '$scope', '$log', function($http, $sc
 		var query = $scope.query;
 		$scope.warning = '';
 		
-		if(!query.origin.us_domestic || !query.destination.us_domestic) {
-			$scope.warning = 'Currently only US Domestic locations are supported for parcel rates, please select a different origin / destination.';
-			$scope.ratesForm.$busy = false;
-			return ;
-		}
+		//Remvoe this because we now have more services.
+		// if(!query.origin.us_domestic || !query.destination.us_domestic) {
+		// 	$scope.warning = 'Currently only US Domestic locations are supported for parcel rates, please select a different origin / destination.';
+		// 	$scope.ratesForm.$busy = false;
+		// 	return ;
+		// }
 
 		var payload = {
 			from: query.origin,

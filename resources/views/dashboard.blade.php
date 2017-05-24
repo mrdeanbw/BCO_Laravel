@@ -27,7 +27,7 @@
                 <li role="presentation" class="{{ Request::is('members/industry-news') ? 'active' : ''}}"><a href="{{ url('/members/industry-news') }}"><i class="fa fa-fw fa-newspaper-o" aria-hidden="true"></i> Industry News</a></li>
                 <li role="presentation" class="{{ Request::is('members/stock-quotes') ? 'active' : ''}}"><a href="{{ url('/members/stock-quotes') }}"><i class="fa fa-fw fa-usd" aria-hidden="true"></i> Stock Quotes</a></li>
                 <li role="presentation" class="{{ Request::is('members/benchmarking') ? 'active' : ''}}"><a href="{{ url('/members/benchmarking') }}"><i class="fa fa-fw fa-line-chart" aria-hidden="true"></i> Benchmarking</a></li>
-                <li role="presentation"><a href="#"><i class="fa fa-fw fa-calculator" aria-hidden="true"></i> Duties & Taxes</a></li>
+                <!-- <li role="presentation"><a href="#"><i class="fa fa-fw fa-calculator" aria-hidden="true"></i> Duties & Taxes</a></li> -->
                 <li role="presentation" class="{{ Request::is('members/refer') ? 'active': ''}}"><a href="{{ url('/members/refer') }}"><i class="fa fa-fw fa-retweet" aria-hidden="true"></i> Refer a Colleague</a></li>                
             </ul>
         </div>

@@ -48,13 +48,13 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        
         $validator = Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'organization' => 'required|max:255',
             'city' => 'required|max:100',
-            'country' => 'required|max:100',
-            'state' => 'required',
+            'country' => 'required|max:100',            
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required',
             'typeOther' => 'requiredIf:type,Other'
@@ -87,7 +87,7 @@ class RegisterController extends Controller
             }    
         }
         $cargotypes = implode(', ', $cargotypes);
-
+        
         $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -95,6 +95,8 @@ class RegisterController extends Controller
             'city' => $data['city'],
             'country' => $data['country'],
             'state' => isset($data['state']) ? $data['state'] : null,            
+            'lat' => isset($data['lat']) ? $data['lat'] : null,
+            'lng' => isset($data['lng']) ? $data['lng'] : null,
             'password' => bcrypt($data['password']),
             'industry_type' => $data['type'],
             'primary_commodity' => $data['commodity'],

@@ -114,18 +114,25 @@
 			{
 				var data  = {};
 				var place = this.autocomplete.getPlace();				
-				if (place.address_components !== undefined) {
 
+				if(place.geometry !== undefined && place.geometry.location !== undefined) {
+					data['lat'] = place.geometry.location.lat();
+					data['lng'] = place.geometry.location.lng();
+				}
+
+				if (place.address_components !== undefined) {
+					
 					for (var i = 0; i < place.address_components.length; i++) {
 
 						var input = place.address_components[i].types[0];
 						if (this.inputs[input]) {
-
+							
 							data[input] = place.address_components[i][this.inputs[input]];
 						}
 					}
 
 					data = JSON.stringify(data);
+					console.log(data)
 					Store.commit('setAddress', JSON.parse(data));
 				}
 			},
