@@ -108,7 +108,76 @@
                         </div>
                     </div>
 
-                    <hr>
+                    <hr></hr>
+
+                    <h3>Credit Check Authorization</h3>
+                    <p>BCO Power offers freight booking facilities through selected vendors, those vendors may offer you credit terms provided you authorize them to run a credit check on your company. You do not need to opt-in and will still be able to book, however you will be given prepaid payment terms.</p>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Credit check</label>
+                        <div class="col-md-8">                                                                
+                            <div class="checkbox">
+                                <label>
+                                    {!! Form::checkbox('do_vendor_cc', 'do_vendor_cc', old('do_vendor_cc'), ['id'=> 'do_vendor_cc']) !!} I authorize BCO Power and its vendors to run a credit check (more information will be requested.)
+                                </label>
+                            </div>
+                            VendorCC: {{ old('do_vendor_cc')}}
+                        </div>
+                    </div>
+                    <div id="credit_check_opt">
+                    <div class="form-group{{ $errors->has('business_legal_name') ? ' has-error' : '' }}">
+                        <label for="business_legal_name" class="col-md-4 control-label">Business Legal Name</label>
+
+                        <div class="col-md-8">
+                            <input id="business_legal_name" type="text" class="form-control" name="business_legal_name" value="{{ old('business_legal_name') }}">
+
+                            @if ($errors->has('business_legal_name'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('business_legal_name') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('street') ? ' has-error' : '' }}">
+                        <label for="street" class="col-md-4 control-label">Address (Street)</label>
+
+                        <div class="col-md-8">
+                            <input id="street" type="text" class="form-control" name="street" value="{{ old('street') }}">
+
+                            @if ($errors->has('street'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('street') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('postal_code') ? ' has-error' : '' }}">
+                        <label for="postal_code" class="col-md-4 control-label">Zip / Postal Code</label>
+
+                        <div class="col-md-8">
+                            <input id="postal_code" type="text" class="form-control" name="postal_code" value="{{ old('postal_code') }}">
+
+                            @if ($errors->has('postal_code'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('postal_code') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-group{{ $errors->has('tax_id') ? ' has-error' : '' }}">
+                        <label for="tax_id" class="col-md-4 control-label">Tax ID / VAT #</label>
+
+                        <div class="col-md-8">
+                            <input id="tax_id" type="text" class="form-control" name="tax_id" value="{{ old('tax_id') }}">
+
+                            @if ($errors->has('tax_id'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('tax_id') }}</strong>
+                            </span>
+                            @endif
+                        </div>
+                    </div>
+                    </div>
+                    <hr></hr>
 
                     <h3>Please help us to get to know your business</h3>
 
@@ -255,6 +324,23 @@
 @endsection
 
 @section('js')
+<script>window.doVendorCC = <?php echo json_encode(old('do_vendor_cc')!== null); ?></script>
+<script>
+    
+    $(document).ready(function() {
+        if(!window.doVendorCC) {
+            $('#credit_check_opt').addClass('hidden');
+        }
+        $('#do_vendor_cc').change(function() {
+            if($(this).is(":checked")) {
+                $('#credit_check_opt').removeClass('hidden');
+            } else {
+                $('#credit_check_opt').addClass('hidden');
+            }
+        });
+    });
+</script>
+
 <script src="/js/pwstrength-bootstrap.min.js" type="text/javascript"></script>
 <script src='https://www.google.com/recaptcha/api.js'></script>
 <script>

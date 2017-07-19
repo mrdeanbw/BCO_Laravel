@@ -83,7 +83,8 @@ class RatesController extends Controller
 			$response = $client->post('http://exfreight-sandbox.flipstone.com/api/v1/rating', [
 				'json' => $json,
 				'headers' => [
-				'Authorization' => 'token f64e9f0fb0a1f324']
+					'Authorization' => 'token f64e9f0fb0a1f324'
+					]
 				]);
 		} catch (RequestException $e) {
 			$resp = $e->getResponse();

@@ -48,7 +48,7 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        
+        $data['do_vendor_cc'] = $data['do_vendor_cc'] == 'do_vendor_cc';
         $validator = Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -57,7 +57,11 @@ class RegisterController extends Controller
             'country' => 'required|max:100',            
             'password' => 'required|min:6|confirmed',
             'g-recaptcha-response' => 'required',
-            'typeOther' => 'requiredIf:type,Other'
+            'typeOther' => 'requiredIf:type,Other',
+            'business_legal_name' => 'requiredIf:do_vendor_cc,true',
+            'street' => 'requiredIf:do_vendor_cc,true',
+            'postal_code' => 'requiredIf:do_vendor_cc,true',
+            'tax_id' => 'requiredIf:do_vendor_cc,true',
         ]);
 
         $validator->after(function($validator) use ($data)  {
@@ -103,7 +107,12 @@ class RegisterController extends Controller
             'cargo_types' => $cargotypes,
             'trial_ends_at' => \Carbon\Carbon::createFromDate(2017, 12, 31, 'Europe/London'),
             'verification_token' => str_random(40),
-            'other_industry_type' => $data['typeOther']
+            'other_industry_type' => $data['typeOther'],
+            'do_vendor_cc' => isset($data['do_vendor_cc']) ? 1 : 0,
+            'business_legal_name' => isset($data['business_legal_name']) ? $data['business_legal_name'] : null,
+            'street' => isset($data['street']) ? $data['street'] : null,
+            'postal_code' => isset($data['postal_code']) ? $data['postal_code'] : null,
+            'tax_id' => isset($data['tax_id']) ? $data['tax_id'] : null,
             
         ]);        
         
