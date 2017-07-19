@@ -23,5 +23,6 @@ elixir((mix) => {
     mix.copy('resources/assets/summernote/', 'public/summernote');
     mix.copy('node_modules/pwstrength-bootstrap/dist/pwstrength-bootstrap.min.js', 'public/js');
     mix.copy('resources/assets/js/home.js', 'public/js');
+    mix.copy('resources/assets/templates', 'public/templates');
 
 });

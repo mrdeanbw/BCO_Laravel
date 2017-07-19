@@ -104,6 +104,25 @@ html, body, #app, #content {
 
 /* Info pages */
 
+.termspage li {
+	margin-bottom: 12px;
+}
+
+.termspage h3 {
+	font-weight: bold;	
+}
+
+.termspage h4 {
+	font-weight: bold;
+	margin: 45px 0 10px 0;
+	color: $brand-primary;
+}
+
+.termspage p {
+	text-align: justify;
+}
+
+
 .info-page h3 {
 	font-weight: bold;	
 }
@@ -276,6 +295,19 @@ html, body, #app, #content {
 
 .btn-primary {
 	color: #636b6f;
+}
+
+
+
+#footer {
+    list-style-type: none;
+    margin: 0;
+    padding: 5px;
+} 
+
+#footer li {
+	display:inline;
+	padding: 0 10px;
 }
 
 

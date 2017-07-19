@@ -7,12 +7,16 @@
 	}
 </style>
 
-<md-content layout-fill ng-app="ratesApp" id="ratesapp" ng-cloak>
-	<div flex-gt-sm="60" flex-offset-gt-sm="20" ng-controller="indexCtrl">
+<div layout-fill ng-app="ratesApp" id="ratesapp" ng-cloak>
+	<div flex-gt-sm="80" flex-offset-gt-sm="10" ng-controller="indexCtrl">
 
 		<form name="ratesForm" id="ratesForm"  novalidate ng-submit="queryRates()" >
 			<div layout="column" class="md-whiteframe-2dp">
-				<h3 layout-margin><img src="/res/logo-2.png" /> Shipping Rates</h3>
+				<div layout="row" flex>
+					<h3 layout-margin><img src="/res/logo-2.png" /> Shipping Rates</h3>
+					<span flex></span>
+					<md-button class="md-raised" layout-padding ng-href="/members">Return to Dashboard</md-button>
+				</div>
 				<div layout="row" layout-align="start center" layout-margin>
 							
 					<md-autocomplete
@@ -230,7 +234,7 @@
 							<md-input-container>
 								<label>Service</label>
 								<md-select name="serviceCode" ng-model="query.parcel.service" ng-required="ui.selectedTabIndex == 2">
-									<md-option ng-repeat="s in query.parcel.services" ng-value="s.code">[[ s.name ]]</md-option>									
+									<md-option ng-repeat="s in query.parcel.services" ng-value="s">[[ s.name ]]</md-option>									
 								</md-select>
 							</md-input-container>
 							<div>
@@ -284,19 +288,23 @@
 
 		<div class="results-panel md-whiteframe-2dp" ng-show="results.length > 0">
 			<md-list>
-				<md-list-item ng-repeat="result in results | orderBy: 'total_charge_cents'">
+				<md-list-item ng-repeat="result in results | orderBy: 'total_charge_cents'" ng-click="bookFcl($event, result)" ng-mouseenter="result.hover=true" ng-mouseleave="result.hover=false">
+				
 					<div layout="row" flex layout-align="start center" layout-padding>
-						<span flex="5" class="primary" data-toggle="tooltip" title="[[ transformExKey(result.type) ]] ">
+						<span class="primary" data-toggle="tooltip" title="[[ transformExKey(result.type) ]] ">
 							<i class="fa fa-plane fa-2x"  ng-if="result.type.substring(0,3) == 'air'"></i>
-							<i class="fa fa-ship  fa-2x" ng-if="result.type == 'ocean_standard' || result.type=='fcl'"></i>
-							<i class="fa fa-truck  fa-2x" ng-if="result.type == 'ftl' || result.type=='truck'"></i>
+							<i class="fa fa-ship fa-2x" ng-if="result.type == 'ocean_standard' || result.type=='fcl'"></i>
+							<i class="fa fa-truck fa-2x" ng-if="result.type == 'ftl' || result.type=='truck'"></i>
 						</span>
 						<div layout="column" layout-align="center center">
-							<span style="font-size: 1.3em;"><strong>$[[result.total_charge_cents / 100 | number : 2]]</strong></span>
+							<span style="font-size: 1.3em;"><strong>$[[ result.total_charge_cents / 100 | number : 2]]</strong></span>
 							<span>[[result.transit_days]] days</span>
 						</div>
 						<span flex></span>
-						<span flex="50"><div>[[result.description]]</div><div>ExFreight</div></span> 
+						<span ng-show="result.hover" style="width: 96px;"></span>
+						<span><div>[[result.description]]</div><div>ExFreight</div></span> 
+						<span flex></span>
+						
 						<span class="subtle" data-toggle="tooltip" title="[[transformExKey(result.door_service)]]" style="font-size: 1.5em">
 							<span ng-if="result.door_service == 'door_to_port'">
 								<i class="fa fa-home" aria-hidden="true"></i> 
@@ -316,23 +324,32 @@
 								<i class="fa fa-home" aria-hidden="true"></i> 							
 							</span>
 						</span>
+						<md-button ng-show="result.hover" class="md-secondary md-primary md-raised" ng-click="bookFcl($event, result)">Book</md-button>
+
 					</div>
 					<md-divider></md-divider>
 				</md-list-item>
 			</md-list>
 		</div>
 
-		<div class="results-panel md-whiteframe-2dp" ng-show="parcel_result != null" layout-padding>
-			<center>
-				<img ng-src="/res/carriers/[[parcel_result.carrier_code.carrier]].png" style="max-width: 180px; padding: 10px;" />
-				
-				<h3><strong>US$ [[ parcel_result.rate.total_price ]]</strong></h3>
-				<p>Your [[ parcel_result.rate.carrier ]] service rate from [[ parcel_result.rate.from ]] to [[ parcel_result.rate.to ]]</p>
-			</center>
+		<div class="results-panel md-whiteframe-2dp" ng-show="parcel_results != null && parcel_results != []" layout-padding>
+			<md-list>
+				<md-list-item ng-repeat="r in parcel_results | orderBy: 'total_price'" ng-click="bookFcl($event, r)" ng-mouseenter="r.hover=true" ng-mouseleave="r.hover=false">
+					<div layout="row" flex layout-align="start center" layout-padding>
+						<span flex>
+							[[ r.carrier ]]
+						</span>
+						
+						<span style="font-size: 1.3em;"><strong>$[[ r.total_price | number : 2]]</strong></span>
+						
+						<md-button ng-show="r.hover" class="md-secondary md-primary md-raised" ng-click="bookFcl($event, r)">Book</md-button>
+					</div>
+				</md-list-item>
+			</md-list>
 			
 		</div>
 	</div>
-</md-content>
+</div>
 
 
 

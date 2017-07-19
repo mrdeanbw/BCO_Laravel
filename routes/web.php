@@ -24,6 +24,8 @@ Route::get('/who-we-are', function() { return view('public.who-we-are'); });
 Route::get('/non-profit-status', function() { return view('public.non-profit-status'); });
 Route::get('/contact-us', function() { return view('public.contact'); });
 Route::post('/contact-us', 'ContactController@store')->name('contact.store');
+Route::get('/terms', function() { return view('public.terms'); })->name('terms');
+Route::get('/privacy', function() { return view('public.privacy'); })->name('privacy');
 
 // Route::get('register-js', function() {
 // 	return view('auth.register-js');

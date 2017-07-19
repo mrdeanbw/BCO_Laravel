@@ -1,0 +1,280 @@
+<style>
+    md-pagination-wrapper {
+        width: auto !important;
+    }
+</style>
+<md-dialog aria-label="Book [[ rate.description ]]">
+    <form style="margin: 0;">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Book [[ rate.description ]]</h2>
+        </div>
+    </md-toolbar>
+    <md-dialog-content style="min-width: 800px;max-height:810px; ">
+        <md-tabs md-border-bottom md-dynamic-height>
+            <md-tab label="Shipper">
+                <md-content class="md-padding">
+                    <span class="md-headline">Shipper</span>
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="booking.shipper.address.name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Street + Number</label>
+                        <input ng-model="booking.shipper.address.line_1"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Line 2</label>
+                        <input ng-model="booking.shipper.address.line_2"/>
+                    </md-input-container>
+                    <div layout="row">
+                    <md-input-container class="md-block" flex>
+                        <label>Zip / Postal</label>
+                        <input ng-model="booking.shipper.address.postal"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>City</label>
+                        <input ng-model="booking.shipper.address.city"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>State</label>
+                        <input ng-model="booking.shipper.address.state"/>
+                    </md-input-container>
+                    </div>
+                    <md-input-container class="md-block">
+                        <label>Country</label>
+                        <input ng-model="booking.shipper.address.country"/>
+                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container class="md-block" flex>
+                            <label>Contact Name</label>
+                            <input ng-model="booking.shipper.contact.name"/>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex>
+                            <label>Email</label>
+                            <input ng-model="booking.shipper.contact.email"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="md-block" flex>
+                            <label>Phone</label>
+                            <input ng-model="booking.shipper.contact.phone"/>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex>
+                            <label>Fax</label>
+                            <input ng-model="booking.shipper.contact.fax"/>
+                        </md-input-container>
+                    </div>
+                    <md-input-container class="md-block">
+                        <label>EIN</label>
+                        <input ng-model="booking.shipper.ein"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Instructions</label>
+                        <input ng-model="booking.shipper.instructions"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>P.O. Number</label>
+                        <input ng-model="booking.shipper.po_number" />
+                    </md-input-container>
+                    <div layout="row">
+                        <md-input-container class="md-block">
+                            <label>Hours Open</label>
+                            <input ng-model="booking.shipper.hours.open_time"/>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Close</label>
+                            <input ng-model="booking.shipper.hours.close_time"/>
+                        </md-input-container>
+                    </div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Consignee">
+                <md-content class="md-padding">
+                    <span class="md-headline">Consignee</span>
+                    <md-input-container class="md-block">
+                        <label>Name</label>
+                        <input ng-model="booking.consignee.address.name"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Street + Number</label>
+                        <input ng-model="booking.consignee.address.line_1"/>
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Line 2</label>
+                        <input ng-model="booking.consignee.address.line_2"/>
+                    </md-input-container>
+                    <div layout="row">
+                    <md-input-container class="md-block" flex>
+                        <label>Zip / Postal</label>
+                        <input ng-model="booking.consignee.address.postal"/>
+                    </md-input-container>
+                    <md-input-container class="md-block" flex>
+                        <label>City</label>
+                        <input ng-model="booking.consignee.address.city"/>
+                    </md-input-container>
+                    
+                    <md-input-container class="md-block" flex>
+                        <label>State</label>
+                        <input ng-model="booking.consignee.address.state"/>
+                    </md-input-container>
+                    </div>
+                    <md-input-container class="md-block">
+                        <label>Country</label>
+                        <input ng-model="booking.consignee.address.country"/>
+                    </md-input-container>
+
+                    <div layout="row">
+                        <md-input-container class="md-block" flex>
+                            <label>Contact Name</label>
+                            <input ng-model="booking.consignee.contact.name"/>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex>
+                            <label>Email</label>
+                            <input ng-model="booking.consignee.contact.email"/>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container class="md-block" flex>
+                            <label>Phone</label>
+                            <input ng-model="booking.consignee.contact.phone"/>
+                        </md-input-container>
+                        <md-input-container class="md-block" flex>
+                            <label>Fax</label>
+                            <input ng-model="booking.consignee.contact.fax"/>
+                        </md-input-container>
+                    </div>
+                    
+                    <div layout="row">
+                        <md-input-container class="md-block">
+                            <label>Hours Open</label>
+                            <input ng-model="booking.consignee.hours.open_time"/>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Close</label>
+                            <input ng-model="booking.consignee.hours.close_time"/>
+                        </md-input-container>
+                    </div>
+                    <md-input-container class="md-block">
+                        <label>Instructions</label>
+                        <input ng-model="booking.consignee.instructions"/>
+                    </md-input-container>
+                    
+                </md-content>
+            </md-tab>
+            <md-tab label="Commodities">
+                <md-content class="md-padding">
+                <span class="md-headline">Commodities</span>
+                <div layout="column" ng-repeat="commodity in booking.commodities">
+                    <div layout="row">
+                <md-input-container class="md-block" flex>
+                    <label>Description</label>
+                    <input ng-model="commodity.description"/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>ECCN</label>
+                    <input ng-model="commodity.eccn"/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>License Type</label>
+                    <input ng-model="commodity.license_type"/>
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Schedule B</label>
+                    <input ng-model="commodity.schedule_b" />
+                </md-input-container>
+                    </div>
+                    <div layout="row">
+                <md-input-container class="md-block">
+                    <label>Quantity</label>
+                    <input ng-model="commodity.quantity" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Value</label>
+                    <input ng-model="commodity.value" />
+                </md-input-container>
+                <md-input-container class="md-block" flex>
+                    <label>Weight</label>
+                    <input ng-model="commodity.weight.value" />
+                </md-input-container>
+                <md-input-container class="md-block">
+                    <label>Unit</label>
+                    <input ng-model="commodity.weight.unit" />
+                </md-input-container>
+                    </div>
+                </div>
+            
+                </md-content>
+            </md-tab>
+            <md-tab label="Instructions">
+                <md-content class="md-padding">
+                    <span class="md-headline">Instructions</span>
+                    <md-input-container class="md-block">
+                        <label>Ship Day</label>
+                        <input ng-model="booking.ship_day" />
+                    </md-input-container>
+                    <md-input-container class="md-block">
+                        <label>Special Instructions</label>
+                         <textarea ng-model="booking.special_instructions" md-maxlength="150" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                </md-content>
+            </md-tab>
+            <md-tab label="Verify &amp; Send">
+                <md-content layout-padding>
+                    <div layout="row">
+                        <div layout="column" flex>
+                            <div class="md-subhead">Shipper</div>
+                            <div>[[ booking.shipper.address.name]]</div>
+                            <div>[[ booking.shipper.address.line_1]]</div>
+                            <div>[[ booking.shipper.address.line_2]]</div>
+                            <div>[[ booking.shipper.address.postal]] [[ booking.shipper.address.city]] [[ booking.shipper.address.state]]</div>
+                            <div>[[ booking.shipper.address.country ]]</div>
+                            <div>Contact: [[ booking.shipper.contact.name]] | Email: [[ booking.shipper.contact.email ]]</div>
+                            <div>Phone: [[ booking.shipper.contact.phone]] | Fax: [[ booking.shipper.contact.fax ]]</div>
+                            <div>EIN: [[ booking.shipper.ein ]] | PO Number: [[ booking.shipper.po_number ]]</div>
+                            <div>Instructions: [[ booking.shipper.instructions ]]</div>
+                            <div>Open from [[ booking.shipper.hours.open_time ]] to [[ booking.shipper.hours.close_time ]]</div>
+                        </div>
+                        <div layout="column" flex>
+                            <div class="md-subhead">Consignee</div>
+                            <div>[[ booking.consignee.address.name]]</div>
+                            <div>[[ booking.consignee.address.line_1]]</div>
+                            <div>[[ booking.consignee.address.line_2]]</div>
+                            <div>[[ booking.consignee.address.postal]] [[ booking.consignee.address.city]] [[ booking.consignee.address.state]]</div>
+                            <div>[[ booking.consignee.address.country ]]</div>
+                            <div>Contact: [[ booking.consignee.contact.name]] | Email: [[ booking.consignee.contact.email ]]</div>
+                            <div>Phone: [[ booking.consignee.contact.phone]] | Fax: [[ booking.consignee.contact.fax ]]</div>
+                            <div>Instructions: [[ booking.consignee.instructions ]]</div>
+                            <div>Open from [[ booking.consignee.hours.open_time ]] to [[ booking.consignee.hours.close_time ]]</div>
+                        </div>
+                    </div>
+                    <md-divider></md-divider>
+                    <div layout="column">
+                        <div class="md-subhead">Commodities</div>
+                        <div ng-repeat="c in booking.commodities" layout="row" flex>
+                            <span flex>[[ c.description ]]</span>
+                            <span flex>[[ c.eccn ]] </span>
+                            <span flex>[[ c.license_type ]]</span> 
+                            <span flex>[[ c.schedule_b ]] </span>
+                            <span flex>[[ c.quantity ]] </span>
+                            <span flex>[[ c.value ]] </span>
+                            <span flex>[[ c.weight.value ]] [[ c.weight.unit ]]</span>
+                        </div>
+                    </div>
+                    <div layout="column">
+                        <div class="md-subhead">Instructions</div>
+                        <div>Ship Day: [[ booking.ship_day ]]</div>
+                        <div>Special Instructions: [[ booking.special_instructions ]]</div>
+                    </div>
+                    <div layout="column">
+                        <md-checkbox name="tos" ng-model="project.tos" required>
+                            I accept the terms of service.
+                        </md-checkbox>
+                        <md-button>Book</md-button>
+                    </div>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-dialog-content>
+    </form>
+</md-dialog>

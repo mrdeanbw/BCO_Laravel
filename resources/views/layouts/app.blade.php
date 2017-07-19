@@ -51,6 +51,7 @@
 </head>
 <body>
 <div id="app">
+    @if(!Request::is('members/rates'))
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 
@@ -152,11 +153,23 @@
 
 		</div>
 	</nav>
-
-	<div id="content">
+    <div id="content">
 		@yield('content')
+        <div class="container">
+            <ul id="footer">
+            <li><a href="/">&copy; BCO Power 2017</a></li>
+            <li><a href="/terms">Terms and Conditions</a></li>
+            <li><a href="/privacy">Privacy Policy</a></li>
+            <li><a href="qwyk.io">Powered by Qwyk.IO</a></li>
+            </ul>
+        </div>
 	</div>
+    @else
+        @yield('content')
+    @endif
+	
 </div>
+
 	<!-- Scripts -->
     <script src="/js/app.js"></script>
     @yield('js')
