@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\NewReferral' => [ 
             'App\Listeners\NewReferralListener',
+        ],
+        'App\Events\UserAdminVerified' => [
+            'App\Listeners\UserAdminVerifiedListener',
         ]
     ];
 

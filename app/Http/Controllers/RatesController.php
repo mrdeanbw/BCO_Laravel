@@ -78,12 +78,13 @@ class RatesController extends Controller
 
 	private function query_exfreight($json) {
 		$client = new Client;
-
+		$token = isset(\Auth::user()->exf_apitoken) && \Auth::user()->exf_apitoken != '' ? \Auth::user()->exf_apitoken : 'f64e9f0fb0a1f324';
+		
 		try {
 			$response = $client->post('http://exfreight-sandbox.flipstone.com/api/v1/rating', [
 				'json' => $json,
 				'headers' => [
-					'Authorization' => 'token f64e9f0fb0a1f324'
+					'Authorization' => 'token '.$token
 					]
 				]);
 		} catch (RequestException $e) {
@@ -184,9 +185,9 @@ class RatesController extends Controller
 
 	private function transform_exfreight_fcl($data) {
 		$date = new \Carbon\Carbon($data['ship_day']);
-				
+		$username = isset(\Auth::user()->exf_username) && \Auth::user()->exf_username != '' ? \Auth::user()->exf_username : 'mmotsick@hotmail.com';
 		$json = [
-			'username' => 'mmotsick@hotmail.com',
+			'username' => $username,
 			'pickup' => $data['pickup'],
 			'delivery' => $data['delivery'],
 			'ship_day' => $date->toDateString(),

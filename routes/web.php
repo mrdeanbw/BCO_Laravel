@@ -124,6 +124,8 @@ Route::group(array('prefix' => 'subscriptions', 'middleware'=>['auth']), functio
 Route::group(['prefix' => 'admincp', 'middleware' => ['auth', 'admincp']], function() {
 	Route::get('/', 'AdminCPController@index');
 	Route::get('/u/toggle/{user}', 'AdminCPController@toggle_verification');
+	Route::get('/u/exfreight/{user}', 'AdminCPController@fill_exfreight_creds');
+	Route::post('/u/exfreight/{user}', 'AdminCPController@save_exfreight_creds');
 });
 
 //STRIPE
