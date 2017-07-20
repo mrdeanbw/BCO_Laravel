@@ -5,7 +5,7 @@ namespace App\Listeners;
 use App\Events\UserAdminVerified;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use App\Notifications\ExfreightUserNotification;
+use App\Notifications\ExFreightUserNotification;
 
 class UserAdminVerifiedListener
 {
