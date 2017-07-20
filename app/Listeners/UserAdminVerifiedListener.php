@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\UserAdminVerified;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\ExfreightUserNotification;
 
 class UserAdminVerifiedListener
 {
@@ -28,7 +29,7 @@ class UserAdminVerifiedListener
     {
         // Send an email to Exfreight
         $exfreight = \App\Vendor::where('name', 'EXFREIGHT')->firstOrFail();
-        $exfreight->notify(new \App\Notifications\ExfreightUserNotification($event->user));
+        $exfreight->notify(new ExfreightUserNotification($event->user));
         $event->user->exfreight_status = 'Pending';
         $event->user->save();
     }
