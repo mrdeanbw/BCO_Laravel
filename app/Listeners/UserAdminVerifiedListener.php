@@ -29,7 +29,7 @@ class UserAdminVerifiedListener
     {
         // Send an email to Exfreight
         $exfreight = \App\Vendor::where('name', 'EXFREIGHT')->firstOrFail();
-        $exfreight->notify(new ExfreightUserNotification($event->user));
+        $exfreight->notify(new ExFreightUserNotification($event->user));
         $event->user->exfreight_status = 'Pending';
         $event->user->save();
     }
