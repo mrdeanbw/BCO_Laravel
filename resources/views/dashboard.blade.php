@@ -35,7 +35,7 @@
             @yield('dashboard-content')                       
         </div>
         <div class="col-md-2 col-sm-3 col-xs-4">            
-            <div class="embed-responsive embed-responsive-16by9">
+            <!--<div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/DDRFz-1xCOQ?ecver=1"></iframe>
             </div>
             <div class="embed-responsive embed-responsive-16by9">
@@ -43,7 +43,7 @@
             </div>
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/0bCLWeycGMA?ecver=1"></iframe>                
-            </div>
+            </div>-->
             
         </div>
     </div>    

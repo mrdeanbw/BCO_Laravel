@@ -11,7 +11,7 @@
     <title>The association for, and by shippers - {{ config('app.name', 'Laravel') }}</title>
 
 
-    <meta name="description" content="BCO Power is a non-profit shippers association, preparing to launch in Fall 2017">
+    <meta name="description" content="BCO Power is a non-profit shippers association, preparing to launch in Spring 2018">
     <meta name="keywords" content="Freight,Logistics,Shippers,BCO,Power,Association,Non-Profit">
     <meta name="author" content="Qwyk B.V.">    
     <meta name="msapplication-TileColor" content="#24CBD3">
